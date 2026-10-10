@@ -1,53 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS A∞T v6 PRO</title>
-<style>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MINHAS CIFRAS A∞T v7</title><style>
 :root{--green:#0a2f1e;--gold:#d4af37;--gold2:#f5d76e;--bg:#061a11}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:system-ui}
-.header{background:#0a2f1e;border-bottom:2px solid var(--gold);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.logo{color:var(--gold2);font-weight:900}
-.card{background:#102f1f;border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:14px;margin:12px}
-.btn{padding:10px 14px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer;font-size:13px}
+.header{background:var(--green);border-bottom:2px solid var(--gold);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.logo{color:var(--gold2);font-weight:900}.card{background:#102f1f;border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:14px;margin:12px}
+.btn{padding:10px 14px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer}
 .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a2f1e;border:none}
-.tag{background:rgba(212,175,55,.15);border:1px solid var(--gold);color:var(--gold2);padding:6px 12px;border-radius:20px;font-size:12px}
+.tag{background:rgba(212,175,55,.15);border:1px solid var(--gold);color:var(--gold2);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:800}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;align-items:center}
-input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0}
+input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
 .cifra{white-space:pre-wrap;font-family:monospace;line-height:1.9;background:#0a1f14;padding:16px;border-radius:14px;border:1px solid rgba(212,175,55,.3);margin-top:12px}
 .cifra b{color:var(--gold2)}.list-item{padding:14px;border-bottom:1px solid rgba(212,175,55,.15);cursor:pointer}
 </style></head><body>
-<div class="header"><div class="logo">♫ MINHAS CIFRAS A∞T v6</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
-
+<div class="header"><div class="logo">♫ MINHAS CIFRAS A∞T v7</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="home"><div class="card">
-<h3 style="color:var(--gold2)">🔍 Buscar na Internet</h3>
-<div style="display:flex;gap:8px"><input id="webQ" placeholder="Ex: Djavan Oceano"><button class="btn btn-gold" onclick="window.open('https://www.cifraclub.com/search/?q='+encodeURIComponent(document.getElementById('webQ').value),'_blank')">Buscar</button></div>
-<p style="font-size:11px;opacity:.5;margin-top:6px">Abre Cifra Club. Copie e use Importar.txt</p>
+<h3 style="color:var(--gold2)">🔍 Buscar da Internet</h3>
+<div style="display:flex;gap:8px"><input id="webQ" placeholder="Ex: Noite do Prazer"><button class="btn btn-gold" onclick="window.open('https://www.cifraclub.com/search/?q='+encodeURIComponent(document.getElementById('webQ').value),'_blank')">Buscar</button></div>
 <div class="toolbar" style="margin-top:14px"><button class="btn btn-gold" onclick="show('nova')">+ Nova Cifra</button><button class="btn" onclick="show('importar')">Importar.txt</button></div>
 <input id="localQ" placeholder="🔍 Buscar nas minhas cifras..." oninput="render()" style="margin-top:10px">
 </div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
-
-<div id="nova" style="display:none" class="card"><h3 style="color:var(--gold2)">+ Nova Cifra</h3><input id="n_tit" placeholder="Título"><input id="n_art" placeholder="Artista"><input id="n_tom" placeholder="Tom ex: G"><textarea id="n_txt" rows="10"></textarea><div class="toolbar"><button class="btn btn-gold" onclick="salvarNova()">Salvar</button><button class="btn" onclick="show('home')">Cancelar</button></div></div>
-<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">Importar.txt</h3><textarea id="i_txt" rows="12"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-
+<div id="nova" style="display:none" class="card"><h3 style="color:var(--gold2)">+ Nova Cifra</h3><input id="n_tit" placeholder="Título"><input id="n_art" placeholder="Artista"><input id="n_tom" placeholder="Tom ex: G"><textarea id="n_txt" rows="12"></textarea><div class="toolbar"><button class="btn btn-gold" onclick="salvarNova()">Salvar</button><button class="btn" onclick="show('home')">Cancelar</button></div></div>
+<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">Importar.txt</h3><textarea id="i_txt" rows="14"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
 <div id="leitor" style="display:none" class="card">
 <div style="display:flex;justify-content:space-between"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><button class="btn" onclick="stop();show('home')">← Voltar</button></div>
 <div class="toolbar"><button id="btnSimp" class="btn" onclick="toggleS()">Cifra Simples</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">Tom: G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
-<div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><span style="color:var(--gold2);font-weight:800;font-size:12px">TAMANHO:</span><button class="btn" onclick="fontM(-2)">A-</button><span id="fontTag" class="tag">16px</span><button class="btn" onclick="fontM(2)">A+</button></div>
-<div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:12px;margin:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="color:var(--gold2);font-weight:800;font-size:12px">ROLAGEM:</span><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️ Parar</button><input type="range" id="speed" min="1" max="10" value="3" oninput="document.getElementById('speedTag').innerText=this.value+'x';vel=this.value"><span id="speedTag" class="tag">3x</span></div>
-<div id="l_cifra" class="cifra" ondblclick="playPause()"></div><div style="height:70vh"></div>
+<div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><span style="color:var(--gold2);font-weight:800;font-size:12px">TAMANHO:</span><button class="btn" onclick="fontM(-2)">A-</button><span id="fontTag" class="tag">16px</span><button class="btn" onclick="fontM(2)">A+</button><button class="btn" onclick="fontM(0,true)">Reset</button></div>
+<div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:12px;margin:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="color:var(--gold2);font-weight:800;font-size:12px">ROLAGEM:</span><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️ Parar</button><input type="range" id="speed" min="1" max="10" value="3" style="width:110px" oninput="vel=this.value;document.getElementById('speedTag').innerText=this.value+'x'"><span id="speedTag" class="tag">3x</span></div>
+<div id="l_cifra" class="cifra" ondblclick="playPause()"></div><div style="height:65vh"></div>
 </div>
-
 <script>
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,simples=false,timer=null,tr=0,fz=16,vel=3;
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,simples=false,timer=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'16'),vel=3;
 function show(id){stop();['home','nova','importar','leitor'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();}
 function save(){localStorage.setItem('mc_cifras',JSON.stringify(cifras));localStorage.setItem('mc',JSON.stringify(cifras));}
 function salvarNova(){let t=document.getElementById('n_txt').value;if(!t)return;cifras.unshift({id:Date.now(),titulo:document.getElementById('n_tit').value||'Sem titulo',artista:document.getElementById('n_art').value||'Autoral',tom:document.getElementById('n_tom').value||'G',texto:t,orig:t});save();show('home');}
 function salvarImp(){let t=document.getElementById('i_txt').value;if(!t)return;cifras.unshift({id:Date.now(),titulo:document.getElementById('i_tit').value||'Importada',artista:document.getElementById('i_art').value||'Importada',tom:'G',texto:t,orig:t});save();show('home');}
 function render(){let q=(document.getElementById('localQ').value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>h+=`<div class="list-item" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()} - Tom ${c.tom}</small></div>`);document.getElementById('lista').innerHTML=h||'Vazio';}
-function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;fz=parseInt(localStorage.getItem('fz')||16);document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');document.getElementById('l_cifra').innerHTML=atual.texto.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');applyFont();show('leitor');}
-function toggleS(){simples=!simples;let b=document.getElementById('btnSimp');if(simples){b.innerText='★ SIMPLES ON';b.className='btn btn-gold';let s=atual.orig.replace(/\[([^\]]+)\]/g,(a,i)=>{let base=i.match(/^[A-G][#b]?/);if(!base)return a;let m={'C#':'C','D#':'D','F#':'F','G#':'G','A#':'A','Db':'C','Eb':'D','Gb':'F','Ab':'G','Bb':'A'};let nb=m[base[0]]||base[0].replace('#','').replace('b','');let min=i.toLowerCase().includes('m')&&!i.toLowerCase().includes('maj');return '['+nb+(min?'m':'')+']';});document.getElementById('l_cifra').innerHTML=s.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>')+'<br><br><small style=color:var(--gold2)>Simplificado: Em7→Em, C7M→C</small>';}else{b.innerText='Cifra Simples';b.className='btn';document.getElementById('l_cifra').innerHTML=atual.orig.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}}
+function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');document.getElementById('l_cifra').innerHTML=atual.texto.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');applyFont();show('leitor');}
+function toggleS(){simples=!simples;let b=document.getElementById('btnSimp');if(simples){b.innerText='★ SIMPLES ON';b.className='btn btn-gold';let s=atual.orig.replace(/\[([^\]]+)\]/g,(a,i)=>{let base=i.match(/^[A-G][#b]?/);if(!base)return a;let m={'C#':'C','D#':'D','F#':'F','G#':'G','A#':'A','Db':'C','Eb':'D','Gb':'F','Ab':'G','Bb':'A'};let nb=m[base[0]]||base[0].replace('#','').replace('b','');let minor=i.toLowerCase().includes('m')&&!i.toLowerCase().includes('maj');return '['+nb+(minor?'m':'')+']';});document.getElementById('l_cifra').innerHTML=s.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}else{b.innerText='Cifra Simples';b.className='btn';document.getElementById('l_cifra').innerHTML=atual.orig.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}}
 function transp(d){tr+=d;let notes=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];let txt=atual.orig.replace(/\[([A-G][#b]?)([^\]]*)\]/g,(a,b,r)=>{let i=notes.indexOf(b);if(i<0)return a;return '['+notes[(i+tr+120)%12]+r+']';});document.getElementById('l_cifra').innerHTML=txt.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}
 function applyFont(){document.getElementById('l_cifra').style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';localStorage.setItem('fz',fz);}
-function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
+function fontM(d,reset){if(reset)fz=16;else fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function playPause(){if(timer){stop();return;}timer=setInterval(()=>window.scrollBy(0,vel),40);document.getElementById('playBtn').innerText='⏸️ Pausar';}
 function stop(){if(timer)clearInterval(timer);timer=null;let b=document.getElementById('playBtn');if(b)b.innerText='▶️ Play';}
 render();
