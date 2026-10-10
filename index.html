@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v23.1 FIX</title>
+<title>MINHAS CIFRAS v24 - FORMATADO</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@600;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
@@ -12,39 +12,48 @@
 .btn{padding:7px 11px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer;font-size:11px}
 .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a2f1e;border:none}
 .btn-active{background:var(--gold2)!important;color:#0a2f1e!important}
-.btn-danger{background:#ff4444!important;color:#fff!important;border-color:#000!important}
+.btn-danger{background:#ff4444!important;color:#fff!important}
 .btn-success{background:#4CAF50!important;color:#fff!important;border:none}
 .tag{background:rgba(255,215,0,.2);border:1px solid var(--gold);color:var(--gold2);padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
-.cifra{width:100%!important;max-width:100vw!important;padding:14px 12px;border-radius:14px;border:3px solid #000;height:68vh;overflow:auto;box-sizing:border-box;background:#fff!important}
-.linhas{font-size:inherit; line-height:1.2; color:#000}
-.linha{margin-bottom:6px}
-.linha.acordes{white-space:pre-wrap; word-break:break-word; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.95em; line-height:1.2; display:block}
-.linha.letra{white-space:pre-wrap; word-break:break-word; font-family:'Kalam',cursive; font-weight:600; font-size:1.05em; line-height:1.3; display:block; margin-top:2px; color:#111!important}
-.linha.secao{margin:14px 0 8px 0}
-.linha.secao.letra{font-weight:900; font-family:'Courier Prime',monospace; color:#000!important}
 
-/* TEMAS - CORREÇÃO COM DESCENDENTE */
-.cifra.tema-branco{background:#FFFFFF!important; border-color:#000!important}
-.cifra.tema-branco.letra{color:#000!important}
-.cifra.tema-branco.acordes{color:#B8860B!important}
-.cifra.tema-branco.vermelha.acordes{color:#C62828!important}
+/* CAIXA DA CIFRA - AUTO AJUSTE */
+.cifra{width:100%!important;max-width:100vw!important;padding:14px 12px;border-radius:14px;border:3px solid #000;height:68vh;overflow:auto;box-sizing:border-box}
+.linhas{font-size:inherit}
+.linha{margin-bottom:4px; line-height:1.15}
+.linha.acordes{white-space:pre-wrap; word-break:break-word; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.98em; letter-spacing:0.5px; line-height:1.15; display:block; margin:0}
+.linha.letra{white-space:pre-wrap; word-break:break-word; font-family:'Kalam',cursive; font-weight:600; font-size:1.12em; line-height:1.35; display:block; margin:0; margin-top:1px}
+.linha.secao{white-space:pre-wrap; font-family:'Courier Prime',monospace; font-weight:900; font-size:1.05em; letter-spacing:1px; text-transform:uppercase; display:block; padding:6px 0 2px 0; border-bottom:1px dashed}
 
+/* ===== 4 TEMAS - AGORA CORRETO - COM DESCENDENTE ===== */
+/* BRANCO */
+.cifra.tema-branco{background:#FFFFFF!important; border-color:#222!important}
+.cifra.tema-branco.letra{color:#111111!important}
+.cifra.tema-branco.acordes{color:#8B6914!important}
+.cifra.tema-branco.acordes.vermelha{color:#C62828!important}
+.cifra.tema-branco.secao{color:#2E7D32!important; border-color:#2E7D32}
+
+/* PRETO - ANTES TAVA TUDO PRETO, AGORA LETRA BRANCA */
 .cifra.tema-preto{background:#000000!important; border-color:#FFD700!important}
 .cifra.tema-preto.letra{color:#FFFFFF!important}
-.cifra.tema-preto.acordes{color:#FFEB3B!important}
-.cifra.tema-preto.vermelha.acordes{color:#FF5252!important}
+.cifra.tema-preto.acordes{color:#FFEB3B!important; text-shadow:0 0 8px rgba(255,235,59,.7)}
+.cifra.tema-preto.acordes.vermelha{color:#FF5252!important}
+.cifra.tema-preto.secao{color:#66BB6A!important; border-color:#66BB6A}
 
-.cifra.tema-azul{background:#001a33!important; border-color:#4DA6FF!important}
+/* AZUL */
+.cifra.tema-azul{background:#0D1B2A!important; border-color:#4DA6FF!important}
 .cifra.tema-azul.letra{color:#E0F2FF!important}
 .cifra.tema-azul.acordes{color:#FFEB3B!important}
-.cifra.tema-azul.vermelha.acordes{color:#FF6B6B!important}
+.cifra.tema-azul.acordes.vermelha{color:#FF8A80!important}
+.cifra.tema-azul.secao{color:#4DA6FF!important; border-color:#4DA6FF}
 
+/* VERDE */
 .cifra.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
 .cifra.tema-verde.letra{color:#E8FFE8!important}
 .cifra.tema-verde.acordes{color:#FFEB3B!important}
-.cifra.tema-verde.vermelha.acordes{color:#FF6E6E!important}
+.cifra.tema-verde.acordes.vermelha{color:#FF5252!important}
+.cifra.tema-verde.secao{color:#A5D6A7!important; border-color:#66BB6A}
 
 .item{padding:12px;border-bottom:1px solid rgba(212,175,55,.15);display:flex;justify-content:space-between;align-items:center}
 .item-info{cursor:pointer;flex:1}
@@ -69,7 +78,7 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="installApp();closeMenu()">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v23.1</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v24</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">15px</span><button class="btn" onclick="fontM(1)">A+</button>
@@ -81,9 +90,7 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 
 <div id="importar" style="display:none" class="card">
 <h3 style="color:var(--gold2)">📄 Criar / Editar Manual</h3>
-<input id="i_tit" placeholder="Título">
-<input id="i_art" placeholder="Artista">
-<input id="i_tom" placeholder="Tom">
+<input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><input id="i_tom" placeholder="Tom">
 <textarea id="i_txt" rows="14" placeholder="Cole aqui:
 [Primeira Parte]
 Em7 C7M Bm7 Em7
@@ -100,14 +107,14 @@ A noite vai ser boa..."></textarea>
 <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><div class="toolbar"><button class="btn btn-success" onclick="incluirNaLista()">➕ Lista</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn btn-danger" onclick="excluirAtual()">🗑️</button><button class="btn" onclick="stop();show('home')">← Voltar</button></div></div>
 
 <div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px;display:flex;gap:6px;flex-wrap:wrap">
-<span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 FUNDO:</span>
+<span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 FUNDO DA TELA:</span>
 <button id="tBranco" class="btn btn-active" style="background:#fff;color:#000;border:2px solid #000" onclick="setTema('branco')">⬜ Branco</button>
 <button id="tPreto" class="btn" style="background:#000;color:#FFEB3B;border:2px solid #FFD700" onclick="setTema('preto')">⬛ Preto</button>
-<button id="tAzul" class="btn" style="background:#001a33;color:#E0F2FF;border:2px solid #4DA6FF" onclick="setTema('azul')">🟦 Azul</button>
+<button id="tAzul" class="btn" style="background:#0D1B2A;color:#E0F2FF;border:2px solid #4DA6FF" onclick="setTema('azul')">🟦 Azul</button>
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
 <div class="toolbar" style="background:#f5f5f5;border:1px solid #000;padding:8px;border-radius:10px">
-<span style="color:#000;font-weight:900;font-size:10px">CIFRA SEM QUADRADO:</span>
+<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA (sem quadrado):</span>
 <button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
 </div>
@@ -126,33 +133,9 @@ function buscar(t){let q=document.getElementById('webQ').value.trim();if(!q)retu
 function save(){localStorage.setItem('mc_cifras',JSON.stringify(cifras));}
 function saveSet(){localStorage.setItem('mc_setlist',JSON.stringify(setlist));}
 function novaCifra(){editId=null;document.getElementById('i_tit').value='';document.getElementById('i_art').value='';document.getElementById('i_tom').value='G';document.getElementById('i_txt').value='';document.getElementById('editActions').style.display='none';show('importar');}
-function editarAtual(){
-  if(!atual)return;
-  editId=atual.id;
-  document.getElementById('i_tit').value=atual.titulo;
-  document.getElementById('i_art').value=atual.artista;
-  document.getElementById('i_tom').value=atual.tom;
-  document.getElementById('i_txt').value=atual.orig;
-  document.getElementById('editActions').style.display='flex';
-  show('importar');
-}
-function salvarImp(incluirLista=false){
-  let txt=document.getElementById('i_txt').value;if(!txt){alert('Cole a cifra');return;}
-  if(editId){
-    let idx=cifras.findIndex(c=>c.id==editId);
-    if(idx>=0){cifras[idx].titulo=document.getElementById('i_tit').value||'Sem titulo';cifras[idx].artista=document.getElementById('i_art').value||'';cifras[idx].tom=document.getElementById('i_tom').value||'G';cifras[idx].orig=txt;}
-    editId=null;
-  }else{
-    let nova={id:Date.now(),titulo:document.getElementById('i_tit').value||'Minha Cifra',artista:document.getElementById('i_art').value||'',tom:document.getElementById('i_tom').value||'G',orig:txt};
-    cifras.unshift(nova);
-    if(incluirLista){setlist.push(nova.id);saveSet();}
-  }
-  save();show('home');render();
-}
-function excluirAtual(){
-  let id=editId||(atual&&atual.id);if(!id)return;
-  if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();editId=null;atual=null;show('home');render();}
-}
+function editarAtual(){if(!atual)return;editId=atual.id;document.getElementById('i_tit').value=atual.titulo;document.getElementById('i_art').value=atual.artista;document.getElementById('i_tom').value=atual.tom;document.getElementById('i_txt').value=atual.orig;document.getElementById('editActions').style.display='flex';show('importar');}
+function salvarImp(incluirLista=false){let txt=document.getElementById('i_txt').value;if(!txt){alert('Cole a cifra');return;}if(editId){let idx=cifras.findIndex(c=>c.id==editId);if(idx>=0){cifras[idx].titulo=document.getElementById('i_tit').value||'Sem titulo';cifras[idx].artista=document.getElementById('i_art').value||'';cifras[idx].tom=document.getElementById('i_tom').value||'G';cifras[idx].orig=txt;}editId=null;}else{let nova={id:Date.now(),titulo:document.getElementById('i_tit').value||'Minha Cifra',artista:document.getElementById('i_art').value||'',tom:document.getElementById('i_tom').value||'G',orig:txt};cifras.unshift(nova);if(incluirLista){setlist.push(nova.id);saveSet();}}save();show('home');render();}
+function excluirAtual(){let id=editId||(atual&&atual.id);if(!id)return;if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();editId=null;atual=null;show('home');render();}}
 function excluirDaLista(id){if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();render();renderListas();}}
 function incluirNaLista(){if(!atual)return;if(!setlist.includes(atual.id)){setlist.push(atual.id);saveSet();alert('✅ Incluída na lista!');}else{alert('Já está na lista');}}
 function limparSetlist(){if(confirm('Limpar toda a lista?')){setlist=[];saveSet();renderListas();}}
@@ -161,25 +144,29 @@ function incluirRapido(id){if(!setlist.includes(id)){setlist.push(id);saveSet();
 function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista.<br>Home > ➕</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
 function removerSet(id){setlist=setlist.filter(s=>s!=id);saveSet();renderListas();}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
-function isChordLine(line){if(!line.trim())return false;if(line.trim().startsWith('['))return false;let tokens=line.trim().split(/\s+/);let chordCount=tokens.filter(t=>/^[A-G][#b]?m?(?:7M|m7|7|dim|sus4?)?(?:\(.*\))?$/.test(t)).length;return chordCount>0 && tokens.length<=8 && chordCount/tokens.length>=0.4;}
+function isChordLine(line){if(!line.trim())return false;if(line.trim().startsWith('['))return false;let t=line.trim();if(t.length>80)return false;let tokens=t.split(/\s+/);let chordCount=tokens.filter(x=>/^[A-G][#b]?m?(?:7M|m7|7|sus|dim)?(?:\(.*\))?$/.test(x)).length;return chordCount>=1 && chordCount/tokens.length>=0.4;}
 function pintar(txt){
-  if(!txt){document.getElementById('linhas').innerHTML='<div class="letra" style="color:red">Cifra vazia - clique em Editar</div>';return;}
+  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red;padding:20px">Cifra vazia - clique em Editar para colar</div>';return;}
   let linhasTxt=txt.split('\n');let html='';
   for(let i=0;i<linhasTxt.length;i++){
-    let line=linhasTxt[i];let next=linhasTxt[i+1]||'';let lineTrim=line.trim();
-    if(!lineTrim){html+=`<div class="linha"><div class="letra"> </div></div>`;continue;}
-    if(lineTrim.startsWith('[')){html+=`<div class="linha secao"><div class="letra secao">${lineTrim}</div></div>`;continue;}
+    let line=linhasTxt[i];let next=linhasTxt[i+1]||'';let trim=line.trim();
+    if(!trim){html+=`<div class="linha"><span class="letra">&nbsp;</span></div>`;continue;}
+    if(trim.startsWith('[')){
+      html+=`<div class="linha"><span class="secao">${trim}</span></div>`;continue;
+    }
     if(isChordLine(line) && next &&!isChordLine(next) &&!next.trim().startsWith('[') && next.trim()!=''){
-      html+=`<div class="linha"><div class="acordes">${line}</div><div class="letra">${next}</div></div>`;i++;
+      let corClass=corCifra=='vermelha'?'acordes vermelha':'acordes';
+      html+=`<div class="linha"><span class="${corClass}">${line}</span><span class="letra">${next}</span></div>`;i++;
     }else if(isChordLine(line)){
-      html+=`<div class="linha"><div class="acordes">${line}</div></div>`;
+      let corClass=corCifra=='vermelha'?'acordes vermelha':'acordes';
+      html+=`<div class="linha"><span class="${corClass}">${line}</span></div>`;
     }else{
-      html+=`<div class="linha"><div class="letra">${line}</div></div>`;
+      html+=`<div class="linha"><span class="letra">${line}</span></div>`;
     }
   }
   document.getElementById('linhas').innerHTML=html;
   let el=document.getElementById('l_cifra');
-  el.className='cifra tema-'+temaAtual+(corCifra=='vermelha'?' vermelha':'');
+  el.className='cifra tema-'+temaAtual;
 }
 function transp(d){tr+=d;if(!atual)return;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
 function setTema(t){temaAtual=t;localStorage.setItem('tema',t);document.getElementById('tBranco').className=t=='branco'?'btn btn-active':'btn';document.getElementById('tPreto').className=t=='preto'?'btn btn-active':'btn';document.getElementById('tAzul').className=t=='azul'?'btn btn-active':'btn';document.getElementById('tVerde').className=t=='verde'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
