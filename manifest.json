@@ -1,26 +1,10 @@
 {
-  "name": "Minhas Cifras",
+  "name": "Minhas Cifras v28",
   "short_name": "Minhas Cifras",
-  "start_url": "./index.html?v=28",
+  "start_url": "./index.html?v=28FINAL",
   "display": "standalone",
   "background_color": "#0a2f1e",
   "theme_color": "#0a2f1e",
-  "icons": [
-    {
-      "src": "https://takitakisom-dev.github.io/MINHAS-CIFRAS/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "share_target": {
-    "action": "./index.html",
-    "method": "GET",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    },
-    "enctype": "application/x-www-form-urlencoded"
-  }
+  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3659/3659899.png","sizes": "512x512","type": "image/png","purpose": "any maskable"}],
+  "share_target": {"action": "./index.html","method": "GET","params": {"title": "title","text": "text","url": "url"}}
 }
