@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v25.1 FIX BRANCO</title>
+<title>MINHAS CIFRAS v26 FINAL</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
@@ -16,39 +16,43 @@
 .tag{background:rgba(255,215,0,.2);border:1px solid #FFD700;color:#FFEB3B;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
+.cifra{width:100%;padding:14px 12px;border-radius:14px;border:3px solid #000;height:72vh;overflow:auto}
+.linha{display:block;margin-bottom:9px;line-height:1.4}
 
-/* CAIXA */
-.cifra{width:100%;padding:14px 12px;border-radius:14px;border:3px solid #000;height:70vh;overflow:auto;box-sizing:border-box}
-.linhas{font-size:inherit}
-.linha{margin-bottom:8px; line-height:1.4; display:block}
+/* CORES BASE - FUNCIONA SEMPRE */
+.ac{font-family:'Courier Prime',monospace;font-weight:900;font-size:0.98em;letter-spacing:0.5px}
+.let{font-family:'Kalam',cursive;font-weight:700;font-size:1.12em;margin-left:4px}
+.secao{font-family:'Courier Prime',monospace;font-weight:900;display:block;padding:8px 0 4px 0;margin-top:14px;border-bottom:1px dashed;text-transform:uppercase}
 
-/* TEMA BRANCO - AGORA CORRIGIDO COM ESPAÇO */
-.tema-branco{background:#FFFFFF!important; border-color:#000!important}
-.tema-branco.ac{color:#8B6914!important; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.98em}
-.tema-branco.ac.vermelha{color:#C62828!important}
-.tema-branco.let{color:#000000!important; font-family:'Kalam',cursive; font-weight:700; font-size:1.1em}
-.tema-branco.secao{color:#2E7D32!important; font-weight:900; border-bottom:1px dashed #2E7D32; display:block; padding:8px 0 4px 0; margin-top:12px; text-transform:uppercase}
+/* FUNDO BRANCO - LETRA PRETA, CIFRA DOURADA/VERMELHA */
+.tema-branco{background:#FFFFFF!important;border-color:#000!important}
+.tema-branco.ac{color:#8B6914!important}
+.tema-branco.ac.vermelha{color:#CC0000!important}
+.tema-branco.ac.dourada{color:#8B6914!important}
+.tema-branco.let{color:#000000!important}
+.tema-branco.secao{color:#2E7D32!important;border-color:#2E7D32!important}
 
-/* TEMA PRETO */
-.tema-preto{background:#000000!important; border-color:#FFD700!important}
-.tema-preto.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
-.tema-preto.ac.vermelha{color:#FF5252!important}
-.tema-preto.let{color:#FFFFFF!important; font-family:'Kalam',cursive; font-weight:700; font-size:1.1em}
-.tema-preto.secao{color:#66BB6A!important; font-weight:900; border-bottom:1px dashed #66BB6A; display:block; padding:8px 0 4px 0; margin-top:12px}
+/* FUNDO PRETO */
+.tema-preto{background:#000000!important;border-color:#FFD700!important}
+.tema-preto.ac{color:#FFEB3B!important}
+.tema-preto.ac.dourada{color:#FFEB3B!important;text-shadow:0 0 6px rgba(255,235,59,.6)}
+.tema-preto.ac.vermelha{color:#FF4444!important;text-shadow:none}
+.tema-preto.let{color:#FFFFFF!important}
+.tema-preto.secao{color:#66BB6A!important;border-color:#66BB6A!important}
 
-/* TEMA AZUL */
-.tema-azul{background:#0D1B2A!important; border-color:#4DA6FF!important}
-.tema-azul.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
-.tema-azul.ac.vermelha{color:#FF8A80!important}
-.tema-azul.let{color:#E0F2FF!important; font-family:'Kalam',cursive; font-weight:700}
-.tema-azul.secao{color:#4DA6FF!important; font-weight:900; border-bottom:1px dashed #4DA6FF; display:block; padding:8px 0 4px 0; margin-top:12px}
+/* FUNDO AZUL */
+.tema-azul{background:#0D1B2A!important;border-color:#4DA6FF!important}
+.tema-azul.ac{color:#FFEB3B!important}
+.tema-azul.ac.vermelha{color:#FF6B6B!important}
+.tema-azul.let{color:#E0F2FF!important}
+.tema-azul.secao{color:#4DA6FF!important;border-color:#4DA6FF!important}
 
-/* TEMA VERDE */
-.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
-.tema-verde.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
-.tema-verde.ac.vermelha{color:#FF6E6E!important}
-.tema-verde.let{color:#E8FFE8!important; font-family:'Kalam',cursive; font-weight:700}
-.tema-verde.secao{color:#A5D6A7!important; font-weight:900; border-bottom:1px dashed #66BB6A; display:block; padding:8px 0 4px 0; margin-top:12px}
+/* FUNDO VERDE */
+.tema-verde{background:#0a2f1e!important;border-color:#66BB6A!important}
+.tema-verde.ac{color:#FFEB3B!important}
+.tema-verde.ac.vermelha{color:#FF8A80!important}
+.tema-verde.let{color:#E8FFE8!important}
+.tema-verde.secao{color:#A5D6A7!important;border-color:#66BB6A!important}
 
 .item{padding:12px;border-bottom:1px solid rgba(212,175,55,.15);display:flex;justify-content:space-between;align-items:center}
 .item-info{cursor:pointer;flex:1}
@@ -72,7 +76,7 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid #FFD700;color:#FFEB3B;border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v25.1</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid #FFD700;color:#FFEB3B;border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v26</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button>
@@ -100,8 +104,8 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
 <div class="toolbar" style="background:#f5f5f5;border:1px solid #000;padding:8px;border-radius:10px">
-<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA (sem quadrado):</span>
-<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Dourada</button>
+<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA (sem quadrado) - TESTADO:</span>
+<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('dourada')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
 </div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
@@ -109,7 +113,7 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div></div>
 </div>
 <script>
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'17'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco',editId=null;
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'17'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'dourada',temaAtual=localStorage.getItem('tema')||'branco',editId=null;
 const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
@@ -124,18 +128,16 @@ function excluirAtual(){let id=editId||(atual&&atual.id);if(!id)return;if(confir
 function excluirDaLista(id){if(confirm('Excluir?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();render();renderListas();}}
 function incluirNaLista(){if(!atual)return;if(!setlist.includes(atual.id)){setlist.push(atual.id);saveSet();alert('✅ Incluída!');}else{alert('Já está');}}
 function limparSetlist(){if(confirm('Limpar?')){setlist=[];saveSet();renderListas();}}
-function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>{h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b style="color:#FFEB3B">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn" onclick="abrir(${c.id});editarAtual()">✏️</button><button class="btn btn-danger" onclick="excluirDaLista(${c.id})">🗑️</button><button class="btn btn-gold" onclick="incluirRapido(${c.id})">➕</button></div></div>`;});document.getElementById('lista').innerHTML=h||'<div style="padding:20px;opacity:.6;text-align:center">Vazio - + Nova Cifra Manual</div>';}
+function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>{h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b style="color:#FFEB3B">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn" onclick="abrir(${c.id});editarAtual()">✏️</button><button class="btn btn-danger" onclick="excluirDaLista(${c.id})">🗑️</button><button class="btn btn-gold" onclick="incluirRapido(${c.id})">➕</button></div></div>`;});document.getElementById('lista').innerHTML=h||'<div style="padding:20px;opacity:.6;text-align:center">Vazio</div>';}
 function incluirRapido(id){if(!setlist.includes(id)){setlist.push(id);saveSet();alert('✅ Incluída!');}else{alert('Já está');}}
-function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista.<br>Home > ➕</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
+function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista.</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
 function removerSet(id){setlist=setlist.filter(s=>s!=id);saveSet();renderListas();}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
 function separarCifraELetra(linha){
-  let tokens=linha.trim().split(/\s+/);
-  let acordes=[]; let letraInicio=-1;
+  let tokens=linha.trim().split(/\s+/);let acordes=[];let letraInicio=-1;
   for(let i=0;i<tokens.length;i++){
-    let t=tokens[i];
-    if(/^[A-G][#b]?m?(?:7M|m7|7|sus4?|dim)?(\(4\/9\)|\(9\)|\(.*\))?$/.test(t) || /^[A-G]$/.test(t)){
-      acordes.push(t);
+    if(/^[A-G][#b]?m?(?:7M|m7|7|sus|dim)?(\(4\/9\)|\(9\)|\(.*\))?$/.test(tokens[i]) || /^[A-G]$/.test(tokens[i])){
+      acordes.push(tokens[i]);
     }else{letraInicio=i;break;}
   }
   if(acordes.length>0 && letraInicio!=-1){return {ac:acordes.join(' '), let:tokens.slice(letraInicio).join(' ')};}
@@ -143,19 +145,17 @@ function separarCifraELetra(linha){
   else{return {ac:'', let:linha};}
 }
 function pintar(txt){
-  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red;padding:20px">Vazia</div>';return;}
+  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red">Vazia</div>';return;}
   let linhas=txt.split('\n');let html='';
   for(let line of linhas){
     let trim=line.trim();
     if(!trim){html+=`<div class="linha">&nbsp;</div>`;continue;}
-    if(trim.startsWith('[')){html+=`<div class="linha secao ${temaAtual}">${trim}</div>`;continue;}
+    if(trim.startsWith('[')){html+=`<div class="linha secao">${trim}</div>`;continue;}
     let sep=separarCifraELetra(line);
     if(sep.ac && sep.let){
-      let acClass='ac '+(corCifra=='vermelha'?'vermelha':'');
-      html+=`<div class="linha"><span class="${acClass}">${sep.ac}</span> <span class="let">${sep.let}</span></div>`;
+      html+=`<div class="linha"><span class="ac ${corCifra}">${sep.ac}</span> <span class="let">${sep.let}</span></div>`;
     }else if(sep.ac){
-      let acClass='ac '+(corCifra=='vermelha'?'vermelha':'');
-      html+=`<div class="linha"><span class="${acClass}">${sep.ac}</span></div>`;
+      html+=`<div class="linha"><span class="ac ${corCifra}">${sep.ac}</span></div>`;
     }else{
       html+=`<div class="linha"><span class="let">${line}</span></div>`;
     }
@@ -165,7 +165,7 @@ function pintar(txt){
 }
 function transp(d){tr+=d;if(!atual)return;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
 function setTema(t){temaAtual=t;localStorage.setItem('tema',t);['Branco','Preto','Azul','Verde'].forEach(n=>{let el=document.getElementById('t'+n);if(el)el.className=n.toLowerCase()==t?'btn btn-active':'btn';});if(atual)pintar(atual.orig);}
-function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='amarela'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
+function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='dourada'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
 function applyFont(){let cont=document.getElementById('linhas');cont.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function setSpeed(v){vel=parseFloat(v);document.getElementById('speed').value=v;document.getElementById('speedTag').innerText=v+'x';}
