@@ -1,53 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v25 SEPARADO</title>
+<title>MINHAS CIFRAS v25.1 FIX BRANCO</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{--green:#0a2f1e;--gold:#FFD700;--gold2:#FFEB3B;--bg:#061a11}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:Roboto,sans-serif}
-.header{background:var(--green);border-bottom:2px solid var(--gold);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
-.logo{color:var(--gold2);font-weight:900}.card{background:#102f1f;border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:14px;margin:12px}
-.btn{padding:7px 11px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer;font-size:11px}
-.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a2f1e;border:none}
-.btn-active{background:var(--gold2)!important;color:#0a2f1e!important}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#061a11;color:#fff;font-family:Roboto,sans-serif}
+.header{background:#0a2f1e;border-bottom:2px solid #FFD700;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.logo{color:#FFEB3B;font-weight:900}.card{background:#102f1f;border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:14px;margin:12px}
+.btn{padding:7px 11px;border-radius:22px;font-weight:800;border:1px solid #FFD700;color:#FFEB3B;background:transparent;cursor:pointer;font-size:11px}
+.btn-gold{background:linear-gradient(180deg,#FFEB3B,#FFD700);color:#0a2f1e;border:none}
+.btn-active{background:#FFEB3B!important;color:#000!important;border:2px solid #000!important}
 .btn-danger{background:#ff4444!important;color:#fff!important}
 .btn-success{background:#4CAF50!important;color:#fff!important}
-.tag{background:rgba(255,215,0,.2);border:1px solid var(--gold);color:var(--gold2);padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
+.tag{background:rgba(255,215,0,.2);border:1px solid #FFD700;color:#FFEB3B;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
-.cifra{width:100%;padding:14px 12px;border-radius:14px;border:3px solid #000;height:68vh;overflow:auto;box-sizing:border-box}
-.linha{margin-bottom:8px; line-height:1.3}
-.linha.ac{font-family:'Courier Prime',monospace; font-weight:900; letter-spacing:0.5px; font-size:0.98em}
-.linha.let{font-family:'Kalam',cursive; font-weight:700; font-size:1.1em; line-height:1.35; margin-left:4px}
-.linha.secao{font-family:'Courier Prime',monospace; font-weight:900; font-size:1.1em; text-transform:uppercase; padding:8px 0 4px 0; border-bottom:1px dashed; margin-top:16px; letter-spacing:1px}
-/* TEMAS CORRIGIDOS */
-.cifra.tema-branco{background:#FFFFFF!important; border-color:#000!important}
-.cifra.tema-branco.letra{color:#111!important}
-.cifra.tema-branco.ac{color:#8B6914!important}
-.cifra.tema-branco.ac.vermelha{color:#C62828!important}
-.cifra.tema-branco.secao{color:#2E7D32!important}
-.cifra.tema-preto{background:#000000!important; border-color:#FFD700!important}
-.cifra.tema-preto.letra{color:#FFFFFF!important}
-.cifra.tema-preto.ac{color:#FFEB3B!important; text-shadow:0 0 6px rgba(255,235,59,.6)}
-.cifra.tema-preto.ac.vermelha{color:#FF5252!important; text-shadow:none}
-.cifra.tema-preto.secao{color:#66BB6A!important}
-.cifra.tema-azul{background:#0D1B2A!important; border-color:#4DA6FF!important}
-.cifra.tema-azul.letra{color:#E0F2FF!important}
-.cifra.tema-azul.ac{color:#FFEB3B!important}
-.cifra.tema-azul.ac.vermelha{color:#FF8A80!important}
-.cifra.tema-azul.secao{color:#4DA6FF!important}
-.cifra.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
-.cifra.tema-verde.letra{color:#E8FFE8!important}
-.cifra.tema-verde.ac{color:#FFEB3B!important}
-.cifra.tema-verde.ac.vermelha{color:#FF6E6E!important}
-.cifra.tema-verde.secao{color:#A5D6A7!important}
+
+/* CAIXA */
+.cifra{width:100%;padding:14px 12px;border-radius:14px;border:3px solid #000;height:70vh;overflow:auto;box-sizing:border-box}
+.linhas{font-size:inherit}
+.linha{margin-bottom:8px; line-height:1.4; display:block}
+
+/* TEMA BRANCO - AGORA CORRIGIDO COM ESPAÇO */
+.tema-branco{background:#FFFFFF!important; border-color:#000!important}
+.tema-branco.ac{color:#8B6914!important; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.98em}
+.tema-branco.ac.vermelha{color:#C62828!important}
+.tema-branco.let{color:#000000!important; font-family:'Kalam',cursive; font-weight:700; font-size:1.1em}
+.tema-branco.secao{color:#2E7D32!important; font-weight:900; border-bottom:1px dashed #2E7D32; display:block; padding:8px 0 4px 0; margin-top:12px; text-transform:uppercase}
+
+/* TEMA PRETO */
+.tema-preto{background:#000000!important; border-color:#FFD700!important}
+.tema-preto.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
+.tema-preto.ac.vermelha{color:#FF5252!important}
+.tema-preto.let{color:#FFFFFF!important; font-family:'Kalam',cursive; font-weight:700; font-size:1.1em}
+.tema-preto.secao{color:#66BB6A!important; font-weight:900; border-bottom:1px dashed #66BB6A; display:block; padding:8px 0 4px 0; margin-top:12px}
+
+/* TEMA AZUL */
+.tema-azul{background:#0D1B2A!important; border-color:#4DA6FF!important}
+.tema-azul.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
+.tema-azul.ac.vermelha{color:#FF8A80!important}
+.tema-azul.let{color:#E0F2FF!important; font-family:'Kalam',cursive; font-weight:700}
+.tema-azul.secao{color:#4DA6FF!important; font-weight:900; border-bottom:1px dashed #4DA6FF; display:block; padding:8px 0 4px 0; margin-top:12px}
+
+/* TEMA VERDE */
+.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
+.tema-verde.ac{color:#FFEB3B!important; font-family:'Courier Prime',monospace; font-weight:900}
+.tema-verde.ac.vermelha{color:#FF6E6E!important}
+.tema-verde.let{color:#E8FFE8!important; font-family:'Kalam',cursive; font-weight:700}
+.tema-verde.secao{color:#A5D6A7!important; font-weight:900; border-bottom:1px dashed #66BB6A; display:block; padding:8px 0 4px 0; margin-top:12px}
+
 .item{padding:12px;border-bottom:1px solid rgba(212,175,55,.15);display:flex;justify-content:space-between;align-items:center}
 .item-info{cursor:pointer;flex:1}
 .item-actions{display:flex;gap:4px}
 .cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px}
-.full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid var(--gold);padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
+.full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid #FFD700;padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
 .full-tools.show{display:flex}
 .side-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;z-index:10001;transition:.3s;display:flex;flex-direction:column}
 .side-menu.open{left:0}.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:10000}.overlay.show{display:block}
@@ -63,10 +70,9 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="show('listas');closeMenu();renderListas()">📋 Minhas Listas</a>
     <a href="#" onclick="show('importar');closeMenu()">📄 Importar.txt</a>
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup</a>
-    <a href="#" onclick="installApp();closeMenu()">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v25</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid #FFD700;color:#FFEB3B;border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v25.1</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button>
@@ -74,22 +80,22 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 </div>
 <div id="home"><div class="card"><input id="webQ" placeholder="Buscar cifra..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div>
 <div class="toolbar"><button class="btn btn-gold" onclick="novaCifra()">+ Nova Cifra Manual</button><button class="btn" onclick="show('importar')">📄 Colar Manual</button><button class="btn" onclick="show('backup')">Backup</button></div>
-<input id="localQ" placeholder="🔍 Buscar nas minhas..." oninput="render()"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
+<input id="localQ" placeholder="🔍 Buscar nas minhas..." oninput="render()"></div><div class="card"><h3 style="color:#FFEB3B">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
 <div id="importar" style="display:none" class="card">
-<h3 style="color:var(--gold2)">📄 Criar / Editar Manual</h3>
+<h3 style="color:#FFEB3B">📄 Criar / Editar Manual</h3>
 <input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><input id="i_tom" placeholder="Tom">
-<textarea id="i_txt" rows="14" placeholder="Cole aqui"></textarea>
+<textarea id="i_txt" rows="14"></textarea>
 <div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">💾 Salvar</button><button class="btn btn-success" onclick="salvarImp(true)">💾 + Lista</button><button class="btn" onclick="show('home')">Voltar</button></div>
 <div id="editActions" style="display:none" class="toolbar"><button class="btn btn-danger" onclick="excluirAtual()">🗑️ Excluir</button></div>
 </div>
-<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR</button></div><hr style="margin:12px 0"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Cole backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-<div id="listas" style="display:none" class="card"><h3 style="color:var(--gold2)">📋 Minhas Listas - Setlist</h3><div id="listaSetlist"></div><div class="toolbar"><button class="btn" onclick="limparSetlist()">🗑️ Limpar Lista</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+<div id="backup" style="display:none" class="card"><h3 style="color:#FFEB3B">🔄 Backup</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR</button></div><hr style="margin:12px 0"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6"></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+<div id="listas" style="display:none" class="card"><h3 style="color:#FFEB3B">📋 Minhas Listas</h3><div id="listaSetlist"></div><div class="toolbar"><button class="btn" onclick="limparSetlist()">🗑️ Limpar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
 <div id="leitor" style="display:none" class="card">
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><div class="toolbar"><button class="btn btn-success" onclick="incluirNaLista()">➕ Lista</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn btn-danger" onclick="excluirAtual()">🗑️</button><button class="btn" onclick="stop();show('home')">← Voltar</button></div></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><div><h2 id="l_tit" style="color:#FFEB3B"></h2><p id="l_art" style="opacity:.6"></p></div><div class="toolbar"><button class="btn btn-success" onclick="incluirNaLista()">➕ Lista</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn btn-danger" onclick="excluirAtual()">🗑️</button><button class="btn" onclick="stop();show('home')">← Voltar</button></div></div>
 <div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px;display:flex;gap:6px;flex-wrap:wrap">
 <span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 FUNDO DA TELA:</span>
-<button id="tBranco" class="btn" style="background:#fff;color:#000;border:2px solid #000" onclick="setTema('branco')">⬜ Branco</button>
-<button id="tPreto" class="btn btn-active" style="background:#000;color:#FFEB3B;border:2px solid #FFD700" onclick="setTema('preto')">⬛ Preto</button>
+<button id="tBranco" class="btn btn-active" style="background:#fff;color:#000;border:2px solid #000" onclick="setTema('branco')">⬜ Branco</button>
+<button id="tPreto" class="btn" style="background:#000;color:#FFEB3B;border:2px solid #FFD700" onclick="setTema('preto')">⬛ Preto</button>
 <button id="tAzul" class="btn" style="background:#0D1B2A;color:#E0F2FF;border:2px solid #4DA6FF" onclick="setTema('azul')">🟦 Azul</button>
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
@@ -99,11 +105,11 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
 </div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
-<div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
-<div id="l_cifra" class="cifra tema-preto"><div id="linhas" class="linhas"></div></div>
+<div style="background:#0a1f14;border:1px solid #FFD700;border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
+<div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div></div>
 </div>
 <script>
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'17'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'preto',editId=null;
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'17'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco',editId=null;
 const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
@@ -114,64 +120,44 @@ function saveSet(){localStorage.setItem('mc_setlist',JSON.stringify(setlist));}
 function novaCifra(){editId=null;document.getElementById('i_tit').value='';document.getElementById('i_art').value='';document.getElementById('i_tom').value='G';document.getElementById('i_txt').value='';document.getElementById('editActions').style.display='none';show('importar');}
 function editarAtual(){if(!atual)return;editId=atual.id;document.getElementById('i_tit').value=atual.titulo;document.getElementById('i_art').value=atual.artista;document.getElementById('i_tom').value=atual.tom;document.getElementById('i_txt').value=atual.orig;document.getElementById('editActions').style.display='flex';show('importar');}
 function salvarImp(incluirLista=false){let txt=document.getElementById('i_txt').value;if(!txt){alert('Cole a cifra');return;}if(editId){let idx=cifras.findIndex(c=>c.id==editId);if(idx>=0){cifras[idx].titulo=document.getElementById('i_tit').value||'Sem titulo';cifras[idx].artista=document.getElementById('i_art').value||'';cifras[idx].tom=document.getElementById('i_tom').value||'G';cifras[idx].orig=txt;}editId=null;}else{let nova={id:Date.now(),titulo:document.getElementById('i_tit').value||'Minha Cifra',artista:document.getElementById('i_art').value||'',tom:document.getElementById('i_tom').value||'G',orig:txt};cifras.unshift(nova);if(incluirLista){setlist.push(nova.id);saveSet();}}save();show('home');render();}
-function excluirAtual(){let id=editId||(atual&&atual.id);if(!id)return;if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();editId=null;atual=null;show('home');render();}}
-function excluirDaLista(id){if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();render();renderListas();}}
-function incluirNaLista(){if(!atual)return;if(!setlist.includes(atual.id)){setlist.push(atual.id);saveSet();alert('✅ Incluída na lista!');}else{alert('Já está na lista');}}
-function limparSetlist(){if(confirm('Limpar toda a lista?')){setlist=[];saveSet();renderListas();}}
-function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>{h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn" onclick="abrir(${c.id});editarAtual()">✏️</button><button class="btn btn-danger" onclick="excluirDaLista(${c.id})">🗑️</button><button class="btn btn-gold" onclick="incluirRapido(${c.id})">➕</button></div></div>`;});document.getElementById('lista').innerHTML=h||'<div style="padding:20px;opacity:.6;text-align:center">Vazio - + Nova Cifra Manual</div>';}
+function excluirAtual(){let id=editId||(atual&&atual.id);if(!id)return;if(confirm('Excluir?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();editId=null;atual=null;show('home');render();}}
+function excluirDaLista(id){if(confirm('Excluir?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();render();renderListas();}}
+function incluirNaLista(){if(!atual)return;if(!setlist.includes(atual.id)){setlist.push(atual.id);saveSet();alert('✅ Incluída!');}else{alert('Já está');}}
+function limparSetlist(){if(confirm('Limpar?')){setlist=[];saveSet();renderListas();}}
+function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>{h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b style="color:#FFEB3B">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn" onclick="abrir(${c.id});editarAtual()">✏️</button><button class="btn btn-danger" onclick="excluirDaLista(${c.id})">🗑️</button><button class="btn btn-gold" onclick="incluirRapido(${c.id})">➕</button></div></div>`;});document.getElementById('lista').innerHTML=h||'<div style="padding:20px;opacity:.6;text-align:center">Vazio - + Nova Cifra Manual</div>';}
 function incluirRapido(id){if(!setlist.includes(id)){setlist.push(id);saveSet();alert('✅ Incluída!');}else{alert('Já está');}}
 function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista.<br>Home > ➕</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
 function removerSet(id){setlist=setlist.filter(s=>s!=id);saveSet();renderListas();}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
-
-// NOVA FUNÇÃO QUE SEPARA CIFRA DA LETRA NA MESMA LINHA
 function separarCifraELetra(linha){
-  let chordRegex = /[A-G][#b]?m?(?:7M|m7|7|sus4?|dim)?(?:\(.*?\)|\b)?/g;
-  let tokens = linha.trim().split(/\s+/);
-  let acordes = [];
-  let letraInicio = -1;
+  let tokens=linha.trim().split(/\s+/);
+  let acordes=[]; let letraInicio=-1;
   for(let i=0;i<tokens.length;i++){
-    let t = tokens[i].replace(/[()]/g, '');
-    if(/^[A-G][#b]?m?(?:7M|m7|7|sus4?|dim)?(\(4\/9\)|\(9\))?$/.test(t) || /^[A-G][#b]?$/.test(t)){
-      acordes.push(tokens[i]);
-    }else{
-      letraInicio = i;
-      break;
-    }
+    let t=tokens[i];
+    if(/^[A-G][#b]?m?(?:7M|m7|7|sus4?|dim)?(\(4\/9\)|\(9\)|\(.*\))?$/.test(t) || /^[A-G]$/.test(t)){
+      acordes.push(t);
+    }else{letraInicio=i;break;}
   }
-  if(acordes.length>0 && letraInicio!=-1){
-    let letra = tokens.slice(letraInicio).join(' ');
-    return {ac: acordes.join(' '), let: letra};
-  }else if(acordes.length>0 && letraInicio==-1){
-    // só acordes
-    return {ac: linha.trim(), let: ''};
-  }else{
-    // só letra
-    return {ac: '', let: linha};
-  }
+  if(acordes.length>0 && letraInicio!=-1){return {ac:acordes.join(' '), let:tokens.slice(letraInicio).join(' ')};}
+  else if(acordes.length>0){return {ac:linha.trim(), let:''};}
+  else{return {ac:'', let:linha};}
 }
-
 function pintar(txt){
-  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red;padding:20px">Vazia - Editar</div>';return;}
-  let linhas = txt.split('\n');
-  let html = '';
+  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red;padding:20px">Vazia</div>';return;}
+  let linhas=txt.split('\n');let html='';
   for(let line of linhas){
-    let trim = line.trim();
+    let trim=line.trim();
     if(!trim){html+=`<div class="linha">&nbsp;</div>`;continue;}
-    if(trim.startsWith('[')){
-      html+=`<div class="linha secao ${temaAtual}">${trim}</div>`;continue;
-    }
-    let sep = separarCifraELetra(line);
+    if(trim.startsWith('[')){html+=`<div class="linha secao ${temaAtual}">${trim}</div>`;continue;}
+    let sep=separarCifraELetra(line);
     if(sep.ac && sep.let){
-      let acClass = 'ac '+temaAtual+(corCifra=='vermelha'?' vermelha':'');
-      let letClass = 'let '+temaAtual;
-      html+=`<div class="linha"><span class="${acClass}">${sep.ac}</span> <span class="${letClass}">${sep.let}</span></div>`;
+      let acClass='ac '+(corCifra=='vermelha'?'vermelha':'');
+      html+=`<div class="linha"><span class="${acClass}">${sep.ac}</span> <span class="let">${sep.let}</span></div>`;
     }else if(sep.ac){
-      let acClass = 'ac '+temaAtual+(corCifra=='vermelha'?' vermelha':'');
+      let acClass='ac '+(corCifra=='vermelha'?'vermelha':'');
       html+=`<div class="linha"><span class="${acClass}">${sep.ac}</span></div>`;
     }else{
-      let letClass = 'let '+temaAtual;
-      html+=`<div class="linha"><span class="${letClass}">${line}</span></div>`;
+      html+=`<div class="linha"><span class="let">${line}</span></div>`;
     }
   }
   document.getElementById('linhas').innerHTML=html;
