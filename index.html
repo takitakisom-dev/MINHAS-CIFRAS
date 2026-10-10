@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v19 FINAL</title>
+<title>MINHAS CIFRAS v20 SEM QUADRADO</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--green:#0a2f1e;--gold:#FFD700;--gold2:#FFEB3B;--bg:#061a11}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:Roboto,sans-serif}
@@ -12,46 +12,42 @@
 .btn{padding:7px 11px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer;font-size:11px}
 .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a2f1e;border:none}
 .btn-active{background:var(--gold2)!important;color:#0a2f1e!important}
-.btn-red-active{background:#ff4444!important;color:#fff!important;border-color:#000!important}
 .tag{background:rgba(255,215,0,.2);border:1px solid var(--gold);color:var(--gold2);padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
 .install-banner{display:none;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#000;padding:12px;text-align:center;font-weight:900;cursor:pointer;position:sticky;top:52px;z-index:19;border:2px solid #000}
 .install-banner.show{display:flex;justify-content:center}
-
-/* PARTE DA MÚSICA - FUNDO BRANCO, LETRA PRETA */
-.cifra{background:#FFFFFF!important;padding:16px 12px;border-radius:14px;border:3px solid #000;height:62vh;overflow:auto;box-shadow:inset 0 0 0 2px #FFD700}
+.cifra{background:#FFFFFF!important;padding:18px 14px;border-radius:14px;border:3px solid #000;height:62vh;overflow:auto}
 .cifra pre{white-space:pre; margin:0; min-width:max-content; color:#000!important}
-.font-mono pre{font-family:'Courier Prime',monospace; font-size:inherit; line-height:2.4; color:#000}
-.font-mao pre{font-family:'Patrick Hand',cursive; font-size:1.2em; line-height:2.9; color:#111}
-.font-rascunho pre{font-family:'Caveat',cursive; font-weight:700; font-size:1.4em; line-height:3.0; color:#111}
+.font-mono pre{font-family:'Courier Prime',monospace; line-height:2.4; color:#000}
+.font-mao pre{font-family:'Patrick Hand',cursive; font-size:1.2em; line-height:3.0; color:#111}
+.font-rascunho pre{font-family:'Caveat',cursive; font-weight:700; font-size:1.45em; line-height:3.1; color:#111}
 
-/* CIFRA AMARELA OU VERMELHA COM BORDA PRETA */
+/* SEM QUADRADO - SÓ COR */
 .cifra b.chord-amarela{
-  background:#FFEB3B!important;
-  color:#000!important;
-  border:2px solid #000!important;
-  padding:2px 8px!important;
-  border-radius:6px!important;
+  background:none!important;
+  border:none!important;
+  color:#C6A000!important;
   font-family:'Courier Prime',monospace!important;
   font-weight:900!important;
-  display:inline-block;
-  font-size:0.85em;
-  box-shadow:0 1px 2px rgba(0,0,0,.3);
+  padding:0 2px!important;
+  text-shadow:0 0 1px rgba(0,0,0,.2);
+  font-size:1em;
 }
 .cifra b.chord-vermelha{
-  background:#FF4444!important;
-  color:#fff!important;
-  border:2px solid #000!important;
-  padding:2px 8px!important;
-  border-radius:6px!important;
+  background:none!important;
+  border:none!important;
+  color:#D32F2F!important;
   font-family:'Courier Prime',monospace!important;
   font-weight:900!important;
-  display:inline-block;
-  font-size:0.85em;
-  box-shadow:0 1px 2px rgba(0,0,0,.3);
+  padding:0 2px!important;
+  text-shadow:0 0 1px rgba(0,0,0,.15);
+  font-size:1em;
 }
-.cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px;background:#fff!important}
+/* [Primeira Parte] também sem quadrado, só negrito */
+.cifra b.secao{color:#000!important; font-weight:900!important; background:none!important; border:none!important}
+
+.cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 14px 20px 14px;background:#fff!important}
 .full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid var(--gold);padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
 .full-tools.show{display:flex}
 .side-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;z-index:10001;transition:.3s;display:flex;flex-direction:column}
@@ -70,12 +66,12 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="show('importar');closeMenu()">📄 Importar.txt</a>
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup e Restauração</a>
     <a href="#" onclick="showPrefs();closeMenu()">⚙️ Preferências</a>
-    <a href="#" onclick="alert('v19 FINAL - Fundo branco, letra preta, cifra amarela/vermelha');closeMenu()">❓ Ajuda</a>
-    <a href="#" onclick="alert('MINHAS CIFRAS A∞T v19 FINAL');closeMenu()">ℹ️ Sobre</a>
+    <a href="#" onclick="alert('v20 - Sem quadrado, só cor');closeMenu()">❓ Ajuda</a>
+    <a href="#" onclick="alert('MINHAS CIFRAS A∞T v20');closeMenu()">ℹ️ Sobre</a>
     <a href="#" onclick="installApp();closeMenu()">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v19 FINAL</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v20</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="installBanner" class="install-banner" onclick="installApp()">📲 CLIQUE AQUI PARA INSTALAR O APP</div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
@@ -89,10 +85,9 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <div id="leitor" style="display:none" class="card">
 <div style="display:flex;justify-content:space-between"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><button class="btn" onclick="stop();show('home')">← Voltar</button></div>
 <div class="toolbar"><button id="btnMono" class="btn" onclick="setFonte('mono')">🖥️ Máquina</button><button id="btnMao" class="btn" onclick="setFonte('mao')">✍️ Mão</button><button id="btnRasc" class="btn btn-active" onclick="setFonte('rascunho')">📝 Mão Bonita</button></div>
-<div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px"><span style="color:#000;font-weight:900;font-size:11px">COR DA CIFRA:</span>
-<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Amarela</button>
+<div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px"><span style="color:#000;font-weight:900;font-size:11px">COR DA CIFRA SEM QUADRADO:</span>
+<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
-<span style="color:#000;font-weight:800;font-size:10px;margin-left:8px">FUNDO BRANCO + LETRA PRETA</span>
 </div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">13px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
 <div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
@@ -113,14 +108,13 @@ function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCa
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
 function pintar(txt){
   let classe=corCifra=='amarela'?'chord-amarela':'chord-vermelha';
-  let html=txt.replace(/\[([^\]]+)\]/g,(m,c)=>`<b class="${classe}">[${c}]</b>`);
+  let html=txt.replace(/\[([^\]]+)\]/g,(m,c)=>`<b class="secao">[${c}]</b>`);
   html=html.replace(/(^|[ \n\t])([A-G][#b]?m?7M?|Bm7|Am7|C7M|Em7|G7M|D7\(4\/9\)|A\b|[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(4\/9\)|\(9\))?)(?=[ \n\t]|$)/g,(m,esp,acorde)=>{if(acorde.length>6)return m;return esp+`<b class="${classe}">${acorde}</b>`;});
   document.getElementById('preCifra').innerHTML=html;
 }
 function transp(d){tr+=d;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
 function setFonte(t){fonteAtual=t;let el=document.getElementById('l_cifra');el.className='cifra font-'+t;document.getElementById('btnMono').className=t=='mono'?'btn':'btn';document.getElementById('btnMao').className=t=='mao'?'btn btn-active':'btn';document.getElementById('btnRasc').className=t=='rascunho'?'btn btn-active':'btn';localStorage.setItem('fonte',t);}
-function toggleFonte(){if(fonteAtual=='mono')setFonte('mao');else if(fonteAtual=='mao')setFonte('rascunho');else setFonte('mono');}
-function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='amarela'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-red-active':'btn';if(atual)pintar(atual.orig);}
+function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='amarela'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
 function applyFont(){document.getElementById('preCifra').style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function setSpeed(v){vel=parseFloat(v);document.getElementById('speed').value=v;document.getElementById('speedTag').innerText=v+'x';}
