@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v17 FINAL</title>
+<title>MINHAS CIFRAS v18</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--green:#0a2f1e;--gold:#FFD700;--gold2:#FFEB3B;--bg:#061a11}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:Roboto,sans-serif}
@@ -15,48 +15,40 @@
 .tag{background:rgba(255,215,0,.2);border:1px solid var(--gold);color:var(--gold2);padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
-.install-banner{display:none;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#000;padding:12px 16px;text-align:center;font-weight:900;cursor:pointer;position:sticky;top:52px;z-index:19;border:2px solid #000}
-.install-banner.show{display:flex;justify-content:center;align-items:center}
-.cifra{background:#0a1f14;padding:14px 10px;border-radius:14px;border:1px solid var(--gold);height:62vh;overflow:auto}
-.cifra pre{white-space:pre; line-height:3.2; margin:0; min-width:max-content; font-size:inherit}
-/* BORDA PRETA COM AMARELO - ALTA VISIBILIDADE FINAL */
+.install-banner{display:none;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#000;padding:12px;text-align:center;font-weight:900;cursor:pointer;position:sticky;top:52px;z-index:19;border:2px solid #000}
+.install-banner.show{display:flex;justify-content:center}
+.cifra{background:#0a1f14;padding:16px 12px;border-radius:14px;border:1px solid var(--gold);height:62vh;overflow:auto}
+.cifra pre{white-space:pre; margin:0; min-width:max-content}
+/* LETRA BONITA DE VOLTA */
+.font-mono pre{font-family:'Courier Prime',monospace; font-size:inherit; line-height:2.2; color:#fff; letter-spacing:0.3px}
+.font-mao pre{font-family:'Patrick Hand',cursive; font-size:1.15em; line-height:2.9; color:#FFFDE7; letter-spacing:0.8px}
+.font-rascunho pre{font-family:'Caveat',cursive; font-weight:600; font-size:1.35em; line-height:2.9; color:#FFF8E1; letter-spacing:0.5px}
+/* SÓ A CIFRA COM BORDA PRETA + AMARELO - LETRA CONTINUA BRANCA */
 .cifra b.chord{
   background:#FFEB3B!important;
-  color:#000000!important;
-  border:2px solid #000000!important;
-  font-weight:900!important;
-  padding:2px 8px!important;
-  border-radius:6px!important;
-  box-shadow:0 0 0 1px #FFEB3B, 0 2px 4px rgba(0,0,0,.8)!important;
-  text-shadow:none!important;
-  display:inline-block;
-  margin:1px 2px;
-  letter-spacing:0.5px;
-}
-.cifra b.chord-section{
-  background:#FFC107!important;
   color:#000!important;
   border:2px solid #000!important;
-  padding:3px 10px!important;
+  font-family:'Courier Prime',monospace!important;
+  font-weight:900!important;
+  padding:1px 7px!important;
+  border-radius:6px!important;
+  box-shadow:0 1px 3px rgba(0,0,0,.8)!important;
+  display:inline-block;
+  font-size:0.85em;
 }
-.font-mono pre{font-family:'Courier Prime',monospace}
-.font-mao pre{font-family:'Patrick Hand',cursive; line-height:3.2}
-.font-rascunho pre{font-family:'Caveat',cursive; font-weight:700; line-height:3.5; font-size:1.1em}
+.font-mao b.chord,.font-rascunho b.chord{font-size:0.75em; transform:translateY(-2px)}
 .cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px;background:#05120c}
 .full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid var(--gold);padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
 .full-tools.show{display:flex}
-.side-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;z-index:10001;transition:.3s;box-shadow:4px 0 15px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.side-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;z-index:10001;transition:.3s;display:flex;flex-direction:column}
 .side-menu.open{left:0}.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:10000}.overlay.show{display:block}
 .menu-top{background:linear-gradient(135deg,#66BB6A,#2E7D32);padding:20px 16px;color:#fff}
 .menu-list{flex:1;overflow-y:auto;padding:8px 0}
-.menu-list a{display:flex;align-items:center;gap:16px;padding:14px 20px;color:#616161;text-decoration:none;font-size:15px;border-bottom:1px solid #f0f0f0}
+.menu-list a{display:flex;gap:16px;padding:14px 20px;color:#616161;text-decoration:none;font-size:15px;border-bottom:1px solid #f0f0f0}
 </style></head><body>
 <div id="overlay" class="overlay" onclick="closeMenu()"></div>
 <div id="sideMenu" class="side-menu">
-  <div class="menu-top">
-    <div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:10px">🎸</div>
-    <b style="font-size:18px">Cifras</b><br><small>androidcifras@gmail.com</small>
-  </div>
+  <div class="menu-top"><div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:10px">🎸</div><b style="font-size:18px">Cifras</b><br><small>androidcifras@gmail.com</small></div>
   <div class="menu-list">
     <a href="#" onclick="show('home');closeMenu();render()">👥 Minhas músicas</a>
     <a href="#" onclick="show('listas');closeMenu()">📋 Minhas Listas</a>
@@ -65,45 +57,37 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup e Restauração</a>
     <a href="#" onclick="showPrefs();closeMenu()">⚙️ Preferências</a>
     <a href="#" onclick="window.open('https://instagram.com','_blank');closeMenu()">📱 Redes Sociais</a>
-    <a href="#" onclick="alert('Outros Apps A∞T');closeMenu()">⭐ Outros Apps</a>
-    <a href="#" onclick="alert('Ajuda: Notas agora com borda preta e amarela para alta visibilidade');closeMenu()">❓ Ajuda</a>
-    <a href="#" onclick="alert('MINHAS CIFRAS A∞T v17 FINAL - Borda Preta com Amarelo');closeMenu()">ℹ️ Sobre</a>
+    <a href="#" onclick="alert('Outros Apps');closeMenu()">⭐ Outros Apps</a>
+    <a href="#" onclick="alert('v18 - Letra mão livre bonita + cifra amarela borda preta');closeMenu()">❓ Ajuda</a>
+    <a href="#" onclick="alert('MINHAS CIFRAS v18');closeMenu()">ℹ️ Sobre</a>
     <a href="#" onclick="installApp();closeMenu()" id="menuInstall">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v17</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v18</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="installBanner" class="install-banner" onclick="installApp()">📲 CLIQUE AQUI PARA INSTALAR O APP</div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">13px</span><button class="btn" onclick="fontM(1)">A+</button>
-<button class="btn btn-active" onclick="toggleFonte()">✍️</button>
+<button class="btn btn-active" onclick="toggleFonte()">✍️ Mão</button>
 <button class="btn" style="margin-left:auto;background:#ff4444;color:#fff" onclick="expandir()">✕</button>
 </div>
-<div id="home"><div class="card"><input id="webQ" placeholder="Buscar..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div>
-<div class="toolbar"><button class="btn btn-gold" onclick="show('importar')">Importar.txt</button><button class="btn" onclick="show('backup')">Backup</button></div>
-<input id="localQ" placeholder="🔍 Minhas cifras..." oninput="render()" style="margin-top:8px"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
-<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">📄 Importar.txt</h3><textarea id="i_txt" rows="12"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3>
-<div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR Backup</button></div>
-<hr style="margin:12px 0;border-color:rgba(212,175,55,.2)">
-<input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea>
-<div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div>
-</div>
-<div id="listas" style="display:none" class="card"><h3 style="color:var(--gold2)">📋 Minhas Listas</h3><p style="opacity:.6;font-size:13px">Em breve!</p><button class="btn" onclick="show('home')">Voltar</button></div>
+<div id="home"><div class="card"><input id="webQ" placeholder="Buscar..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div><div class="toolbar"><button class="btn btn-gold" onclick="show('importar')">Importar.txt</button><button class="btn" onclick="show('backup')">Backup</button></div><input id="localQ" placeholder="🔍 Minhas cifras..." oninput="render()"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
+<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">📄 Importar</h3><textarea id="i_txt" rows="12"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR Backup</button></div><hr style="margin:12px 0;border-color:rgba(212,175,55,.2)"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+<div id="listas" style="display:none" class="card"><h3 style="color:var(--gold2)">📋 Minhas Listas</h3><button class="btn" onclick="show('home')">Voltar</button></div>
 <div id="leitor" style="display:none" class="card">
 <div style="display:flex;justify-content:space-between"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><button class="btn" onclick="stop();show('home')">← Voltar</button></div>
-<div class="toolbar"><button id="btnMono" class="btn" onclick="setFonte('mono')">🖥️ Máquina</button><button id="btnMao" class="btn" onclick="setFonte('mao')">✍️ Mão</button><button id="btnRasc" class="btn btn-active" onclick="setFonte('rascunho')">📝 Rascunho</button><button class="btn" onclick="toggleContrast()">👁️ Alto</button></div>
+<div class="toolbar"><button id="btnMono" class="btn" onclick="setFonte('mono')">🖥️ Máquina</button><button id="btnMao" class="btn" onclick="setFonte('mao')">✍️ Mão</button><button id="btnRasc" class="btn btn-active" onclick="setFonte('rascunho')">📝 Rascunho Bonito</button></div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">13px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
 <div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
-<div id="l_cifra" class="cifra font-mono"><pre id="preCifra"></pre></div>
+<div id="l_cifra" class="cifra font-rascunho"><pre id="preCifra"></pre></div>
 </div>
 <script>
-let deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').classList.add('show');});
-function installApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Clique nos 3 pontinhos > Adicionar à tela inicial');}}
+let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').classList.add('show');});
+function installApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('3 pontinhos > Adicionar à tela inicial');}}
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'13'),vel=2.5,fonteAtual=localStorage.getItem('fonte')||'mono';
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'13'),vel=2.5,fonteAtual=localStorage.getItem('fonte')||'rascunho';
 const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
 function show(id){stop();['home','importar','leitor','backup','listas'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();}
 function buscar(t){let q=document.getElementById('webQ').value.trim();if(!q)return;let u=t=='cifraclub'?'https://www.cifraclub.com/search/?q='+encodeURIComponent(q):'https://www.google.com/search?q='+encodeURIComponent(q+' cifra');window.open(u,'_blank');}
@@ -112,14 +96,13 @@ function salvarImp(){let t=document.getElementById('i_txt').value;if(!t)return;c
 function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>h+=`<div style="padding:12px;border-bottom:1px solid rgba(212,175,55,.15);cursor:pointer" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div>`);document.getElementById('lista').innerHTML=h||'Vazio';}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
 function pintar(txt){
-  let html=txt.replace(/\[([^\]]+)\]/g,(m,c)=>{if(c.toLowerCase().includes('parte')||c.toLowerCase().includes('refr')||c.toLowerCase().includes('intro'))return `<b class="chord chord-section">[${c}]</b>`;return `<b class="chord">[${c}]</b>`;});
-  html=html.replace(/(^|[ \n\t])([A-G][#b]?m?7M?|Bm7|Am7|C7M|Em7|G7M|D7\(4\/9\)|A\b|[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(4\/9\)|\(9\))?)(?=[ \n\t]|$)/g,(m,esp,acorde)=>{if(acorde.length>6||esp.trim()=='')return m;return esp+`<b class="chord">${acorde}</b>`;});
+  let html=txt.replace(/\[([^\]]+)\]/g,(m,c)=>{if(c.toLowerCase().includes('parte')||c.toLowerCase().includes('refr'))return `<b class="chord">[${c}]</b>`;return `<b class="chord">[${c}]</b>`;});
+  html=html.replace(/(^|[ \n\t])([A-G][#b]?m?7M?|Bm7|Am7|C7M|Em7|G7M|D7\(4\/9\)|A\b|[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(4\/9\)|\(9\))?)(?=[ \n\t]|$)/g,(m,esp,acorde)=>{if(acorde.length>6)return m;return esp+`<b class="chord">${acorde}</b>`;});
   document.getElementById('preCifra').innerHTML=html;
 }
 function transp(d){tr+=d;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
-function setFonte(t){fonteAtual=t;let el=document.getElementById('l_cifra');el.className='cifra font-'+t;document.getElementById('btnMono').className=t=='mono'?'btn btn-active':'btn';document.getElementById('btnMao').className=t=='mao'?'btn btn-active':'btn';document.getElementById('btnRasc').className=t=='rascunho'?'btn btn-active':'btn';localStorage.setItem('fonte',t);}
+function setFonte(t){fonteAtual=t;let el=document.getElementById('l_cifra');el.className='cifra font-'+t;document.getElementById('btnMono').className=t=='mono'?'btn':'btn';document.getElementById('btnMao').className=t=='mao'?'btn btn-active':'btn';document.getElementById('btnRasc').className=t=='rascunho'?'btn btn-active':'btn';localStorage.setItem('fonte',t);}
 function toggleFonte(){if(fonteAtual=='mono')setFonte('mao');else if(fonteAtual=='mao')setFonte('rascunho');else setFonte('mono');}
-function toggleContrast(){}
 function applyFont(){document.getElementById('preCifra').style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function setSpeed(v){vel=parseFloat(v);document.getElementById('speed').value=v;document.getElementById('speedTag').innerText=v+'x';}
@@ -127,7 +110,7 @@ function playPause(){let el=document.getElementById('l_cifra');if(raf){stop();re
 function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}document.getElementById('playBtn').innerText='▶️ Play';document.getElementById('playFull').innerText='▶️';}
 function expandir(){let el=document.getElementById('l_cifra');let tools=document.getElementById('fullTools');el.classList.toggle('fullscreen');tools.classList.toggle('show');}
 function exportarBackup(){let blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-cifras.txt';a.click();}
-function importarBackup(){let file=document.getElementById('fileInput').files[0];let txt=document.getElementById('backupTxt').value;if(file){let r=new FileReader();r.onload=e=>{try{cifras=JSON.parse(e.target.result);save();render();alert('Restaurado '+cifras.length);show('home');}catch{alert('Arquivo inválido');}};r.readAsText(file);return;}if(txt){try{cifras=JSON.parse(txt);save();render();alert('Restaurado');show('home');}catch{alert('Inválido');}}}
+function importarBackup(){let file=document.getElementById('fileInput').files[0];let txt=document.getElementById('backupTxt').value;if(file){let r=new FileReader();r.onload=e=>{try{cifras=JSON.parse(e.target.result);save();render();alert('Restaurado '+cifras.length);show('home');}catch{alert('Inválido');}};r.readAsText(file);return;}if(txt){try{cifras=JSON.parse(txt);save();render();alert('Restaurado');show('home');}catch{alert('Inválido');}}}
 function showPrefs(){let n=prompt('Tamanho:',fz);if(n){fz=parseInt(n);applyFont();}}
 setFonte(fonteAtual);render();applyFont();setSpeed(vel);
 </script></body></html>
