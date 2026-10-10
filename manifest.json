@@ -1,8 +1,24 @@
 {
- "name": "MINHAS CIFRAS A∞T",
- "short_name": "Minhas Cifras",
- "background_color": "#071a11",
- "theme_color": "#0a3d26",
- "display": "standalone",
- "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3659/3659784.png","sizes":"512x512","type":"image/png"}]
+  "name": "Minhas Cifras",
+  "short_name": "Cifras",
+  "start_url": "./?v=28",
+  "display": "standalone",
+  "background_color": "#0a2f1e",
+  "theme_color": "#0a2f1e",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3659/3659899.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
