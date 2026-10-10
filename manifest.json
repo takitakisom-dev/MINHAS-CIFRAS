@@ -1,0 +1,8 @@
+{
+ "name": "MINHAS CIFRAS A∞T",
+ "short_name": "Minhas Cifras",
+ "background_color": "#071a11",
+ "theme_color": "#0a3d26",
+ "display": "standalone",
+ "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3659/3659784.png","sizes":"512x512","type":"image/png"}]
+}
