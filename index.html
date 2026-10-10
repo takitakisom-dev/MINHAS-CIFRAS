@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v26 FINAL</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a2f1e">
+<title>MINHAS CIFRAS v27 FIX DEFINITIVO</title>
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#061a11;color:#fff;font-family:Roboto,sans-serif}
@@ -16,48 +14,27 @@
 .tag{background:rgba(255,215,0,.2);border:1px solid #FFD700;color:#FFEB3B;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
-.cifra{width:100%;padding:14px 12px;border-radius:14px;border:3px solid #000;height:72vh;overflow:auto}
-.linha{display:block;margin-bottom:9px;line-height:1.4}
-
-/* CORES BASE - FUNCIONA SEMPRE */
-.ac{font-family:'Courier Prime',monospace;font-weight:900;font-size:0.98em;letter-spacing:0.5px}
-.let{font-family:'Kalam',cursive;font-weight:700;font-size:1.12em;margin-left:4px}
-.secao{font-family:'Courier Prime',monospace;font-weight:900;display:block;padding:8px 0 4px 0;margin-top:14px;border-bottom:1px dashed;text-transform:uppercase}
-
-/* FUNDO BRANCO - LETRA PRETA, CIFRA DOURADA/VERMELHA */
-.tema-branco{background:#FFFFFF!important;border-color:#000!important}
-.tema-branco.ac{color:#8B6914!important}
-.tema-branco.ac.vermelha{color:#CC0000!important}
-.tema-branco.ac.dourada{color:#8B6914!important}
-.tema-branco.let{color:#000000!important}
-.tema-branco.secao{color:#2E7D32!important;border-color:#2E7D32!important}
-
-/* FUNDO PRETO */
-.tema-preto{background:#000000!important;border-color:#FFD700!important}
-.tema-preto.ac{color:#FFEB3B!important}
-.tema-preto.ac.dourada{color:#FFEB3B!important;text-shadow:0 0 6px rgba(255,235,59,.6)}
-.tema-preto.ac.vermelha{color:#FF4444!important;text-shadow:none}
-.tema-preto.let{color:#FFFFFF!important}
+.cifra-box{width:100%;padding:16px;border-radius:14px;border:3px solid #000;min-height:60vh;max-height:72vh;overflow:auto;white-space:pre-wrap;word-break:break-word;line-height:1.6;font-size:17px;font-family:'Kalam',cursive}
+.cifra-box.tema-branco{background:#FFFFFF!important;color:#000000!important;border-color:#000!important}
+.cifra-box.tema-preto{background:#000000!important;color:#FFFFFF!important;border-color:#FFD700!important}
+.cifra-box.tema-azul{background:#0D1B2A!important;color:#E0F2FF!important;border-color:#4DA6FF!important}
+.cifra-box.tema-verde{background:#0a2f1e!important;color:#E8FFE8!important;border-color:#66BB6A!important}
+.chord{font-family:'Courier Prime',monospace;font-weight:900}
+.chord.dourada{color:#8B6914!important}
+.tema-branco.chord.dourada{color:#8B6914!important}
+.tema-preto.chord.dourada{color:#FFEB3B!important}
+.tema-azul.chord.dourada{color:#FFEB3B!important}
+.tema-verde.chord.dourada{color:#FFEB3B!important}
+.chord.vermelha{color:#CC0000!important}
+.tema-preto.chord.vermelha{color:#FF4444!important}
+.tema-azul.chord.vermelha{color:#FF6B6B!important}
+.tema-verde.chord.vermelha{color:#FF6E6E!important}
+.secao{color:#2E7D32!important;font-weight:900;font-family:'Courier Prime',monospace;text-transform:uppercase;display:block;margin-top:12px;border-bottom:1px dashed #2E7D32}
 .tema-preto.secao{color:#66BB6A!important;border-color:#66BB6A!important}
-
-/* FUNDO AZUL */
-.tema-azul{background:#0D1B2A!important;border-color:#4DA6FF!important}
-.tema-azul.ac{color:#FFEB3B!important}
-.tema-azul.ac.vermelha{color:#FF6B6B!important}
-.tema-azul.let{color:#E0F2FF!important}
-.tema-azul.secao{color:#4DA6FF!important;border-color:#4DA6FF!important}
-
-/* FUNDO VERDE */
-.tema-verde{background:#0a2f1e!important;border-color:#66BB6A!important}
-.tema-verde.ac{color:#FFEB3B!important}
-.tema-verde.ac.vermelha{color:#FF8A80!important}
-.tema-verde.let{color:#E8FFE8!important}
-.tema-verde.secao{color:#A5D6A7!important;border-color:#66BB6A!important}
-
 .item{padding:12px;border-bottom:1px solid rgba(212,175,55,.15);display:flex;justify-content:space-between;align-items:center}
 .item-info{cursor:pointer;flex:1}
 .item-actions{display:flex;gap:4px}
-.cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px}
+.cifra-box.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;min-height:100vh!important;max-height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px}
 .full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid #FFD700;padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
 .full-tools.show{display:flex}
 .side-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:#fff;z-index:10001;transition:.3s;display:flex;flex-direction:column}
@@ -68,7 +45,7 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 </style></head><body>
 <div id="overlay" class="overlay" onclick="closeMenu()"></div>
 <div id="sideMenu" class="side-menu">
-  <div class="menu-top"><div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:10px">🎸</div><b style="font-size:18px">Cifras</b><br><small>androidcifras@gmail.com</small></div>
+  <div class="menu-top"><b style="font-size:18px">🎸 Cifras</b><br><small>androidcifras@gmail.com</small></div>
   <div class="menu-list">
     <a href="#" onclick="show('home');closeMenu();render()">👥 Minhas músicas</a>
     <a href="#" onclick="show('listas');closeMenu();renderListas()">📋 Minhas Listas</a>
@@ -76,19 +53,21 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid #FFD700;color:#FFEB3B;border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v26</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid #FFD700;color:#FFEB3B;border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v27</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button>
 <button class="btn" style="margin-left:auto;background:#ff4444;color:#fff" onclick="expandir()">✕</button>
 </div>
-<div id="home"><div class="card"><input id="webQ" placeholder="Buscar cifra..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div>
-<div class="toolbar"><button class="btn btn-gold" onclick="novaCifra()">+ Nova Cifra Manual</button><button class="btn" onclick="show('importar')">📄 Colar Manual</button><button class="btn" onclick="show('backup')">Backup</button></div>
+<div id="home"><div class="card"><div class="toolbar"><button class="btn btn-gold" onclick="novaCifra()">+ Nova Cifra Manual</button><button class="btn" onclick="show('importar')">📄 Colar Manual</button><button class="btn" onclick="show('backup')">Backup</button></div>
 <input id="localQ" placeholder="🔍 Buscar nas minhas..." oninput="render()"></div><div class="card"><h3 style="color:#FFEB3B">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
 <div id="importar" style="display:none" class="card">
-<h3 style="color:#FFEB3B">📄 Criar / Editar Manual</h3>
+<h3 style="color:#FFEB3B">📄 Criar / Editar</h3>
 <input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><input id="i_tom" placeholder="Tom">
-<textarea id="i_txt" rows="14"></textarea>
+<textarea id="i_txt" rows="14" placeholder="Ex:
+[Primeira Parte]
+Em7 C7M Bm7
+A noite vai ser boa..."></textarea>
 <div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">💾 Salvar</button><button class="btn btn-success" onclick="salvarImp(true)">💾 + Lista</button><button class="btn" onclick="show('home')">Voltar</button></div>
 <div id="editActions" style="display:none" class="toolbar"><button class="btn btn-danger" onclick="excluirAtual()">🗑️ Excluir</button></div>
 </div>
@@ -104,13 +83,13 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
 <div class="toolbar" style="background:#f5f5f5;border:1px solid #000;padding:8px;border-radius:10px">
-<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA (sem quadrado) - TESTADO:</span>
+<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA - AGORA FUNCIONA:</span>
 <button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('dourada')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
 </div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">17px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
 <div style="background:#0a1f14;border:1px solid #FFD700;border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
-<div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div></div>
+<div id="l_cifra" class="cifra-box tema-branco"></div>
 </div>
 <script>
 let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'17'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'dourada',temaAtual=localStorage.getItem('tema')||'branco',editId=null;
@@ -118,7 +97,6 @@ const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
 function show(id){stop();['home','importar','leitor','backup','listas'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();if(id==='listas')renderListas();}
-function buscar(t){let q=document.getElementById('webQ').value.trim();if(!q)return;let u=t=='cifraclub'?'https://www.cifraclub.com/search/?q='+encodeURIComponent(q):'https://www.google.com/search?q='+encodeURIComponent(q+' cifra');window.open(u,'_blank');}
 function save(){localStorage.setItem('mc_cifras',JSON.stringify(cifras));}
 function saveSet(){localStorage.setItem('mc_setlist',JSON.stringify(setlist));}
 function novaCifra(){editId=null;document.getElementById('i_tit').value='';document.getElementById('i_art').value='';document.getElementById('i_tom').value='G';document.getElementById('i_txt').value='';document.getElementById('editActions').style.display='none';show('importar');}
@@ -133,40 +111,28 @@ function incluirRapido(id){if(!setlist.includes(id)){setlist.push(id);saveSet();
 function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista.</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
 function removerSet(id){setlist=setlist.filter(s=>s!=id);saveSet();renderListas();}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
-function separarCifraELetra(linha){
-  let tokens=linha.trim().split(/\s+/);let acordes=[];let letraInicio=-1;
-  for(let i=0;i<tokens.length;i++){
-    if(/^[A-G][#b]?m?(?:7M|m7|7|sus|dim)?(\(4\/9\)|\(9\)|\(.*\))?$/.test(tokens[i]) || /^[A-G]$/.test(tokens[i])){
-      acordes.push(tokens[i]);
-    }else{letraInicio=i;break;}
-  }
-  if(acordes.length>0 && letraInicio!=-1){return {ac:acordes.join(' '), let:tokens.slice(letraInicio).join(' ')};}
-  else if(acordes.length>0){return {ac:linha.trim(), let:''};}
-  else{return {ac:'', let:linha};}
-}
 function pintar(txt){
-  if(!txt){document.getElementById('linhas').innerHTML='<div style="color:red">Vazia</div>';return;}
-  let linhas=txt.split('\n');let html='';
-  for(let line of linhas){
-    let trim=line.trim();
-    if(!trim){html+=`<div class="linha">&nbsp;</div>`;continue;}
-    if(trim.startsWith('[')){html+=`<div class="linha secao">${trim}</div>`;continue;}
-    let sep=separarCifraELetra(line);
-    if(sep.ac && sep.let){
-      html+=`<div class="linha"><span class="ac ${corCifra}">${sep.ac}</span> <span class="let">${sep.let}</span></div>`;
-    }else if(sep.ac){
-      html+=`<div class="linha"><span class="ac ${corCifra}">${sep.ac}</span></div>`;
-    }else{
-      html+=`<div class="linha"><span class="let">${line}</span></div>`;
-    }
-  }
-  document.getElementById('linhas').innerHTML=html;
-  document.getElementById('l_cifra').className='cifra tema-'+temaAtual;
+  if(!txt){document.getElementById('l_cifra').innerHTML='Vazia - clique em Editar';return;}
+  // ESCAPE HTML
+  let esc = txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Destaca acordes - qualquer palavra que parece acorde
+  let regex = /\b([A-G][#b]?(?:m|7M|m7|7|sus4?|dim)?(?:\(4\/9\)|\(9\)|\(.*?\))?)\b/g;
+  let html = esc.replace(regex, (match)=>{
+    // Evita palavras comuns que começam com A-G mas são letra
+    if(match.length==1 && /^[A-Z]$/.test(match)) return match; // A, E sozinho pode ser acorde mas vamos manter
+    // Se for palavra normal tipo "Amor", não colore (tem minúsculas depois)
+    // Nosso regex só pega maiúsculo + m ou número, então já filtra bem
+    return `<span class="chord ${corCifra}">${match}</span>`;
+  });
+  // Seção [Primeira Parte]
+  html = html.replace(/\[.*?\]/g, (m)=>`<span class="secao">${m}</span>`);
+  document.getElementById('l_cifra').innerHTML = html;
+  document.getElementById('l_cifra').className = 'cifra-box tema-'+temaAtual;
 }
 function transp(d){tr+=d;if(!atual)return;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
 function setTema(t){temaAtual=t;localStorage.setItem('tema',t);['Branco','Preto','Azul','Verde'].forEach(n=>{let el=document.getElementById('t'+n);if(el)el.className=n.toLowerCase()==t?'btn btn-active':'btn';});if(atual)pintar(atual.orig);}
 function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='dourada'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
-function applyFont(){let cont=document.getElementById('linhas');cont.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
+function applyFont(){let cont=document.getElementById('l_cifra');cont.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function setSpeed(v){vel=parseFloat(v);document.getElementById('speed').value=v;document.getElementById('speedTag').innerText=v+'x';}
 function playPause(){let el=document.getElementById('l_cifra');if(raf){stop();return;}function step(){el.scrollTop+=vel*0.35;raf=requestAnimationFrame(step);}raf=requestAnimationFrame(step);document.getElementById('playBtn').innerText='⏸️';document.getElementById('playFull').innerText='⏸️';}
