@@ -1,87 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>MINHAS CIFRAS - A∞T PRO v2</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a3d26">
-<style>
-:root{--green:#0a3d26;--green2:#123f2e;--gold:#d4af37;--gold2:#f5d76e;--bg:#071a11}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:#fff;font-family:system-ui}
-.header{background:linear-gradient(180deg,var(--green2),var(--green));border-bottom:2px solid var(--gold);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
-.logo{font-weight:900;color:var(--gold2);font-size:18px}
-.card{background:linear-gradient(180deg,#132f24,#0d2118);border:1px solid rgba(212,175,55,.4);border-radius:16px;padding:16px;margin:12px;box-shadow:0 4px 20px rgba(0,0,0,.4)}
-.btn{padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer;border:none;font-size:14px}
-.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:var(--green)}
-.btn-out{border:1px solid var(--gold);color:var(--gold2);background:transparent}
-.btn-small{padding:8px 12px;font-size:12px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;align-items:center}
-input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:14px;border-radius:10px;margin:6px 0;font-size:16px}
-.cifra{white-space:pre-wrap;font-family:monospace;line-height:1.9;background:#0a1f14;padding:18px;border-radius:12px;border:1px solid rgba(212,175,55,.3);margin-top:12px}
-.cifra b{color:var(--gold2);font-weight:900}
-.tag{display:inline-block;background:rgba(212,175,55,.15);border:1px solid var(--gold);color:var(--gold2);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
-.list-item{padding:14px;border-bottom:1px solid rgba(212,175,55,.15);cursor:pointer;display:flex;justify-content:space-between}
-.scroll-ctrl{background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-</style>
-</head>
-<body>
-<div class="header"><div class="logo">♫ MINHAS CIFRAS A∞T PRO</div><button class="btn btn-gold btn-small" onclick="show('home')">Home</button></div>
-
-<div id="home">
-<div class="card">
-<h2 style="color:var(--gold2)">Sua coleção particular</h2>
-<p style="opacity:.8;margin:8px 0;font-size:14px">Crie, importe e organize. Tudo offline.</p>
-<div style="display:flex;gap:8px;margin:10px 0"><input id="searchWeb" placeholder="🔍 Buscar na internet - Ex: Legião Tempo Perdido" onkeydown="if(event.key==='Enter') buscarWeb()"><button class="btn btn-out btn-small" onclick="buscarWeb()">Buscar</button></div>
-<div class="toolbar"><button class="btn btn-gold" onclick="show('nova')">+ Nova Cifra</button><button class="btn btn-out" onclick="show('importar')">Importar.txt</button><button class="btn btn-out" onclick="show('repertorio')">+ Repertório</button></div>
-<div style="display:flex;gap:8px;margin-top:16px"><input id="searchLocal" placeholder="🔍 Buscar nas minhas cifras..." oninput="renderLista()"></div>
-</div>
-<div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div>
-<div id="repsHome" class="card" style="display:none"><h3 style="color:var(--gold2)">Meus Repertórios</h3><div id="listaReps"></div></div>
-</div>
-
-<div id="nova" style="display:none" class="card">
-<h3 style="color:var(--gold2)">+ Nova Cifra</h3><input id="n_titulo" placeholder="Título"><input id="n_artista" placeholder="Artista"><input id="n_tom" placeholder="Tom - Ex: C"><textarea id="n_texto" rows="10" placeholder="[C] Quando eu digo [G] que deixei..."></textarea>
-<div class="toolbar"><button class="btn btn-gold" onclick="salvarNova()">Salvar</button><button class="btn btn-out" onclick="show('home')">Cancelar</button></div>
-</div>
-
-<div id="importar" style="display:none" class="card">
-<h3 style="color:var(--gold2)">Importar.txt</h3><textarea id="imp_texto" rows="12" placeholder="Cole a cifra aqui"></textarea><input id="imp_titulo" placeholder="Título"><input id="imp_artista" placeholder="Artista">
-<div class="toolbar"><button class="btn btn-gold" onclick="salvarImport()">Importar</button><button class="btn btn-out" onclick="show('home')">Voltar</button></div>
-</div>
-
-<div id="leitor" style="display:none" class="card">
-<div style="display:flex;justify-content:space-between"><h2 id="l_titulo" style="color:var(--gold2)"></h2><button class="btn btn-out btn-small" onclick="stopScroll();show('home')">← Voltar</button></div><p id="l_artista" style="opacity:.7"></p>
-<div class="toolbar"><button id="btnSimples" class="btn btn-out btn-small" onclick="toggleSimples()">Cifra Simples</button><button class="btn btn-out btn-small" onclick="transpose(-1)">Tom -</button><span id="tomAtual" class="tag">Tom: C</span><button class="btn btn-out btn-small" onclick="transpose(1)">Tom +</button></div>
-<div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:10px;border:1px solid rgba(212,175,55,.2)"><span style="font-size:12px;color:var(--gold2);font-weight:800">TAMANHO:</span><button class="btn btn-out btn-small" onclick="changeFont(-2)">A-</button><span id="fontSizeTag" class="tag">16px</span><button class="btn btn-out btn-small" onclick="changeFont(2)">A+</button><button class="btn btn-out btn-small" onclick="changeFont(0)">Reset</button></div>
-<div class="scroll-ctrl"><span style="font-size:12px;color:var(--gold2);font-weight:800">🎬 AUTOSCROLL:</span><button id="playBtn" class="btn btn-gold btn-small" onclick="toggleScroll()">▶️ Play</button><button class="btn btn-out btn-small" onclick="stopScroll()">⏹️ Parar</button><div style="display:flex;align-items:center;gap:8px;width:100%;margin-top:8px"><span style="font-size:11px">Lento</span><input type="range" id="speedRange" min="1" max="10" value="3" oninput="updateSpeed()" style="width:100%"><span style="font-size:11px">Rápido</span><span id="speedTag" class="tag">3x</span></div></div>
-<div id="l_cifra" class="cifra"></div><div style="height:60vh"></div>
-</div>
-
-<div id="repertorio" style="display:none" class="card"><h3 style="color:var(--gold2)">Criar Repertório</h3><input id="rep_nome" placeholder="Nome - Ex: Culto Domingo"><div id="rep_lista" style="max-height:40vh;overflow:auto;margin:10px 0"></div><button class="btn btn-gold" onclick="salvarRep()">Salvar Repertório</button><button class="btn btn-out" onclick="show('home')">Voltar</button></div>
-
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MINHAS CIFRAS A∞T PRO</title><link rel="manifest" href="manifest.json"><style>:root{--green:#0a3d26;--gold:#d4af37;--gold2:#f5d76e;--bg:#071a11}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:system-ui}.header{background:#0a3d26;border-bottom:2px solid var(--gold);padding:14px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:10}.card{background:#132f24;border:1px solid rgba(212,175,55,.4);border-radius:16px;padding:16px;margin:12px}.btn{padding:12px 16px;border-radius:10px;font-weight:800;border:none;cursor:pointer}.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a3d26}.btn-out{border:1px solid var(--gold);color:var(--gold2);background:transparent}input,textarea{width:100%;background:#0a1f14;border:1px solid var(--gold);color:#fff;padding:12px;border-radius:10px;margin:6px 0}.cifra{white-space:pre-wrap;font-family:monospace;background:#0a1f14;padding:16px;border-radius:12px;border:1px solid rgba(212,175,55,.3);line-height:1.9}.cifra b{color:var(--gold2)}.tag{background:rgba(212,175,55,.15);border:1px solid var(--gold);color:var(--gold2);padding:4px 10px;border-radius:20px;font-size:12px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.list-item{padding:12px;border-bottom:1px solid rgba(212,175,55,.2)}</style></head><body>
+<div class="header"><div style="color:var(--gold2);font-weight:900">♫ MINHAS CIFRAS A∞T PRO v3</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div id="home"><div class="card"><h3 style="color:var(--gold2)">🔍 Buscar na Internet</h3><div style="display:flex;gap:8px"><input id="buscaWeb" placeholder="Ex: Legião Tempo Perdido"><button class="btn btn-gold" onclick="buscar()">Buscar</button></div><p style="font-size:11px;opacity:.6;margin-top:6px">Abre Cifra Club + Google pra você copiar</p><div class="toolbar" style="margin-top:16px"><button class="btn btn-gold" onclick="show('nova')">+ Nova Cifra</button><button class="btn btn-out" onclick="show('importar')">Importar.txt</button></div><input id="buscaLocal" placeholder="🔍 Buscar nas minhas cifras..." oninput="render()" style="margin-top:12px"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
+<div id="nova" style="display:none" class="card"><h3 style="color:var(--gold2)">+ Nova Cifra</h3><input id="n_tit" placeholder="Título"><input id="n_art" placeholder="Artista"><input id="n_tom" placeholder="Tom"><textarea id="n_txt" rows="10" placeholder="[C] Letra..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="salvarNova()">Salvar</button><button class="btn btn-out" onclick="show('home')">Cancelar</button></div></div>
+<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">Importar.txt</h3><textarea id="i_txt" rows="10" placeholder="Cole aqui"></textarea><input id="i_tit" placeholder="Título"><button class="btn btn-gold" onclick="salvarImp()">Importar</button><button class="btn btn-out" onclick="show('home')">Voltar</button></div>
+<div id="leitor" style="display:none" class="card"><div style="display:flex;justify-content:space-between"><h2 id="l_tit" style="color:var(--gold2)"></h2><button class="btn btn-out" onclick="parar();show('home')">Voltar</button></div><p id="l_art" style="opacity:.6"></p><div class="toolbar"><button id="bSimp" class="btn btn-out" onclick="toggleS()">Cifra Simples</button><button class="btn btn-out" onclick="tom(-1)">Tom -</button><span id="tTag" class="tag"></span><button class="btn btn-out" onclick="tom(1)">Tom +</button></div><div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:10px"><span style="color:var(--gold2);font-size:12px;font-weight:800">TAMANHO:</span><button class="btn btn-out" onclick="font(-2)">A-</button><span id="fTag" class="tag">16px</span><button class="btn btn-out" onclick="font(2)">A+</button></div><div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:12px;margin:10px 0"><div style="display:flex;gap:8px;align-items:center"><span style="color:var(--gold2);font-size:12px;font-weight:800">ROLAGEM:</span><button id="play" class="btn btn-gold" onclick="toggleR()">▶️ Play</button><button class="btn btn-out" onclick="parar()">⏹️ Parar</button><input type="range" id="rng" min="1" max="10" value="3" oninput="vel()"><span id="vTag" class="tag">3x</span></div></div><div id="l_cif" class="cifra"></div><div style="height:70vh"></div></div>
 <script>
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||'[]');let atual=null,modoSimples=false,scrollInt=null,trans=0,fontSize=16,scrollSpeed=3;
-function show(id){stopScroll();document.querySelectorAll('#home,#nova,#importar,#leitor,#repertorio').forEach(e=>e.style.display='none');document.getElementById(id).style.display='block';if(id==='home'){renderLista();renderRepsHome();}if(id==='repertorio')renderRep();window.scrollTo(0,0);}
-function buscarWeb(){let q=document.getElementById('searchWeb').value.trim();if(!q)return;window.open('https://www.cifraclub.com/search/?q='+encodeURIComponent(q),'_blank');}
-function salvarNova(){let t=document.getElementById('n_titulo').value.trim(),txt=document.getElementById('n_texto').value.trim();if(!t||!txt){alert('Preencha');return;}cifras.unshift({id:Date.now(),titulo:t,artista:document.getElementById('n_artista').value||'Autoral',tom:document.getElementById('n_tom').value||'C',texto:txt,orig:txt});localStorage.setItem('mc_cifras',JSON.stringify(cifras));show('home');}
-function salvarImport(){let t=document.getElementById('imp_texto').value.trim();if(!t)return;cifras.unshift({id:Date.now(),titulo:document.getElementById('imp_titulo').value||'Importada',artista:document.getElementById('imp_artista').value||'Importada',tom:'C',texto:t,orig:t});localStorage.setItem('mc_cifras',JSON.stringify(cifras));show('home');}
-function renderLista(){let f=(document.getElementById('searchLocal').value||'').toLowerCase();document.getElementById('count').innerText='('+cifras.length+')';let l=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(f));let h='';l.forEach(c=>{h+=`<div class=list-item onclick="abrir(${c.id})"><div><b>${c.titulo}</b><br><small style=opacity:.6>${c.artista} - Tom ${c.tom}</small></div><span class=tag>Ver</span></div>`});document.getElementById('lista').innerHTML=h||'<p style=opacity:.5;padding:10px>Sem cifras ainda</p>';}
-function renderRepsHome(){let reps=JSON.parse(localStorage.getItem('mc_reps')||'[]');if(!reps.length){document.getElementById('repsHome').style.display='none';return;}document.getElementById('repsHome').style.display='block';let h='';reps.forEach((r,i)=>{h+=`<div class=list-item><div><b>${r.nome}</b><br><small>${r.ids.length} músicas</small></div></div>`});document.getElementById('listaReps').innerHTML=h;}
-function abrir(id){atual=cifras.find(c=>c.id===id);trans=0;modoSimples=false;fontSize=parseInt(localStorage.getItem('mc_font')||'16');document.getElementById('l_titulo').innerText=atual.titulo;document.getElementById('l_artista').innerText=atual.artista;document.getElementById('l_cifra').innerHTML=colorir(atual.texto);document.getElementById('l_cifra').style.fontSize=fontSize+'px';document.getElementById('fontSizeTag').innerText=fontSize+'px';document.getElementById('tomAtual').innerText='Tom: '+atual.tom;show('leitor');}
-function colorir(t){return t.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}
-function simplifyChords(text){return text.replace(/\[([A-G][#b]?)([^\]]*)\]/g,(f,base,rest)=>{let map={'C#':'C','D#':'D','F#':'F','G#':'G','A#':'A','Db':'C','Eb':'D','Gb':'F','Ab':'G','Bb':'A'};let s=map[base]||base.replace('#','').replace('b','');let m=rest.toLowerCase().includes('m')&&!rest.toLowerCase().includes('maj');return '['+s+(m?'m':'')+']';});}
-function toggleSimples(){modoSimples=!modoSimples;let b=document.getElementById('btnSimples');if(modoSimples){b.innerText='★ SIMPLES ON';b.className='btn btn-gold btn-small';document.getElementById('l_cifra').innerHTML=colorir(simplifyChords(atual.orig))+'<br><br><small style=color:var(--gold2)>💡 Simplificado: F#m7(b5) → Dm. Use Capo 2ª casa p/ tom original.</small>';}else{b.innerText='Cifra Simples';b.className='btn btn-out btn-small';document.getElementById('l_cifra').innerHTML=colorir(atual.texto);}}
-function transpose(dir){trans+=dir;let notes=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];let txt=atual.orig.replace(/\[([A-G][#b]?)([^\]]*)\]/g,(f,b,r)=>{let i=notes.indexOf(b);if(i<0)return f;return '['+notes[(i+trans+120)%12]+r+']';});atual.texto=txt;document.getElementById('l_cifra').innerHTML=colorir(txt);}
-function changeFont(d){if(d===0)fontSize=16;else fontSize=Math.min(32,Math.max(10,fontSize+d));document.getElementById('l_cifra').style.fontSize=fontSize+'px';document.getElementById('fontSizeTag').innerText=fontSize+'px';localStorage.setItem('mc_font',fontSize);}
-function updateSpeed(){scrollSpeed=parseInt(document.getElementById('speedRange').value);document.getElementById('speedTag').innerText=scrollSpeed+'x';if(scrollInt){stopScroll();startScroll();}}
-function startScroll(){scrollInt=setInterval(()=>window.scrollBy(0,scrollSpeed),40);}
-function toggleScroll(){if(scrollInt)stopScroll();else{startScroll();document.getElementById('playBtn').innerText='⏸️ Pausar';}}
-function stopScroll(){if(scrollInt)clearInterval(scrollInt);scrollInt=null;let b=document.getElementById('playBtn');if(b)b.innerText='▶️ Play';}
-function renderRep(){let h='';cifras.forEach(c=>{h+=`<div class=list-item><label><input type=checkbox value=${c.id} class=repcheck> ${c.titulo}</label></div>`});document.getElementById('rep_lista').innerHTML=h;}
-function salvarRep(){let nome=document.getElementById('rep_nome').value.trim();if(!nome)return;let ids=[...document.querySelectorAll('.repcheck:checked')].map(e=>+e.value);let reps=JSON.parse(localStorage.getItem('mc_reps')||'[]');reps.push({nome,ids});localStorage.setItem('mc_reps',JSON.stringify(reps));show('home');}
-renderLista();renderRepsHome();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script>
-</body>
-</html>
+let cifras=JSON.parse(localStorage.getItem('mc')||'[]'),atual=null,simples=false,roll=null,trans=0,fz=16,veloc=3;
+function show(id){document.querySelectorAll('#home,#nova,#importar,#leitor').forEach(e=>e.style.display='none');document.getElementById(id).style.display='block';if(id=='home')render();}
+function buscar(){let q=document.getElementById('buscaWeb').value;if(!q)return;window.open('https://www.cifraclub.com/search/?q='+encodeURIComponent(q),'_blank');}
+function salvarNova(){cifras.unshift({id:Date.now(),titulo:document.getElementById('n_tit').value,artista:document.getElementById('n_art').value,tom:document.getElementById('n_tom').value||'C',texto:document.getElementById('n_txt').value,orig:document.getElementById('n_txt').value});localStorage.setItem('mc',JSON.stringify(cifras));show('home');}
+function salvarImp(){cifras.unshift({id:Date.now(),titulo:document.getElementById('i_tit').value||'Importada',artista:'Importada',tom:'C',texto:document.getElementById('i_txt').value,orig:document.getElementById('i_txt').value});localStorage.setItem('mc',JSON.stringify(cifras));show('home');}
+function render(){let f=document.getElementById('buscaLocal').value.toLowerCase();let lis=cifras.filter(c=>(c.titulo+c.artista).toLowerCase().includes(f));document.getElementById('count').innerText='('+lis.length+')';let h='';lis.forEach(c=>h+=`<div class=list-item onclick="abrir(${c.id})"><b>${c.titulo}</b><br><small>${c.artista}</small></div>`);document.getElementById('lista').innerHTML=h||'Sem cifras';}
+function abrir(id){atual=cifras.find(x=>x.id==id);trans=0;fz=parseInt(localStorage.getItem('fz')||16);document.getElementById('l_tit').innerText=atual.titulo;document.getElementById('l_art').innerText=atual.artista;document.getElementById('tTag').innerText='Tom: '+atual.tom;document.getElementById('l_cif').innerHTML=col(atual.texto);document.getElementById('l_cif').style.fontSize=fz+'px';document.getElementById('fTag').innerText=fz+'px';show('leitor');}
+function col(t){return t.replace(/\[([^\]]+)\]/g,'<b>[$1]</b>');}
+function toggleS(){simples=!simples;let b=document.getElementById('bSimp');if(simples){b.innerText='★ SIMPLES ON';b.className='btn btn-gold';let s=atual.orig.replace(/\[([A-G][#b]?)([^\]]*)\]/g,(a,base,rest)=>{let m={'C#':'C','D#':'D','F#':'F','G#':'G','A#':'A'};let nb=m[base]||base.replace('#','');let min=rest.toLowerCase().includes('m')&&!rest.includes('maj');return '['+nb+(min?'m':'')+']';});document.getElementById('l_cif').innerHTML=col(s)+'<br><br><small style=color:var(--gold2)>Simplificado! F#m7b5 → Dm</small>';}else{b.innerText='Cifra Simples';b.className='btn btn-out';document.getElementById('l_cif').innerHTML=col(atual.texto);}}
+function tom(d){trans+=d;let notes=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];let txt=atual.orig.replace(/\[([A-G][#b]?)([^\]]*)\]/g,(a,b,r)=>{let i=notes.indexOf(b);if(i<0)return a;return '['+notes[(i+trans+12)%12]+r+']';});document.getElementById('l_cif').innerHTML=col(txt);}
+function font(d){fz=Math.min(32,Math.max(10,fz+d));document.getElementById('l_cif').style.fontSize=fz+'px';document.getElementById('fTag').innerText=fz+'px';localStorage.setItem('fz',fz);}
+function toggleR(){if(roll){parar();return;}roll=setInterval(()=>window.scrollBy(0,veloc),40);document.getElementById('play').innerText='⏸️ Pausar';}
+function parar(){if(roll)clearInterval(roll);roll=null;document.getElementById('play').innerText='▶️ Play';window.scrollTo(0,0);}
+function vel(){veloc=parseInt(document.getElementById('rng').value);document.getElementById('vTag').innerText=veloc+'x';}
+render();
+</script></body></html>
