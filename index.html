@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v21 - 4 TEMAS</title>
+<title>MINHAS CIFRAS v22 - COLADO</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@600;700&family=Patrick+Hand&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@600;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--green:#0a2f1e;--gold:#FFD700;--gold2:#FFEB3B;--bg:#061a11}
 *{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:Roboto,sans-serif}
@@ -17,70 +17,35 @@
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
 .install-banner{display:none;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#000;padding:12px;text-align:center;font-weight:900;cursor:pointer;position:sticky;top:52px;z-index:19;border:2px solid #000}
 .install-banner.show{display:flex;justify-content:center}
-
-/* AUTO AJUSTE - NUNCA CORTA */
-.cifra{
-  width:100%!important;
-  max-width:100vw!important;
-  padding:16px 10px;
-  border-radius:14px;
-  border:3px solid #000;
-  height:66vh;
-  overflow:auto;
-  overflow-x:auto;
-  box-sizing:border-box;
-  word-wrap:break-word;
-}
-.cifra pre{
-  white-space:pre-wrap!important;
-  word-wrap:break-word!important;
-  word-break:break-word!important;
-  overflow-wrap:break-word!important;
-  max-width:100%!important;
-  margin:0;
-  line-height:2.8;
-  font-size:inherit;
-}
+.cifra{width:100%!important;max-width:100vw!important;padding:14px 10px;border-radius:14px;border:3px solid #000;height:68vh;overflow:auto;box-sizing:border-box}
+.cifra pre{display:none}
+/* NOVO FORMATO COLADO - SEM VÃO */
+.linhas{font-size:inherit; line-height:1.1}
+.linha{margin-bottom:8px; line-height:1.1}
+.linha.acordes{white-space:pre-wrap; word-break:break-word; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.95em; min-height:1.1em; line-height:1.1; letter-spacing:0.3px; margin:0; padding:0}
+.linha.letra{white-space:pre-wrap; word-break:break-word; font-family:'Kalam','Caveat',cursive; font-weight:600; font-size:1.05em; line-height:1.2; margin:0; padding:0; margin-top:2px}
+.linha.secao{margin:16px 0 10px 0}
+.linha.secao.letra{font-weight:900; font-family:'Courier Prime',monospace; font-size:1.1em}
 
 /* TEMAS */
 .tema-branco{background:#FFFFFF!important; border-color:#000!important}
-.tema-branco pre{color:#000!important}
-.tema-preto{background:#000000!important; border-color:#FFD700!important}
-.tema-preto pre{color:#FFFFFF!important}
-.tema-azul{background:#001a33!important; border-color:#4DA6FF!important}
-.tema-azul pre{color:#E0F2FF!important}
-.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
-.tema-verde pre{color:#E8FFE8!important}
-
-/* LETRA MÃO MAIS NÍTIDA */
-.font-mono pre{font-family:'Courier Prime',monospace; font-weight:700; letter-spacing:0.2px; -webkit-font-smoothing:antialiased}
-.font-mao pre{font-family:'Kalam','Patrick Hand',cursive; font-weight:700; font-size:1.25em; letter-spacing:0.5px; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:3.0}
-.font-rascunho pre{font-family:'Caveat',cursive; font-weight:700; font-size:1.5em; letter-spacing:0.6px; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:3.2}
-
-/* CIFRA SEM QUADRADO - SÓ COR NÍTIDA */
-.cifra b.chord{
-  background:none!important;
-  border:none!important;
-  font-family:'Courier Prime',monospace!important;
-  font-weight:900!important;
-  padding:0 3px!important;
-  font-size:1em;
-  letter-spacing:0.5px;
-}
-.tema-branco b.chord{color:#B8860B!important; text-shadow:none}
-.tema-preto b.chord{color:#FFEB3B!important; text-shadow:0 0 8px rgba(255,235,59,.6)}
-.tema-azul b.chord{color:#FFEB3B!important; text-shadow:0 0 8px rgba(255,235,59,.8)}
-.tema-verde b.chord{color:#FFEB3B!important; text-shadow:0 0 6px rgba(255,235,59,.6)}
-.tema-branco b.chord.vermelha{color:#D32F2F!important}
-.tema-preto b.chord.vermelha{color:#FF5252!important}
-.tema-azul b.chord.vermelha{color:#FF6B6B!important}
-.tema-verde b.chord.vermelha{color:#FF5252!important}
-
-.cifra b.secao{font-weight:900!important; background:none!important; border:none!important; font-size:1.1em}
+.tema-branco.letra{color:#000!important}
+.tema-branco.acordes{color:#B8860B!important}
 .tema-branco b.secao{color:#000!important}
-.tema-preto b.secao{color:#FFD700!important}
-.tema-azul b.secao{color:#4DA6FF!important}
-.tema-verde b.secao{color:#66BB6A!important}
+.tema-preto{background:#000000!important; border-color:#FFD700!important}
+.tema-preto.letra{color:#FFFFFF!important}
+.tema-preto.acordes{color:#FFEB3B!important; text-shadow:0 0 6px rgba(255,235,59,.5)}
+.tema-azul{background:#001a33!important; border-color:#4DA6FF!important}
+.tema-azul.letra{color:#E0F2FF!important}
+.tema-azul.acordes{color:#FFEB3B!important}
+.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
+.tema-verde.letra{color:#E8FFE8!important}
+.tema-verde.acordes{color:#FFEB3B!important}
+.vermelha.acordes{color:#D32F2F!important}
+.tema-preto.vermelha.acordes{color:#FF5252!important}
+.tema-azul.vermelha.acordes{color:#FF6B6B!important}
+.tema-verde.vermelha.acordes{color:#FF6E6E!important}
+.tema-branco.vermelha.acordes{color:#C62828!important}
 
 .cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px}
 .full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid var(--gold);padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
@@ -96,17 +61,12 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
   <div class="menu-top"><div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:10px">🎸</div><b style="font-size:18px">Cifras</b><br><small>androidcifras@gmail.com</small></div>
   <div class="menu-list">
     <a href="#" onclick="show('home');closeMenu();render()">👥 Minhas músicas</a>
-    <a href="#" onclick="show('listas');closeMenu()">📋 Minhas Listas</a>
-    <a href="#" onclick="show('home');closeMenu();document.getElementById('webQ').focus()">🔍 Procurar Música</a>
     <a href="#" onclick="show('importar');closeMenu()">📄 Importar.txt</a>
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup e Restauração</a>
-    <a href="#" onclick="show('home');closeMenu()">⚙️ Preferências</a>
-    <a href="#" onclick="alert('v21 - 4 Temas + Auto Ajuste + Mão Nítida');closeMenu()">❓ Ajuda</a>
-    <a href="#" onclick="alert('MINHAS CIFRAS A∞T v21');closeMenu()">ℹ️ Sobre</a>
     <a href="#" onclick="installApp();closeMenu()">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v21</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v22</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="installBanner" class="install-banner" onclick="installApp()">📲 CLIQUE AQUI PARA INSTALAR O APP</div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
@@ -115,73 +75,82 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 </div>
 <div id="home"><div class="card"><input id="webQ" placeholder="Buscar cifra..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div><div class="toolbar"><button class="btn btn-gold" onclick="show('importar')">Importar.txt</button><button class="btn" onclick="show('backup')">Backup</button></div><input id="localQ" placeholder="🔍 Minhas cifras..." oninput="render()"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
 <div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">📄 Importar</h3><textarea id="i_txt" rows="12"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR Backup</button></div><hr style="margin:12px 0;border-color:rgba(212,175,55,.2)"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-<div id="listas" style="display:none" class="card"><h3 style="color:var(--gold2)">📋 Minhas Listas</h3><button class="btn" onclick="show('home')">Voltar</button></div>
+<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR</button></div><hr style="margin:12px 0;border-color:rgba(212,175,55,.2)"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
 <div id="leitor" style="display:none" class="card">
 <div style="display:flex;justify-content:space-between"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><button class="btn" onclick="stop();show('home')">← Voltar</button></div>
-<div class="toolbar"><button id="btnMono" class="btn" onclick="setFonte('mono')">🖥️ Máquina</button><button id="btnMao" class="btn" onclick="setFonte('mao')">✍️ Mão Nítida</button><button id="btnRasc" class="btn btn-active" onclick="setFonte('rascunho')">📝 Rascunho Nítido</button></div>
-
 <div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px;display:flex;gap:6px;flex-wrap:wrap">
-<span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 4 TIPOS DE TELA (fundo):</span>
+<span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 FUNDO:</span>
 <button id="tBranco" class="btn btn-active" style="background:#fff;color:#000;border:2px solid #000" onclick="setTema('branco')">⬜ Branco</button>
 <button id="tPreto" class="btn" style="background:#000;color:#FFEB3B;border:2px solid #FFD700" onclick="setTema('preto')">⬛ Preto</button>
 <button id="tAzul" class="btn" style="background:#001a33;color:#E0F2FF;border:2px solid #4DA6FF" onclick="setTema('azul')">🟦 Azul</button>
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
-
 <div class="toolbar" style="background:#f5f5f5;border:1px solid #000;padding:8px;border-radius:10px">
-<span style="color:#000;font-weight:900;font-size:10px">COR DA CIFRA (sem quadrado):</span>
-<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Amarela</button>
+<span style="color:#000;font-weight:900;font-size:10px">CIFRA (sem quadrado):</span>
+<button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
-<span id="ajusteInfo" style="color:#000;font-size:9px;margin-left:auto">✅ Ajuste automático ligado</span>
 </div>
-
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">15px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
 <div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
-<div id="l_cifra" class="cifra font-rascunho tema-branco"><pre id="preCifra"></pre></div>
+<div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div><pre id="preCifra"></pre></div>
 </div>
 <script>
 let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').classList.add('show');});
 function installApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('3 pontinhos > Adicionar à tela inicial');}}
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'15'),vel=2.5,fonteAtual=localStorage.getItem('fonte')||'rascunho',corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco';
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'15'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco';
 const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
-function show(id){stop();['home','importar','leitor','backup','listas'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();}
+function show(id){stop();['home','importar','leitor','backup'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();}
 function buscar(t){let q=document.getElementById('webQ').value.trim();if(!q)return;let u=t=='cifraclub'?'https://www.cifraclub.com/search/?q='+encodeURIComponent(q):'https://www.google.com/search?q='+encodeURIComponent(q+' cifra');window.open(u,'_blank');}
 function save(){localStorage.setItem('mc_cifras',JSON.stringify(cifras));}
 function salvarImp(){let t=document.getElementById('i_txt').value;if(!t)return;cifras.unshift({id:Date.now(),titulo:document.getElementById('i_tit').value||'Importada',artista:document.getElementById('i_art').value||'',tom:'G',texto:t,orig:t});save();show('home');}
 function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>h+=`<div style="padding:12px;border-bottom:1px solid rgba(212,175,55,.15);cursor:pointer" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div>`);document.getElementById('lista').innerHTML=h||'Vazio';}
 function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
-function pintar(txt){
-  let classeChord=corCifra=='amarela'?'chord':'chord vermelha';
-  let html=txt.replace(/\[([^\]]+)\]/g,(m,c)=>`<b class="secao">[${c}]</b>`);
-  html=html.replace(/(^|[ \n\t])([A-G][#b]?m?7M?|Bm7|Am7|C7M|Em7|G7M|D7\(4\/9\)|A\b|[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(4\/9\)|\(9\))?)(?=[ \n\t]|$)/g,(m,esp,acorde)=>{if(acorde.length>8)return m;return esp+`<b class="${classeChord}">${acorde}</b>`;});
-  document.getElementById('preCifra').innerHTML=html;
-  ajustarTela();
+function isChordLine(line){
+  if(!line.trim())return false;
+  if(line.trim().startsWith('['))return false;
+  let tokens=line.trim().split(/\s+/);
+  let chordCount=tokens.filter(t=>/^[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(.*\))?$/.test(t)).length;
+  return chordCount>0 && chordCount/tokens.length>=0.5;
 }
-function ajustarTela(){
-  let pre=document.getElementById('preCifra');
-  let cifra=document.getElementById('l_cifra');
-  // Força quebra automática - nunca deixa cortar
-  pre.style.whiteSpace='pre-wrap';
-  pre.style.wordBreak='break-word';
-  cifra.scrollLeft=0;
+function pintar(txt){
+  let linhasTxt=txt.split('\n');
+  let html='';
+  for(let i=0;i<linhasTxt.length;i++){
+    let line=linhasTxt[i];
+    let next=linhasTxt[i+1]||'';
+    let lineTrim=line.trim();
+    if(!lineTrim){html+=`<div class="linha"><div class="letra"> </div></div>`;continue;}
+    if(lineTrim.startsWith('[')){
+      html+=`<div class="linha secao"><div class="letra"><b class="secao">${lineTrim}</b></div></div>`;
+      continue;
+    }
+    if(isChordLine(line) && next &&!isChordLine(next) &&!next.trim().startsWith('[')){
+      // Par cifra + letra - COLADO
+      let acordes=line.replace(/([A-G][#b]?m?(?:7M|m7|7)?(?:\(.*\))?)/g,'<span style="font-weight:900">$1</span>');
+      html+=`<div class="linha"><div class="acordes">${acordes}</div><div class="letra">${next}</div></div>`;
+      i++;
+    } else if(isChordLine(line)){
+      html+=`<div class="linha"><div class="acordes">${line}</div></div>`;
+    } else {
+      html+=`<div class="linha"><div class="letra">${line}</div></div>`;
+    }
+  }
+  document.getElementById('linhas').innerHTML=html;
+  document.getElementById('l_cifra').className='cifra tema-'+temaAtual+' '+(corCifra=='vermelha'?'vermelha':'');
 }
 function transp(d){tr+=d;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
-function setFonte(t){fonteAtual=t;let el=document.getElementById('l_cifra');el.className='cifra font-'+t+' tema-'+temaAtual;document.getElementById('btnMono').className=t=='mono'?'btn btn-active':'btn';document.getElementById('btnMao').className=t=='mao'?'btn btn-active':'btn';document.getElementById('btnRasc').className=t=='rascunho'?'btn btn-active':'btn';localStorage.setItem('fonte',t);ajustarTela();}
 function setTema(t){
   temaAtual=t;localStorage.setItem('tema',t);
-  let el=document.getElementById('l_cifra');
-  el.className='cifra font-'+fonteAtual+' tema-'+t;
   document.getElementById('tBranco').className=t=='branco'?'btn btn-active':'btn';
   document.getElementById('tPreto').className=t=='preto'?'btn btn-active':'btn';
   document.getElementById('tAzul').className=t=='azul'?'btn btn-active':'btn';
   document.getElementById('tVerde').className=t=='verde'?'btn btn-active':'btn';
-  ajustarTela();
+  if(atual)pintar(atual.orig);
 }
 function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='amarela'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
-function applyFont(){let pre=document.getElementById('preCifra');pre.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);ajustarTela();}
+function applyFont(){let cont=document.getElementById('linhas');cont.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
 function setSpeed(v){vel=parseFloat(v);document.getElementById('speed').value=v;document.getElementById('speedTag').innerText=v+'x';}
 function playPause(){let el=document.getElementById('l_cifra');if(raf){stop();return;}function step(){el.scrollTop+=vel*0.35;raf=requestAnimationFrame(step);}raf=requestAnimationFrame(step);document.getElementById('playBtn').innerText='⏸️';document.getElementById('playFull').innerText='⏸️';}
@@ -189,5 +158,5 @@ function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}document.getElementB
 function expandir(){let el=document.getElementById('l_cifra');let tools=document.getElementById('fullTools');el.classList.toggle('fullscreen');tools.classList.toggle('show');}
 function exportarBackup(){let blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-cifras.txt';a.click();}
 function importarBackup(){let file=document.getElementById('fileInput').files[0];let txt=document.getElementById('backupTxt').value;if(file){let r=new FileReader();r.onload=e=>{try{cifras=JSON.parse(e.target.result);save();render();alert('Restaurado '+cifras.length);show('home');}catch{alert('Inválido');}};r.readAsText(file);return;}if(txt){try{cifras=JSON.parse(txt);save();render();alert('Restaurado');show('home');}catch{alert('Inválido');}}}
-setFonte(fonteAtual);setTema(temaAtual);setCorCifra(corCifra);render();applyFont();setSpeed(vel);
+setTema(temaAtual);setCorCifra(corCifra);render();applyFont();setSpeed(vel);
 </script></body></html>
