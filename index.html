@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS v22 - COLADO</title>
+<title>MINHAS CIFRAS v23 - CRUD COMPLETO</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a2f1e">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@600;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
@@ -12,41 +12,25 @@
 .btn{padding:7px 11px;border-radius:22px;font-weight:800;border:1px solid var(--gold);color:var(--gold2);background:transparent;cursor:pointer;font-size:11px}
 .btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0a2f1e;border:none}
 .btn-active{background:var(--gold2)!important;color:#0a2f1e!important}
+.btn-danger{background:#ff4444!important;color:#fff!important;border-color:#000!important}
+.btn-success{background:#4CAF50!important;color:#fff!important;border:none}
 .tag{background:rgba(255,215,0,.2);border:1px solid var(--gold);color:var(--gold2);padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}
 input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4);color:#fff;padding:12px;border-radius:12px;margin:6px 0;font-size:16px}
-.install-banner{display:none;background:linear-gradient(90deg,var(--gold2),var(--gold));color:#000;padding:12px;text-align:center;font-weight:900;cursor:pointer;position:sticky;top:52px;z-index:19;border:2px solid #000}
-.install-banner.show{display:flex;justify-content:center}
-.cifra{width:100%!important;max-width:100vw!important;padding:14px 10px;border-radius:14px;border:3px solid #000;height:68vh;overflow:auto;box-sizing:border-box}
-.cifra pre{display:none}
-/* NOVO FORMATO COLADO - SEM VÃO */
+.cifra{width:100%!important;max-width:100vw!important;padding:14px 10px;border-radius:14px;border:3px solid #000;height:58vh;overflow:auto;box-sizing:border-box}
 .linhas{font-size:inherit; line-height:1.1}
-.linha{margin-bottom:8px; line-height:1.1}
-.linha.acordes{white-space:pre-wrap; word-break:break-word; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.95em; min-height:1.1em; line-height:1.1; letter-spacing:0.3px; margin:0; padding:0}
-.linha.letra{white-space:pre-wrap; word-break:break-word; font-family:'Kalam','Caveat',cursive; font-weight:600; font-size:1.05em; line-height:1.2; margin:0; padding:0; margin-top:2px}
-.linha.secao{margin:16px 0 10px 0}
-.linha.secao.letra{font-weight:900; font-family:'Courier Prime',monospace; font-size:1.1em}
-
-/* TEMAS */
-.tema-branco{background:#FFFFFF!important; border-color:#000!important}
-.tema-branco.letra{color:#000!important}
-.tema-branco.acordes{color:#B8860B!important}
-.tema-branco b.secao{color:#000!important}
-.tema-preto{background:#000000!important; border-color:#FFD700!important}
-.tema-preto.letra{color:#FFFFFF!important}
-.tema-preto.acordes{color:#FFEB3B!important; text-shadow:0 0 6px rgba(255,235,59,.5)}
-.tema-azul{background:#001a33!important; border-color:#4DA6FF!important}
-.tema-azul.letra{color:#E0F2FF!important}
-.tema-azul.acordes{color:#FFEB3B!important}
-.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}
-.tema-verde.letra{color:#E8FFE8!important}
-.tema-verde.acordes{color:#FFEB3B!important}
-.vermelha.acordes{color:#D32F2F!important}
-.tema-preto.vermelha.acordes{color:#FF5252!important}
-.tema-azul.vermelha.acordes{color:#FF6B6B!important}
-.tema-verde.vermelha.acordes{color:#FF6E6E!important}
-.tema-branco.vermelha.acordes{color:#C62828!important}
-
+.linha{margin-bottom:6px; line-height:1.1}
+.linha.acordes{white-space:pre-wrap; word-break:break-word; font-family:'Courier Prime',monospace; font-weight:900; font-size:0.95em; min-height:1.1em; line-height:1.1; margin:0; padding:0}
+.linha.letra{white-space:pre-wrap; word-break:break-word; font-family:'Kalam',cursive; font-weight:600; font-size:1.05em; line-height:1.2; margin:0; margin-top:2px; padding:0}
+.linha.secao{margin:14px 0 8px 0}
+.tema-branco{background:#FFFFFF!important; border-color:#000!important}.tema-branco.letra{color:#000!important}.tema-branco.acordes{color:#B8860B!important}.tema-branco.secao{color:#000!important}
+.tema-preto{background:#000000!important; border-color:#FFD700!important}.tema-preto.letra{color:#FFF!important}.tema-preto.acordes{color:#FFEB3B!important}
+.tema-azul{background:#001a33!important; border-color:#4DA6FF!important}.tema-azul.letra{color:#E0F2FF!important}.tema-azul.acordes{color:#FFEB3B!important}
+.tema-verde{background:#0a2f1e!important; border-color:#66BB6A!important}.tema-verde.letra{color:#E8FFE8!important}.tema-verde.acordes{color:#FFEB3B!important}
+.vermelha.acordes{color:#D32F2F!important}.tema-preto.vermelha.acordes{color:#FF5252!important}.tema-azul.vermelha.acordes{color:#FF6B6B!important}
+.item{padding:12px;border-bottom:1px solid rgba(212,175,55,.15);display:flex;justify-content:space-between;align-items:center}
+.item-info{cursor:pointer;flex:1}
+.item-actions{display:flex;gap:4px}
 .cifra.fullscreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;z-index:9999;border-radius:0;padding:70px 12px 20px 12px}
 .full-tools{position:fixed;top:0;left:0;right:0;background:#0a2f1e;border-bottom:2px solid var(--gold);padding:8px 10px;display:none;z-index:10000;gap:6px;align-items:center;flex-wrap:wrap}
 .full-tools.show{display:flex}
@@ -61,23 +45,42 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
   <div class="menu-top"><div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:10px">🎸</div><b style="font-size:18px">Cifras</b><br><small>androidcifras@gmail.com</small></div>
   <div class="menu-list">
     <a href="#" onclick="show('home');closeMenu();render()">👥 Minhas músicas</a>
+    <a href="#" onclick="show('listas');closeMenu();renderListas()">📋 Minhas Listas</a>
     <a href="#" onclick="show('importar');closeMenu()">📄 Importar.txt</a>
     <a href="#" onclick="show('backup');closeMenu()">🔄 Backup e Restauração</a>
     <a href="#" onclick="installApp();closeMenu()">📲 Instalar App</a>
   </div>
 </div>
-<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v22</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
-<div id="installBanner" class="install-banner" onclick="installApp()">📲 CLIQUE AQUI PARA INSTALAR O APP</div>
+<div class="header"><button style="font-size:20px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:10px;padding:6px 12px" onclick="openMenu()">☰</button><div class="logo">♫ MINHAS CIFRAS v23</div><button class="btn btn-gold" onclick="show('home')">Home</button></div>
 <div id="fullTools" class="full-tools">
 <button id="playFull" class="btn btn-gold" onclick="playPause()">▶️</button><button class="btn" onclick="stop()">⏹️</button>
 <button class="btn" onclick="fontM(-1)">A-</button><span id="fontTagFull" class="tag">15px</span><button class="btn" onclick="fontM(1)">A+</button>
 <button class="btn" style="margin-left:auto;background:#ff4444;color:#fff" onclick="expandir()">✕</button>
 </div>
-<div id="home"><div class="card"><input id="webQ" placeholder="Buscar cifra..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div><div class="toolbar"><button class="btn btn-gold" onclick="show('importar')">Importar.txt</button><button class="btn" onclick="show('backup')">Backup</button></div><input id="localQ" placeholder="🔍 Minhas cifras..." oninput="render()"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
-<div id="importar" style="display:none" class="card"><h3 style="color:var(--gold2)">📄 Importar</h3><textarea id="i_txt" rows="12"></textarea><input id="i_tit" placeholder="Título"><input id="i_art" placeholder="Artista"><div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">Salvar</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
-<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR</button></div><hr style="margin:12px 0;border-color:rgba(212,175,55,.2)"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+<div id="home"><div class="card"><input id="webQ" placeholder="Buscar cifra..."><div class="toolbar"><button class="btn btn-gold" onclick="buscar('cifraclub')">Cifra Club</button><button class="btn" onclick="buscar('google')">Google</button></div>
+<div class="toolbar"><button class="btn btn-gold" onclick="novaCifra()">+ Nova Cifra Manual</button><button class="btn" onclick="show('importar')">📄 Colar Manual</button><button class="btn" onclick="show('backup')">Backup</button></div>
+<input id="localQ" placeholder="🔍 Buscar nas minhas..." oninput="render()"></div><div class="card"><h3 style="color:var(--gold2)">Minhas Cifras <span id="count"></span></h3><div id="lista"></div></div></div>
+
+<div id="importar" style="display:none" class="card">
+<h3 style="color:var(--gold2)">📄 Criar / Colar Manual</h3>
+<input id="i_tit" placeholder="Título (ex: Noite do Prazer)">
+<input id="i_art" placeholder="Artista (ex: Claudio Zoli)">
+<input id="i_tom" placeholder="Tom (ex: G)">
+<textarea id="i_txt" rows="14" placeholder="Cole a cifra aqui:
+[Primeira Parte]
+Em7 C7M Bm7
+A noite vai ser boa..."></textarea>
+<div class="toolbar"><button class="btn btn-gold" onclick="salvarImp()">💾 Salvar</button><button class="btn btn-success" onclick="salvarImp(true)">💾 Salvar e Incluir na Lista</button><button class="btn" onclick="show('home')">Voltar</button></div>
+<div id="editActions" style="display:none" class="toolbar"><button class="btn btn-danger" onclick="excluirAtual()">🗑️ Excluir essa cifra</button></div>
+</div>
+
+<div id="backup" style="display:none" class="card"><h3 style="color:var(--gold2)">🔄 Backup e Restauração</h3><div class="toolbar"><button class="btn btn-gold" onclick="exportarBackup()">📤 EXPORTAR Backup (.txt)</button></div><hr style="margin:12px 0;border-color:rgba(212,175,55,.2)"><input type="file" id="fileInput" accept=".txt,.json"><textarea id="backupTxt" rows="6" placeholder="Ou cole o backup aqui..."></textarea><div class="toolbar"><button class="btn btn-gold" onclick="importarBackup()">📥 RESTAURAR</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+
+<div id="listas" style="display:none" class="card"><h3 style="color:var(--gold2)">📋 Minhas Listas - Setlist Show</h3><div id="listaSetlist"></div><div class="toolbar"><button class="btn" onclick="limparSetlist()">🗑️ Limpar Lista</button><button class="btn" onclick="show('home')">Voltar</button></div></div>
+
 <div id="leitor" style="display:none" class="card">
-<div style="display:flex;justify-content:space-between"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><button class="btn" onclick="stop();show('home')">← Voltar</button></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><div><h2 id="l_tit" style="color:var(--gold2)"></h2><p id="l_art" style="opacity:.6"></p></div><div class="toolbar"><button class="btn btn-success" onclick="incluirNaLista()">➕ Incluir na Lista</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn btn-danger" onclick="excluirAtual()">🗑️ Excluir</button><button class="btn" onclick="stop();show('home')">← Voltar</button></div></div>
+
 <div class="toolbar" style="background:#fff;border:2px solid #000;padding:10px;border-radius:12px;display:flex;gap:6px;flex-wrap:wrap">
 <span style="color:#000;font-weight:900;font-size:11px;width:100%">🎨 FUNDO:</span>
 <button id="tBranco" class="btn btn-active" style="background:#fff;color:#000;border:2px solid #000" onclick="setTema('branco')">⬜ Branco</button>
@@ -86,69 +89,78 @@ input,textarea{width:100%;background:#0a1f14;border:1px solid rgba(212,175,55,.4
 <button id="tVerde" class="btn" style="background:#0a2f1e;color:#E8FFE8;border:2px solid #66BB6A" onclick="setTema('verde')">🟩 Verde</button>
 </div>
 <div class="toolbar" style="background:#f5f5f5;border:1px solid #000;padding:8px;border-radius:10px">
-<span style="color:#000;font-weight:900;font-size:10px">CIFRA (sem quadrado):</span>
+<span style="color:#000;font-weight:900;font-size:10px">CIFRA SEM QUADRADO:</span>
 <button id="btnAmarela" class="btn btn-active" style="background:#FFEB3B;color:#000;border:2px solid #000" onclick="setCorCifra('amarela')">💛 Dourada</button>
 <button id="btnVermelha" class="btn" style="background:#ff4444;color:#fff;border:2px solid #000" onclick="setCorCifra('vermelha')">❤️ Vermelha</button>
 </div>
 <div class="toolbar" style="background:rgba(0,0,0,.3);padding:10px;border-radius:12px"><button class="btn" onclick="fontM(-1)">A-</button><span id="fontTag" class="tag">15px</span><button class="btn" onclick="fontM(1)">A+</button><button class="btn btn-gold" onclick="expandir()">⛶ Tela Cheia</button><button class="btn" onclick="transp(-1)">Tom -</button><span id="tomTag" class="tag">G</span><button class="btn" onclick="transp(1)">Tom +</button></div>
 <div style="background:#0a1f14;border:1px solid var(--gold);border-radius:12px;padding:10px;margin:8px 0;display:flex;gap:8px;align-items:center"><button id="playBtn" class="btn btn-gold" onclick="playPause()">▶️ Play</button><button class="btn" onclick="stop()">⏹️</button><input type="range" id="speed" min="0.5" max="10" step="0.5" value="2.5" style="width:90px" oninput="setSpeed(this.value)"><span id="speedTag" class="tag">2.5x</span></div>
-<div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div><pre id="preCifra"></pre></div>
+<div id="l_cifra" class="cifra tema-branco"><div id="linhas" class="linhas"></div></div>
 </div>
+
 <script>
-let deferredPrompt=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').classList.add('show');});
-function installApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('3 pontinhos > Adicionar à tela inicial');}}
+let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),setlist=JSON.parse(localStorage.getItem('mc_setlist')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'15'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco',editId=null;
+const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
 function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show');}
 function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-let cifras=JSON.parse(localStorage.getItem('mc_cifras')||localStorage.getItem('mc')||'[]'),atual=null,raf=null,tr=0,fz=parseInt(localStorage.getItem('fz')||'15'),vel=2.5,corCifra=localStorage.getItem('corCifra')||'amarela',temaAtual=localStorage.getItem('tema')||'branco';
-const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],EQUIV={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
-function show(id){stop();['home','importar','leitor','backup'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();}
+function show(id){stop();['home','importar','leitor','backup','listas'].forEach(e=>document.getElementById(e).style.display='none');document.getElementById(id).style.display='block';if(id==='home')render();if(id==='listas')renderListas();}
 function buscar(t){let q=document.getElementById('webQ').value.trim();if(!q)return;let u=t=='cifraclub'?'https://www.cifraclub.com/search/?q='+encodeURIComponent(q):'https://www.google.com/search?q='+encodeURIComponent(q+' cifra');window.open(u,'_blank');}
 function save(){localStorage.setItem('mc_cifras',JSON.stringify(cifras));}
-function salvarImp(){let t=document.getElementById('i_txt').value;if(!t)return;cifras.unshift({id:Date.now(),titulo:document.getElementById('i_tit').value||'Importada',artista:document.getElementById('i_art').value||'',tom:'G',texto:t,orig:t});save();show('home');}
-function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>h+=`<div style="padding:12px;border-bottom:1px solid rgba(212,175,55,.15);cursor:pointer" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div>`);document.getElementById('lista').innerHTML=h||'Vazio';}
-function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
-function isChordLine(line){
-  if(!line.trim())return false;
-  if(line.trim().startsWith('['))return false;
-  let tokens=line.trim().split(/\s+/);
-  let chordCount=tokens.filter(t=>/^[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(.*\))?$/.test(t)).length;
-  return chordCount>0 && chordCount/tokens.length>=0.5;
+function saveSet(){localStorage.setItem('mc_setlist',JSON.stringify(setlist));}
+function novaCifra(){editId=null;document.getElementById('i_tit').value='';document.getElementById('i_art').value='';document.getElementById('i_tom').value='G';document.getElementById('i_txt').value='';document.getElementById('editActions').style.display='none';show('importar');}
+function editarAtual(){
+  if(!atual)return;
+  editId=atual.id;
+  document.getElementById('i_tit').value=atual.titulo;
+  document.getElementById('i_art').value=atual.artista;
+  document.getElementById('i_tom').value=atual.tom;
+  document.getElementById('i_txt').value=atual.orig;
+  document.getElementById('editActions').style.display='flex';
+  show('importar');
 }
+function salvarImp(incluirLista=false){
+  let txt=document.getElementById('i_txt').value;if(!txt){alert('Cole a cifra');return;}
+  if(editId){
+    let idx=cifras.findIndex(c=>c.id==editId);
+    if(idx>=0){cifras[idx].titulo=document.getElementById('i_tit').value||'Sem titulo';cifras[idx].artista=document.getElementById('i_art').value||'';cifras[idx].tom=document.getElementById('i_tom').value||'G';cifras[idx].texto=txt;cifras[idx].orig=txt;}
+    editId=null;
+  }else{
+    let nova={id:Date.now(),titulo:document.getElementById('i_tit').value||'Minha Cifra',artista:document.getElementById('i_art').value||'',tom:document.getElementById('i_tom').value||'G',texto:txt,orig:txt};
+    cifras.unshift(nova);
+    if(incluirLista){setlist.push(nova.id);saveSet();}
+  }
+  save();show('home');render();
+}
+function excluirAtual(){
+  if(!atual &&!editId){alert('Nenhuma cifra selecionada');return;}
+  let id=editId||atual.id;
+  if(confirm('Tem certeza que quer EXCLUIR essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();editId=null;atual=null;show('home');render();}
+}
+function excluirDaLista(id){if(confirm('Excluir essa cifra?')){cifras=cifras.filter(c=>c.id!=id);setlist=setlist.filter(s=>s!=id);save();saveSet();render();renderListas();}}
+function incluirNaLista(){if(!atual)return;if(!setlist.includes(atual.id)){setlist.push(atual.id);saveSet();alert('✅ Incluída na lista!');}else{alert('Já está na lista');}}
+function limparSetlist(){if(confirm('Limpar toda a lista de show?')){setlist=[];saveSet();renderListas();}}
+function render(){let q=(document.getElementById('localQ')?.value||'').toLowerCase();let list=cifras.filter(c=>(c.titulo+' '+c.artista).toLowerCase().includes(q));document.getElementById('count').innerText='('+list.length+')';let h='';list.forEach(c=>{h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b style="color:var(--gold2)">${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn" onclick="abrir(${c.id});editarAtual()" title="Editar">✏️</button><button class="btn btn-danger" onclick="excluirDaLista(${c.id})" title="Excluir">🗑️</button><button class="btn btn-gold" onclick="setlist.includes(${c.id})?alert('Já na lista'):incluirRapido(${c.id})" title="Incluir na Lista">➕</button></div></div>`;});document.getElementById('lista').innerHTML=h||'<div style="padding:20px;opacity:.6;text-align:center">Vazio - Clique em + Nova Cifra Manual para criar</div>';}
+function incluirRapido(id){if(!setlist.includes(id)){setlist.push(id);saveSet();alert('✅ Incluída na lista!');}else{alert('Já está na lista');}}
+function renderListas(){let h='';if(setlist.length==0){h='<p style="opacity:.6;padding:20px;text-align:center">Nenhuma música na lista de show.<br>Vá em Minhas Músicas e clique em ➕</p>';}else{setlist.forEach((id,idx)=>{let c=cifras.find(x=>x.id==id);if(c){h+=`<div class="item"><div class="item-info" onclick="abrir(${c.id})"><b>${idx+1}. ${c.titulo.toUpperCase()}</b><br><small style="opacity:.6">${c.artista.toUpperCase()}</small></div><div class="item-actions"><button class="btn btn-danger" onclick="removerSet(${id})">❌</button></div></div>`;}});}document.getElementById('listaSetlist').innerHTML=h;}
+function removerSet(id){setlist=setlist.filter(s=>s!=id);saveSet();renderListas();}
+function abrir(id){atual=cifras.find(c=>c.id==id);tr=0;document.getElementById('l_tit').innerText=atual.titulo.toUpperCase();document.getElementById('l_art').innerText=atual.artista.toUpperCase();document.getElementById('tomTag').innerText='Tom: '+(atual.tom||'G');pintar(atual.orig);applyFont();show('leitor');}
+function isChordLine(line){if(!line.trim())return false;if(line.trim().startsWith('['))return false;let tokens=line.trim().split(/\s+/);let chordCount=tokens.filter(t=>/^[A-G][#b]?m?(?:7M|m7|7|dim|sus)?(?:\(.*\))?$/.test(t)).length;return chordCount>0 && chordCount/tokens.length>=0.5;}
 function pintar(txt){
-  let linhasTxt=txt.split('\n');
-  let html='';
+  let linhasTxt=txt.split('\n');let html='';
   for(let i=0;i<linhasTxt.length;i++){
-    let line=linhasTxt[i];
-    let next=linhasTxt[i+1]||'';
-    let lineTrim=line.trim();
+    let line=linhasTxt[i];let next=linhasTxt[i+1]||'';let lineTrim=line.trim();
     if(!lineTrim){html+=`<div class="linha"><div class="letra"> </div></div>`;continue;}
-    if(lineTrim.startsWith('[')){
-      html+=`<div class="linha secao"><div class="letra"><b class="secao">${lineTrim}</b></div></div>`;
-      continue;
-    }
+    if(lineTrim.startsWith('[')){html+=`<div class="linha secao"><div class="letra secao"><b class="secao">${lineTrim}</b></div></div>`;continue;}
     if(isChordLine(line) && next &&!isChordLine(next) &&!next.trim().startsWith('[')){
-      // Par cifra + letra - COLADO
-      let acordes=line.replace(/([A-G][#b]?m?(?:7M|m7|7)?(?:\(.*\))?)/g,'<span style="font-weight:900">$1</span>');
-      html+=`<div class="linha"><div class="acordes">${acordes}</div><div class="letra">${next}</div></div>`;
-      i++;
-    } else if(isChordLine(line)){
-      html+=`<div class="linha"><div class="acordes">${line}</div></div>`;
-    } else {
-      html+=`<div class="linha"><div class="letra">${line}</div></div>`;
-    }
+      html+=`<div class="linha"><div class="acordes">${line}</div><div class="letra">${next}</div></div>`;i++;
+    }else if(isChordLine(line)){html+=`<div class="linha"><div class="acordes">${line}</div></div>`;}
+    else{html+=`<div class="linha"><div class="letra">${line}</div></div>`;}
   }
   document.getElementById('linhas').innerHTML=html;
   document.getElementById('l_cifra').className='cifra tema-'+temaAtual+' '+(corCifra=='vermelha'?'vermelha':'');
 }
 function transp(d){tr+=d;let txt=atual.orig.replace(/([A-G][#b]?)(m?7M?|m?7?|m|\(4\/9\)|\(9\))?/g,(m,nota,resto)=>{let base=nota;if(EQUIV[base])base=EQUIV[base];let idx=NOTAS.indexOf(base);if(idx<0)return m;let nova=NOTAS[(idx+tr+120)%12];return nova+(resto||'');});pintar(txt);}
-function setTema(t){
-  temaAtual=t;localStorage.setItem('tema',t);
-  document.getElementById('tBranco').className=t=='branco'?'btn btn-active':'btn';
-  document.getElementById('tPreto').className=t=='preto'?'btn btn-active':'btn';
-  document.getElementById('tAzul').className=t=='azul'?'btn btn-active':'btn';
-  document.getElementById('tVerde').className=t=='verde'?'btn btn-active':'btn';
-  if(atual)pintar(atual.orig);
-}
+function setTema(t){temaAtual=t;localStorage.setItem('tema',t);document.getElementById('tBranco').className=t=='branco'?'btn btn-active':'btn';document.getElementById('tPreto').className=t=='preto'?'btn btn-active':'btn';document.getElementById('tAzul').className=t=='azul'?'btn btn-active':'btn';document.getElementById('tVerde').className=t=='verde'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
 function setCorCifra(cor){corCifra=cor;localStorage.setItem('corCifra',cor);document.getElementById('btnAmarela').className=cor=='amarela'?'btn btn-active':'btn';document.getElementById('btnVermelha').className=cor=='vermelha'?'btn btn-active':'btn';if(atual)pintar(atual.orig);}
 function applyFont(){let cont=document.getElementById('linhas');cont.style.fontSize=fz+'px';document.getElementById('fontTag').innerText=fz+'px';document.getElementById('fontTagFull').innerText=fz+'px';localStorage.setItem('fz',fz);}
 function fontM(d){fz=Math.min(32,Math.max(10,fz+d));applyFont();}
