@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v31</title>
+<title>Minhas Cifras v32</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -25,25 +25,25 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 .modal.aberto{display:flex}
 .modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:16px;width:100%;max-width:680px;max-height:94vh;overflow:auto;color:white}
 #boxLeitor{background:#123a25;border:2px solid var(--accent);border-radius:16px;width:98%;max-width:98%;height:94vh;display:flex;flex-direction:column;overflow:hidden;padding:0}
-#boxLeitor.topo-fixo{padding:16px;background:#123a25;border-bottom:1px solid rgba(255,235,59,0.2);flex-shrink:0}
-#leitorConteudo{flex:1;overflow:auto;padding:16px;white-space:pre-wrap;line-height:2.3;font-size:22px}
+.topo-fixo{padding:12px;background:inherit;border-bottom:1px solid rgba(255,235,59,0.2);flex-shrink:0}
+#leitorConteudo{flex:1;overflow:auto;padding:12px;white-space:pre-wrap;line-height:1.4;font-size:22px}
 .estilo-mao{font-family:'Kalam',cursive}
 .estilo-maquina{font-family:'Courier Prime',monospace}
-.cifra-line{color:var(--accent);font-weight:bold;margin-top:12px}
+.cifra-line{color:var(--accent);font-weight:bold;margin-top:4px;margin-bottom:0;line-height:1.2}
 .cifra-line.vermelha{color:#ff4444!important}
 .cifra-line.dourada{color:#ffeb3b!important}
-.toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;padding:10px;background:rgba(0,0,0,0.3);border-radius:12px;align-items:center}
+.linha-letra{margin-bottom:8px;line-height:1.3}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;padding:8px;background:rgba(0,0,0,0.3);border-radius:12px;align-items:center}
 #btnInstalar{width:100%;padding:14px;font-size:16px;margin-bottom:12px;display:block}
 .secao-menu{margin:12px 0;padding:10px;border-bottom:1px solid rgba(255,235,59,0.2)}
 .secao-menu h4{color:var(--accent);margin-bottom:6px}
-.btn-telacheia{width:100%;padding:16px;font-size:18px;background:var(--accent);color:#0a2f1e;border:none;border-radius:12px;font-weight:bold;margin:8px 0;cursor:pointer}
 textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin:8px 0}
 </style>
 </head>
 <body>
 <header>
 <button class="btn" onclick="toggleMenu()">☰</button>
-<div class="logo">♪ MINHAS CIFRAS v31</div>
+<div class="logo">♪ MINHAS CIFRAS v32</div>
 <button class="btn btn-amarelo" onclick="renderLista()">Home</button>
 </header>
 
@@ -70,7 +70,7 @@ textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radiu
 <input id="busca" class="input-busca" placeholder="🔍 Buscar..." oninput="renderLista()">
 </div>
 
-<div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>) - Clique pra abrir</h2><div id="lista"></div></div>
+<div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2><div id="lista"></div></div>
 
 <div id="modalLeitor" class="modal"><div id="boxLeitor">
 <div class="topo-fixo">
@@ -118,17 +118,17 @@ function fecharLeitor(){pararRolagem();modalLeitor.classList.remove('aberto');if
 function renderConteudoCifra(texto){
  let html='';
  texto.split('\n').forEach(l=>{
-  if(l.trim()===''){html+=`<div style="height:16px"></div>`;return;}
-  let isCifra = l.trim().length < 50 && /^[A-G][#b]?(m|maj|7|9|6|sus|dim|add)?[\s\/A-G#b0-9m()\-]*$/.test(l.trim()) && l.trim().split(/\s+/).length <= 6;
+  if(l.trim()===''){html+=`<div style="height:4px"></div>`;return;}
+  let isCifra = l.trim().length < 60 && /^[A-G][#b]?(m|maj|7|9|6|sus|dim|add)?[\s\/A-G#b0-9m()\-]*$/.test(l.trim()) && l.trim().split(/\s+/).length <= 7 && /[A-G]/.test(l);
   if(isCifra){html+=`<div class="cifra-line ${corCifra}">${l}</div>`;}
-  else{html+=`<div>${l}</div>`;}
+  else{html+=`<div class="linha-letra">${l}</div>`;}
  });
  leitorConteudo.innerHTML=html;
 }
 function mudarEstilo(e){estiloAtual=e;localStorage.setItem('estilo',e);aplicarEstilo();}
 function aplicarEstilo(){leitorConteudo.className=estiloAtual==='mao'?'estilo-mao':'estilo-maquina';}
 function mudarCorCifra(c){corCifra=c;localStorage.setItem('corCifra',c);document.querySelectorAll('.cifra-line').forEach(x=>x.className='cifra-line '+c);}
-function mudarTemaLeitor(t){if(t==='branco'){boxLeitor.style.background='white';leitorConteudo.style.color='black';}else if(t==='preto'){boxLeitor.style.background='black';leitorConteudo.style.color='white';}else{boxLeitor.style.background='#123a25';leitorConteudo.style.color='white';}document.querySelector('#boxLeitor.topo-fixo').style.background=boxLeitor.style.background;}
+function mudarTemaLeitor(t){if(t==='branco'){boxLeitor.style.background='white';leitorConteudo.style.color='black';}else if(t==='preto'){boxLeitor.style.background='black';leitorConteudo.style.color='white';}else{boxLeitor.style.background='#123a25';leitorConteudo.style.color='white';}}
 function mudarFonte(v){if(typeof v==='number')fontSize+=v;else fontSize=parseInt(v);fontSize=Math.max(12,Math.min(48,fontSize));localStorage.setItem('fontSize',fontSize);aplicarFonte();}
 function aplicarFonte(){leitorConteudo.style.fontSize=fontSize+'px';valFonte.innerText=fontSize+'px';rangeFonte.value=fontSize;}
 function mudarVelocidade(v){velRolagem=parseInt(v);localStorage.setItem('velRolagem',v);valVel.innerText='Vel: '+v;if(rolando){pararRolagem();iniciarRolagem();}}
