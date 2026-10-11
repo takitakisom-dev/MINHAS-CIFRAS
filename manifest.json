@@ -1,25 +1,22 @@
 {
-  "name": "Minhas Cifras v29",
-  "short_name": "Minhas Cifras",
-  "start_url": "./index.html?v=29",
+  "name": "MINHAS CIFRAS",
+  "short_name": "MINHAS CIFRAS",
+  "description": "Suas cifras com MC e clave de sol, cifra grossa e nítida",
+  "start_url": "/?v=53",
   "display": "standalone",
-  "background_color": "#0a2f1e",
-  "theme_color": "#0a2f1e",
+  "background_color": "#0f0f0f",
+  "theme_color": "#0f0f0f",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3659/3659899.png",
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "share_target": {
-    "action": "./index.html",
-    "method": "GET",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
-  }
+  ]
 }
