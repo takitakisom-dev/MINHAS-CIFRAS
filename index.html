@@ -1,51 +1,114 @@
-<!-- BOTÃO INSTALAR INTELIGENTE - SÓ APARECE SE NÃO INSTALOU -->
-<div id="boxInstalar" style="display:none;padding:12px;text-align:center;background:#fff7ed;border:2px dashed #d97706;margin:10px;border-radius:16px;">
-  <button id="btnInst" style="background:#d97706;color:white;border:none;padding:12px 24px;border-radius:999px;font-weight:bold;font-size:16px;">📲 INSTALAR APP</button>
-  <div style="font-size:12px;margin-top:6px;color:#92400e;">Instala e usa offline igual WhatsApp!</div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#d97706">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Minhas Cifras - Offline</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system;background:#fdf6e9;color:#3b1f0a}
+header{background:#d97706;color:white;padding:16px 12px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{margin:0;font-size:22px}
+header p{margin:4px 0 0;font-size:13px;opacity:.9}
+#boxInstalar{display:none;margin:12px;padding:14px;background:#fff7ed;border:2px dashed #d97706;border-radius:18px;text-align:center;animation:pop.3s}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+#btnInst{background:#d97706;color:white;border:none;padding:12px 26px;border-radius:999px;font-weight:800;font-size:15px;box-shadow:0 4px 12px rgba(217,119,6,.4)}
+#busca{margin:12px;display:flex;gap:8px}
+#busca input{flex:1;padding:12px;border:2px solid #f5d0a3;border-radius:12px;outline:none}
+#busca button{background:#422006;color:white;border:none;padding:12px 16px;border-radius:12px;font-weight:bold}
+#lista{padding:0 12px 90px}
+.cifra{background:white;border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 2px 10px rgba(0,0,0,.06);white-space:pre-wrap;font-family:monospace;font-size:14px;line-height:1.4}
+.cifra b{font-family:system-ui;font-size:16px;display:block;margin-bottom:6px}
+.actions{display:flex;gap:8px;margin-top:10px}
+.actions button{flex:1;padding:8px;border-radius:10px;border:none;font-weight:bold}
+.del{background:#fee2e2;color:#991b1b}.edit{background:#fef3c7;color:#92400e}
+#fab{position:fixed;bottom:20px;right:20px;background:#d97706;color:white;border:none;width:56px;height:56px;border-radius:50%;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:end;z-index:20}
+#modal.open{display:flex}
+#sheet{background:white;width:100%;border-radius:24px 24px 0 0;padding:18px;max-height:85vh;overflow:auto}
+#sheet textarea{width:100%;height:220px;border:2px solid #f5d0a3;border-radius:12px;padding:12px;font-family:monospace}
+#sheet input{width:100%;padding:12px;border:2px solid #f5d0a3;border-radius:12px;margin-bottom:10px}
+.btnSave{width:100%;background:#d97706;color:white;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+<h1>🎸 Minhas Cifras</h1>
+<p>Offline • Instala na tela inicial</p>
+</header>
+
+<div id="boxInstalar">
+<button id="btnInst">📲 INSTALAR APP</button>
+<div style="font-size:11px;margin-top:6px;color:#92400e">Instala e some automaticamente!</div>
 </div>
 
+<div id="busca">
+<input id="q" placeholder="Buscar música, artista...">
+<button onclick="nova()">+ Nova</button>
+</div>
+
+<div id="lista"></div>
+<button id="fab" onclick="nova()">+</button>
+
+<div id="modal" onclick="if(event.target===this)fechar()"><div id="sheet">
+<h3 id="mtit" style="margin:0 0 10px">Nova Cifra</h3>
+<input id="titulo" placeholder="Nome da música - Artista">
+<textarea id="conteudo" placeholder="Ex:
+[C] Hoje eu vou...
+[G] cantar...
+[Am]..."></textarea>
+<button class="btnSave" onclick="salvar()">Salvar cifra</button>
+<button onclick="fechar()" style="width:100%;margin-top:8px;background:#eee;border:none;padding:12px;border-radius:12px">Cancelar</button>
+</div></div>
+
 <script>
-// LÓGICA DO BOTÃO INTELIGENTE
-let promptInstall = null;
-const box = document.getElementById('boxInstalar');
-const btn = document.getElementById('btnInst');
-
-// 1. Se já tá instalado como app, nunca mostra
-if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-  box.style.display = 'none';
-} else {
-  // 2. Espera o Chrome liberar a instalação
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    promptInstall = e;
-    box.style.display = 'block'; // AGORA mostra o botão!
-  });
-
-  // 3. Se não liberar em 2s, mostra mesmo assim com tutorial
-  setTimeout(() => {
-    if (!promptInstall && !window.matchMedia('(display-mode: standalone)').matches) {
-      box.style.display = 'block';
-      btn.textContent = '📲 COMO INSTALAR';
-    }
-  }, 2000);
+let cifras=JSON.parse(localStorage.getItem('minhasCifrasV3')||'[]');
+let editIdx=-1;
+const $=s=>document.getElementById(s);
+function salvarLS(){localStorage.setItem('minhasCifrasV3',JSON.stringify(cifras));}
+function render(){
+ const f=$('q').value.toLowerCase();
+ $('lista').innerHTML=cifras.map((c,i)=>{
+  if(f &&!(c.t+c.c).toLowerCase().includes(f)) return '';
+  return `<div class="cifra"><b>${c.t}</b>${c.c.replace(/</g,'&lt;')}
+  <div class="actions"><button class="edit" onclick="editar(${i})">Editar</button><button class="del" onclick="apagar(${i})">Apagar</button></div></div>`;
+ }).join('') || '<p style="text-align:center;padding:40px;color:#a16207">Nenhuma cifra.<br>Clique em + Nova</p>';
 }
+function nova(){editIdx=-1;$('mtit').textContent='Nova Cifra';$('titulo').value='';$('conteudo').value='';$('modal').classList.add('open');}
+function editar(i){editIdx=i;$('mtit').textContent='Editar Cifra';$('titulo').value=cifras[i].t;$('conteudo').value=cifras[i].c;$('modal').classList.add('open');}
+function fechar(){$('modal').classList.remove('open');}
+function salvar(){
+ if(!$('titulo').value.trim()) return alert('Coloca o nome da música');
+ const obj={t:$('titulo').value.trim(),c:$('conteudo').value};
+ if(editIdx>=0) cifras[editIdx]=obj; else cifras.unshift(obj);
+ salvarLS();render();fechar();
+}
+function apagar(i){if(confirm('Apagar "'+cifras[i].t+'"?')){cifras.splice(i,1);salvarLS();render();}}
+$('q').addEventListener('input',render);
+render();
 
-// 4. Clique
-btn.addEventListener('click', async () => {
-  if (promptInstall) {
-    promptInstall.prompt();
-    const choice = await promptInstall.userChoice;
-    if (choice.outcome === 'accepted') {
-      box.style.display = 'none'; // instalou, some!
-    }
-    promptInstall = null;
-  } else {
-    alert('Para instalar:\n\n1. Clique nos 3 pontinhos ⋮ do Chrome\n2. Clique em "Instalar app"\n3. Pronto! O botão vai sumir sozinho depois.');
-  }
-});
+// PWA
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 
-// 5. Quando instalar, some automaticamente
-window.addEventListener('appinstalled', () => {
-  box.style.display = 'none';
-});
+// BOTÃO INSTALAR INTELIGENTE QUE VOCÊ QUERIA
+let promptEv=null;
+const box=$('boxInstalar');
+const btn=$('btnInst');
+const jaApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+if(!jaApp){
+ window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();promptEv=e;box.style.display='block';
+ });
+ setTimeout(()=>{ if(!promptEv) box.style.display='block'; },1200);
+}
+btn.onclick=async()=>{
+ if(promptEv){promptEv.prompt();const ch=await promptEv.userChoice;if(ch.outcome==='accepted') box.style.display='none';promptEv=null;}
+ else alert('No Chrome: 3 pontinhos ⋮ > Instalar app\nNo iPhone: Compartilhar > Adicionar à Tela de Início');
+};
+window.addEventListener('appinstalled',()=>{box.style.display='none';});
 </script>
+</body>
+</html>
