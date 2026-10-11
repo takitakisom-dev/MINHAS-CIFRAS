@@ -2,77 +2,95 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cifras Pro v48 Âmbar</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<title>Cifras v49 Nítida</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0b0f0e;color:#e8e8e8;font-family:'Inter',sans-serif}
 header{position:sticky;top:0;z-index:20;background:rgba(11,15,14,0.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:700;font-size:18px}
-.btn{border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;padding:10px 18px;border-radius:100px;font-weight:600;font-size:13px;cursor:pointer}
-.btn-amarelo{background:#fff;color:#0b0f0e;border-color:#fff;font-weight:700}
+.btn{border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;padding:10px 18px;border-radius:100px;font-weight:700;font-size:13px;cursor:pointer}
+.btn-amarelo{background:#fff;color:#0b0f0e;border-color:#fff;font-weight:800}
 .btn-ativo{background:#D97706;color:white;border-color:#D97706}
 .card{margin:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:18px}
 .input-busca{width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;color:white;outline:none;margin-top:12px}
-.cifra-item{display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:16px;cursor:pointer}
+.cifra-item{padding:16px;border-radius:16px;cursor:pointer}
 .cifra-item:hover{background:rgba(255,255,255,0.05)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(20px);display:none;justify-content:center;align-items:center;z-index:50;padding:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(20px);display:none;justify-content:center;align-items:center;z-index:50;padding:8px}
 .modal.aberto{display:flex}
 .modal-box{background:#161a19;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow:auto}
-#boxLeitor{width:100%;max-width:720px;height:96vh;border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6);position:relative}
-.topo-fixo{padding:18px 20px;border-bottom:1px solid rgba(0,0,0,0.06);flex-shrink:0}
-#leitorConteudo{flex:1;overflow:auto;padding:24px 28px;font-size:20px;line-height:1.7;white-space:pre;font-family:'Caveat',cursive}
-.cifra-line{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;letter-spacing:-0.3px;margin-top:14px;white-space:pre;color:#D97706!important}
-.linha-letra{font-family:'Caveat',cursive;font-size:22px;margin-bottom:14px;white-space:pre-wrap}
+#boxLeitor{width:100%;max-width:760px;height:96vh;border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+.topo-fixo{padding:16px 18px;flex-shrink:0;border-bottom:1px solid rgba(0,0,0,0.08)}
+#leitorConteudo{flex:1;overflow:auto;padding:20px 22px;background:#fdfbf7;color:#111;font-size:20px;line-height:1.2;white-space:pre-wrap;font-family:'Inter',sans-serif}
+.cifra-line{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:18px;letter-spacing:-0.2px;white-space:pre;color:#B45309!important;margin:0;padding:0;line-height:1.1}
+.linha-letra{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;color:#111!important;margin:0 0 18px 0;padding:2px 0 0 0;line-height:1.3;letter-spacing:-0.2px;white-space:pre-wrap}
+.bloco-vazio{height:14px}
 #boxLeitor:fullscreen{border-radius:0;max-width:100vw;width:100vw;height:100vh}
 .tons{display:flex;gap:6px;overflow:auto;padding:8px 0}
-.tom-btn{min-width:44px;height:44px;border-radius:100px;border:1px solid rgba(0,0,0,0.15);background:white;color:#111;font-weight:700;font-size:14px;cursor:pointer}
-.tom-btn.ativo{background:#D97706;color:white;border-color:#D97706;transform:scale(1.05)}
-.chip{display:inline-flex;padding:8px 14px;border-radius:100px;background:#111;color:white;font-size:12px;font-weight:600;cursor:pointer;border:none}
+.tom-btn{min-width:44px;height:44px;border-radius:100px;border:1px solid rgba(0,0,0,0.15);background:white;color:#111;font-weight:800;font-size:14px;cursor:pointer}
+.tom-btn.ativo{background:#D97706;color:white;border-color:#D97706}
+.chip{padding:8px 14px;border-radius:100px;background:#111;color:white;font-size:12px;font-weight:700;cursor:pointer;border:none}
 .chip-ativo{background:#D97706;color:white}
 textarea,input[type=text]{width:100%;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.3);color:white;margin:8px 0;outline:none}
 </style>
 </head>
 <body>
-<header><button class="btn" id="btnMenu">☰</button><div class="logo">CIFRAS PRO</div><button class="btn btn-amarelo" id="btnHome"><span id="total">0</span></button></header>
+<header><button class="btn" id="btnMenu">☰</button><div style="font-weight:800">CIFRAS PRO v49</div><button class="btn btn-amarelo" id="btnHome"><span id="total">0</span></button></header>
 <div id="menuLateral" class="modal"><div class="modal-box">
-<h2 style="font-size:22px;margin-bottom:16px">Ajustes Premium</h2>
-<div style="margin:18px 0"><div style="font-size:11px;opacity:0.5;margin-bottom:10px">COR DA CIFRA - VOCÊ ESCOLHEU ÂMBAR</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ativo" id="corAmbar">Âmbar #D97706 ✓</button><button class="btn" id="corPreta">Preta Pro</button><button class="btn" id="corBranca">Branca</button></div></div>
-<div style="margin:18px 0"><div style="font-size:11px;opacity:0.5;margin-bottom:10px">TEMA DO LEITOR</div><div style="display:flex;gap:8px"><button class="btn btn-ativo" id="btnTemaPapel">Papel claro</button><button class="btn" id="btnTemaDark">Preto palco</button></div></div>
-<div style="margin:18px 0"><div style="font-size:11px;opacity:0.5;margin-bottom:10px">TAMANHO</div><input type="range" min="16" max="32" value="20" id="rangeFonte" style="width:100%"></div>
+<h2 style="font-size:20px;font-weight:800;margin-bottom:16px">Visão e Acesso</h2>
+<div style="margin:18px 0"><div style="font-size:11px;opacity:0.6;margin-bottom:10px;font-weight:700">TAMANHO DA LETRA - PRA VISTA</div><div style="display:flex;gap:8px"><button class="btn" id="sizeNormal">Normal</button><button class="btn btn-ativo" id="sizeGrande">Grande</button><button class="btn" id="sizeGigante">Gigante</button></div><div style="font-size:11px;opacity:0.5;margin-top:6px">Gigante é pra palco, bem grossa</div></div>
+<div style="margin:18px 0"><div style="font-size:11px;opacity:0.6;margin-bottom:10px">TEMA</div><div style="display:flex;gap:8px"><button class="btn btn-ativo" id="btnTemaPapel">Papel claro - mais nítido</button><button class="btn" id="btnTemaDark">Preto palco</button></div></div>
 <div style="margin:18px 0"><button class="btn btn-amarelo" id="btnExportar" style="width:100%">Exportar backup</button><label class="btn" style="width:100%;text-align:center;display:block;margin-top:8px">Importar<input type="file" id="importFile" hidden></label></div>
 <button class="btn" id="btnFecharMenu" style="width:100%;margin-top:16px">Fechar</button>
 </div></div>
-
 <div class="card"><div style="display:flex;gap:10px"><button class="btn btn-amarelo" id="btnNova" style="flex:1">+ Nova cifra</button><button class="btn" id="btnColar" style="flex:1">Colar</button></div><input id="busca" class="input-busca" placeholder="Buscar..."></div>
 <div class="card"><div id="lista"></div></div>
-
-<div id="modalLeitor" class="modal"><div id="boxLeitor"><div class="topo-fixo" id="topoFixo"><div style="display:flex;justify-content:space-between"><button class="btn" id="btnVoltar" style="background:#f0eee9;color:#111;border:none">← Voltar</button><button class="btn" id="btnTelaCheia" style="background:#111;color:white">⛶ Tela cheia</button></div><div style="margin-top:16px;display:flex;justify-content:space-between"><div style="font-size:11px;opacity:0.5">TOM Original <span id="tomOriginal">G</span> → <span id="tomAtualLabel" style="font-weight:700">0</span></div><button class="chip" id="btnSimplificar">Simplificada</button></div><div class="tons" id="barraTons"></div><h2 id="leitorTitulo" style="margin-top:12px;font-size:12px;opacity:0.4;text-transform:uppercase"></h2></div><div id="leitorConteudo"></div></div></div>
+<div id="modalLeitor" class="modal"><div id="boxLeitor"><div class="topo-fixo" id="topoFixo"><div style="display:flex;justify-content:space-between"><button class="btn" id="btnVoltar" style="background:#f0eee9;color:#111;border:none;font-weight:800">← Voltar</button><button class="btn" id="btnTelaCheia" style="background:#111;color:white;font-weight:800">⛶ Tela cheia</button></div><div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div style="font-size:11px;opacity:0.6;font-weight:700">TOM <span id="tomOriginal">G</span> → <span id="tomAtualLabel">0</span></div><button class="chip" id="btnSimplificar">Simplificada</button></div><div class="tons" id="barraTons"></div><h2 id="leitorTitulo" style="margin-top:10px;font-size:11px;opacity:0.5;text-transform:uppercase;font-weight:800"></h2></div><div id="leitorConteudo"></div></div></div>
 <div id="modalEditar" class="modal"><div class="modal-box"><input id="editTitulo" type="text" placeholder="Nome"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="14"></textarea><button class="btn btn-amarelo" id="btnSalvar" style="width:100%">Salvar</button><button class="btn" id="btnCancelarEdit" style="width:100%;margin-top:8px">Cancelar</button></div></div>
 <div id="modalColar" class="modal"><div class="modal-box"><textarea id="colarTexto" rows="12"></textarea><input id="colarTitulo" type="text" placeholder="Nome"><input id="colarArtista" type="text" placeholder="Artista"><button class="btn btn-amarelo" id="btnSalvarColar" style="width:100%">Salvar</button><button class="btn" id="btnCancelarColar" style="width:100%;margin-top:8px">Cancelar</button></div></div>
-
 <script>
 document.addEventListener('DOMContentLoaded', ()=>{
  let cifras=[]; try{cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||'[]');}catch(e){cifras=[];}
- let tom=0, originalConteudo='', acordeOriginal='G', simplificada=false, fontSize=20, temaAtual='papel', corAtual='ambar';
+ let tom=0, originalConteudo='', acordeOriginal='G', simplificada=false, fontSize=20, temaAtual='papel', sizeMode='grande';
  const $=id=>document.getElementById(id);
  const salvar=()=>localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));
- const cores={ambar:'#D97706', preta:'#111111', branca:'#FFFFFF', ambarClaro:'#FB923C'};
- function getCorCifra(){ if(temaAtual==='dark' && corAtual==='preta') return '#FFFFFF'; if(temaAtual==='dark' && corAtual==='ambar') return '#FB923C'; return cores[corAtual]||'#D97706'; }
  function aplicarTemaLeitor(){
   const box=$('boxLeitor'), topo=$('topoFixo'), cont=$('leitorConteudo');
   if(temaAtual==='dark'){ box.style.background='#0f0f0f'; topo.style.background='#0f0f0f'; cont.style.background='#0f0f0f'; cont.style.color='#f5f5f5'; }
-  else { box.style.background='#fdfbf7'; topo.style.background='#fdfbf7'; cont.style.background='#fdfbf7'; cont.style.color='#1a1a1a'; }
-  renderCifraTextoAtual();
+  else { box.style.background='#fdfbf7'; topo.style.background='#fdfbf7'; cont.style.background='#fdfbf7'; cont.style.color='#111'; }
+  aplicarTamanho(); renderCifraTextoAtual();
  }
- function renderLista(){ const b=$('busca').value.toLowerCase(); const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b)); $('total').innerText=f.length; $('lista').innerHTML=f.length?f.map(c=>`<div class="cifra-item" data-id="${c.id}"><div><b>${c.titulo}</b><div style="opacity:0.5;font-size:12px">${c.artista}</div></div><span style="opacity:0.2">›</span></div>`).join(''):'<div style="padding:30px;text-align:center;opacity:0.3">Nenhuma cifra</div>'; document.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>abrirLeitor(Number(el.dataset.id))));}
+ function aplicarTamanho(){
+  if(sizeMode==='normal'){fontSize=18;} else if(sizeMode==='grande'){fontSize=22;} else if(sizeMode==='gigante'){fontSize=26;}
+  $('leitorConteudo').style.fontSize=fontSize+'px';
+ }
+ function renderLista(){ const b=$('busca').value.toLowerCase(); const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b)); $('total').innerText=f.length; $('lista').innerHTML=f.length?f.map(c=>`<div class="cifra-item" data-id="${c.id}"><div><b style="font-size:15px;font-weight:800">${c.titulo}</b><div style="opacity:0.5;font-size:12px;font-weight:600">${c.artista}</div></div><span style="opacity:0.2">›</span></div>`).join(''):'<div style="padding:30px;text-align:center;opacity:0.3">Nenhuma cifra</div>'; document.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>abrirLeitor(Number(el.dataset.id))));}
  function abrirLeitor(id){ const c=cifras.find(x=>x.id==id); if(!c) return; originalConteudo=c.conteudo; tom=0; const m=c.conteudo.match(/[A-G][#b]?/); acordeOriginal=m?m[0]:'G'; $('tomOriginal').innerText=acordeOriginal; criarBarraTons(); $('leitorTitulo').innerText=c.titulo+' • '+c.artista; $('modalLeitor').classList.add('aberto'); aplicarTemaLeitor();}
  function criarBarraTons(){const cont=$('barraTons'); cont.innerHTML=''; for(let i=-5;i<=5;i++){const btn=document.createElement('button'); btn.className=i===0?'tom-btn ativo':'tom-btn'; btn.innerText=(i>0?'+'+i:i); btn.addEventListener('click',()=>{tom=i; atualizarTons(); aplicarTransposicao();}); cont.appendChild(btn);} atualizarTons();}
  function atualizarTons(){$('barraTons').querySelectorAll('.tom-btn').forEach((b,idx)=>{let v=idx-5; b.className=v===tom?'tom-btn ativo':'tom-btn';}); $('tomAtualLabel').innerText=(tom>0?'+'+tom:tom)+' ('+transporNota(acordeOriginal,tom)+')';}
  function transporNota(nota,s){const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'}; let base=MAP[nota]||nota; let i=NOTAS.indexOf(base); if(i==-1) return nota; return NOTAS[(i+s+120)%12];}
  function aplicarTransposicao(){const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'}; let texto=originalConteudo.replace(/[A-G][#b]?/g,m=>{let base=MAP[m]||m; let i=NOTAS.indexOf(base); if(i==-1) return m; return NOTAS[(i+tom+120)%12];}); if(simplificada){texto=texto.replace(/[A-G][#b]?m?(?:7M|maj7|m7|7|9|6|sus2|sus4|sus|dim|aug|add9|\(.*?\)|\/[\w#b]+)*/g,ac=>{let mm=ac.match(/^([A-G][#b]?)(m)?/); return mm?mm[1]+(mm[2]||''):ac;});} originalConteudoTransposto=texto; renderCifraTextoAtual();}
  let originalConteudoTransposto=null;
- function renderCifraTextoAtual(){const txt=originalConteudoTransposto||originalConteudo; if(!txt) return; const cor=getCorCifra(); let html=''; txt.split('\n').forEach(l=>{if(!l.trim()){html+=`\n`;return;}let ehCifra=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=10; if(ehCifra) html+=`<div class="cifra-line" style="color:${cor}">${l}</div>`; else html+=`<div class="linha-letra" style="color:${temaAtual==='dark'?'#e8e8e8':'#2b2b2b'}">${l}</div>`;}); $('leitorConteudo').innerHTML=html; $('leitorConteudo').style.fontSize=fontSize+'px';}
+ function renderCifraTextoAtual(){
+  const txt=originalConteudoTransposto||originalConteudo; if(!txt) return;
+  let html=''; 
+  const linhas=txt.split('\n');
+  for(let i=0;i<linhas.length;i++){
+   const l=linhas[i]; if(!l.trim()){html+=`<div class="bloco-vazio"></div>`; continue;}
+   let ehCifra=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=10 && /^[A-G\s#b0-9\/\(\)mMaj7\-]+$/.test(l.trim());
+   if(ehCifra){
+    // Se próxima linha é letra, gruda
+    const prox=linhas[i+1]||''; const proxEhLetra=prox.trim() && !/^[A-G\s#b0-9\/\(\)mMaj7\-]+$/.test(prox.trim().split(/\s+/).slice(0,3).join(' ')) || prox.trim().length>20;
+    if(proxEhLetra && prox.trim()){
+     html+=`<div class="cifra-line">${l}</div>`;
+    } else {
+     html+=`<div class="cifra-line" style="margin-bottom:18px">${l}</div>`;
+    }
+   } else {
+    html+=`<div class="linha-letra">${l}</div>`;
+   }
+  }
+  $('leitorConteudo').innerHTML=html;
+ }
  function renderCifraTexto(txt){originalConteudoTransposto=txt; renderCifraTextoAtual();}
  $('btnMenu').addEventListener('click',()=>$('menuLateral').classList.add('aberto')); $('btnFecharMenu').addEventListener('click',()=>$('menuLateral').classList.remove('aberto')); $('busca').addEventListener('input',renderLista);
  $('btnNova').addEventListener('click',()=>{$('editTitulo').value=''; $('editArtista').value=''; $('editConteudo').value=''; $('modalEditar').classList.add('aberto');});
@@ -80,14 +98,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
  $('btnVoltar').addEventListener('click',()=>{$('modalLeitor').classList.remove('aberto'); if(document.fullscreenElement)document.exitFullscreen();});
  $('btnTelaCheia').addEventListener('click',()=>{if(!document.fullscreenElement){$('boxLeitor').requestFullscreen();}else document.exitFullscreen();});
  $('btnSimplificar').addEventListener('click',()=>{simplificada=!simplificada; $('btnSimplificar').className=simplificada?'chip chip-ativo':'chip'; aplicarTransposicao();});
- $('rangeFonte').addEventListener('input',e=>{fontSize=parseInt(e.target.value); $('leitorConteudo').style.fontSize=fontSize+'px';});
+ $('sizeNormal').addEventListener('click',()=>{sizeMode='normal'; $('sizeNormal').className='btn btn-ativo'; $('sizeGrande').className='btn'; $('sizeGigante').className='btn'; aplicarTamanho(); renderCifraTextoAtual();});
+ $('sizeGrande').addEventListener('click',()=>{sizeMode='grande'; $('sizeGrande').className='btn btn-ativo'; $('sizeNormal').className='btn'; $('sizeGigante').className='btn'; aplicarTamanho(); renderCifraTextoAtual();});
+ $('sizeGigante').addEventListener('click',()=>{sizeMode='gigante'; $('sizeGigante').className='btn btn-ativo'; $('sizeNormal').className='btn'; $('sizeGrande').className='btn'; aplicarTamanho(); renderCifraTextoAtual();});
  $('btnSalvar').addEventListener('click',()=>{const t=$('editTitulo').value,a=$('editArtista').value,co=$('editConteudo').value; if(!t) return alert('Nome'); cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:co}); salvar(); $('modalEditar').classList.remove('aberto'); renderLista();});
  $('btnSalvarColar').addEventListener('click',()=>{const txt=$('colarTexto').value,t=$('colarTitulo').value||'Importada',a=$('colarArtista').value||''; if(!txt) return alert('Cole'); cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:txt}); salvar(); $('modalColar').classList.remove('aberto'); renderLista();});
  $('btnExportar').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='cifras.json'; a.click();});
  $('importFile').addEventListener('change',e=>{const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{try{cifras=JSON.parse(r.result); salvar(); renderLista();}catch{alert('Inválido');}}; r.readAsText(f);});
- $('corAmbar').addEventListener('click',()=>{corAtual='ambar'; $('corAmbar').className='btn btn-ativo'; $('corPreta').className='btn'; $('corBranca').className='btn'; renderCifraTextoAtual();});
- $('corPreta').addEventListener('click',()=>{corAtual='preta'; $('corPreta').className='btn btn-ativo'; $('corAmbar').className='btn'; $('corBranca').className='btn'; renderCifraTextoAtual();});
- $('corBranca').addEventListener('click',()=>{corAtual='branca'; $('corBranca').className='btn btn-ativo'; $('corAmbar').className='btn'; $('corPreta').className='btn'; renderCifraTextoAtual();});
  $('btnTemaPapel').addEventListener('click',()=>{temaAtual='papel'; $('btnTemaPapel').className='btn btn-ativo'; $('btnTemaDark').className='btn'; aplicarTemaLeitor();});
  $('btnTemaDark').addEventListener('click',()=>{temaAtual='dark'; $('btnTemaDark').className='btn btn-ativo'; $('btnTemaPapel').className='btn'; aplicarTemaLeitor();});
  renderLista(); aplicarTemaLeitor();
