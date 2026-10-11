@@ -5,7 +5,7 @@
 [data-theme="escuro"]{--bg:#121212;--card:#1e1e1e;--text:#e5e5e5;--bord:#333;--leitor:#1a1a1a;--cifra:#fbbf24;--letra:#f5f5f5}
 [data-theme="sepia"]{--bg:#e8dcc8;--card:#fdf6e3;--text:#433422;--bord:#d6c7a8;--leitor:#fdf6e3;--cifra:#8b5a2b;--letra:#3e2f1f}
 [data-theme="azul"]{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--bord:#334155;--leitor:#0f172a;--cifra:#60a5fa;--letra:#f1f5f9}
-[data-theme="palco"]{--bg:#000000;--card:#111111;--text:#facc15;--bord:#333;--leitor:#000000;--cifra:#facc15;--letra:#fef08a}
+[data-theme="palco"]{--bg:#000;--card:#111;--text:#facc15;--bord:#333;--leitor:#000;--cifra:#facc15;--letra:#fef08a}
 *{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}
 header{background:var(--card);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;border-bottom:1px solid var(--bord)}
 .btn{border:1.5px solid var(--bord);background:var(--card);color:var(--text);padding:10px 14px;border-radius:100px;font-weight:700;font-size:13px;cursor:pointer}
@@ -31,15 +31,14 @@ input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px soli
 #ctrlAuto{display:none;gap:6px;align-items:center;background:var(--bg);border:1px solid var(--bord);padding:6px 10px;border-radius:100px}
 #ctrlAuto.on{display:flex}
 #ctrlAuto button{width:30px;height:30px;border-radius:50%;border:1px solid var(--bord);background:var(--card);font-weight:900;font-size:16px;color:var(--text)}
-.temaGrid{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.temaBtn{padding:8px 12px;border-radius:100px;border:1.5px solid var(--bord);font-size:11px;font-weight:800;cursor:pointer}.temaBtn.on{background:#d97706;color:#fff;border-color:#d97706}
+.temaGrid{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.temaBtn{padding:8px 12px;border-radius:100px;border:1.5px solid var(--bord);font-size:11px;font-weight:800;cursor:pointer;background:var(--card);color:var(--text)}.temaBtn.on{background:#d97706;color:#fff;border-color:#d97706}
 </style></head><body>
 <header><button class="btn" onclick="document.getElementById('mMenu').classList.add('on')">☰</button><div style="font-weight:800">🎸 MINHAS CIFRAS</div><span class="btn btn-black" id="tot">0</span></header>
-<div class="card"><div style="font-size:22px;font-weight:800">Sua coleção particular</div><div style="color:var(--text);opacity:.7;margin:6px 0 12px">Crie, importe e organize. Tudo offline.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-black" onclick="nova()">+ Nova Cifra</button><label class="btn">Importar.txt<input type="file" id="imp" hidden></label><button class="btn" onclick="document.getElementById('mMenu').classList.add('on')">☰ Menu</button></div></div>
+<div class="card"><div style="font-size:22px;font-weight:800">Sua coleção particular</div><div style="opacity:.7;margin:6px 0 12px">Crie, importe e organize. Tudo offline.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-black" onclick="nova()">+ Nova Cifra</button><label class="btn">Importar.txt<input type="file" id="imp" hidden></label><button class="btn" onclick="document.getElementById('mMenu').classList.add('on')">☰ Menu</button></div></div>
 <div class="card"><div class="tabs" id="tabsRep"></div><div style="display:flex;gap:8px;margin-top:12px"><input id="busca" placeholder="Buscar..." style="flex:1" oninput="render()"><button class="btn btn-black" onclick="nova()">+ Nova</button></div><div class="chips" id="filtEst"></div><div id="lista" style="margin-top:12px"></div></div>
 
 <div id="mMenu" class="modal" onclick="if(event.target==this)this.classList.remove('on')"><div class="box">
 <h3>Menu</h3>
-
 <div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">🎨 TEMA</div>
 <div class="temaGrid">
 <button class="temaBtn" id="t-claro" onclick="setTema('claro')">☀️ Claro</button>
@@ -48,45 +47,36 @@ input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px soli
 <button class="temaBtn" id="t-azul" onclick="setTema('azul')">🌊 Azul</button>
 <button class="temaBtn" id="t-palco" onclick="setTema('palco')">🎤 Palco</button>
 </div>
-
 <div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">REPERTÓRIOS - RENOMEIE</div><div id="editReps"></div>
 <div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">FILTRAR POR ESTILO</div><div class="chips" id="menuEst" style="flex-wrap:wrap"></div>
 
 <div style="font-size:11px;font-weight:800;opacity:.6;margin-top:18px">BACKUP E APP</div>
 <button class="btnFull btnExport" id="btnInst" onclick="instalarApp()">📲 Instalar Aplicativo</button>
-<button class="btnFull btnExport" style="background:#1a1611" onclick="exportar()">📤 Exportar backup</button>
-<label class="btnFull btnOutline">📥 Importar backup<input type="file" id="impBKP" accept=".json" hidden></label>
+<button class="btnFull btnExport" onclick="compartilharApp()" style="background:#1e293b">📤 Compartilhar App</button>
+<button class="btnFull btnExport" style="background:#1a1611" onclick="exportar()">📥 Exportar backup</button>
+<label class="btnFull btnOutline">📤 Importar backup<input type="file" id="impBKP" accept=".json" hidden></label>
 
 <button class="btnFull" style="background:#fee2e2;color:#b91c1c;border:none;margin-top:12px" onclick="if(confirm('Apagar tudo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button>
 <button class="btnFull btnOutline" onclick="document.getElementById('mMenu').classList.remove('on')">Fechar</button>
 </div></div>
 
 <div id="mLeitor" class="modal"><div id="boxLeitor"><button id="btnSairFull" onclick="toggleFull()">✕ Sair</button><div id="barraTopo" style="padding:10px;border-bottom:1px solid var(--bord);display:flex;justify-content:space-between;background:var(--card);flex-wrap:wrap;gap:6px"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" onclick="fechar()">← Voltar</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn" onclick="excluirAtual()">🗑️</button><button class="btn" onclick="copiarCifra()">📋</button></div><div style="display:flex;gap:6px;align-items:center"><div id="ctrlAuto"><button onclick="ajustaVel(-1)">−</button><span id="labVel" style="font-size:12px;font-weight:800;min-width:44px;text-align:center">2x</span><button onclick="ajustaVel(1)">+</button></div><button class="btn btn-black" id="bAuto" onclick="toggleAuto()">▶️ Auto</button><button class="btn btn-black" onclick="toggleFull()">⛶ Tela cheia</button></div></div><div id="barraTom" style="padding:12px;background:var(--bg);border-bottom:1px solid var(--bord)"><div style="display:flex;justify-content:space-between;align-items:center"><span id="infTom" style="font-size:11px;opacity:.7"></span><div style="display:flex;gap:6px;align-items:center"><button class="btn" onclick="mFont(-2)">A-</button><span id="labF" style="font-size:11px">18px</span><button class="btn" onclick="mFont(2)">A+</button><button class="btn" id="bSimp" onclick="tSimp()">Simplif.</button></div></div><div class="tons" id="barTons"></div><div id="tTit" style="font-size:11px;opacity:.6;margin-top:4px"></div></div><div id="leitor"></div></div></div>
-
 <div id="mNova" class="modal" onclick="if(event.target==this)fecharNova()"><div class="box"><h3 id="titNova">Nova música</h3><input id="nT" placeholder="Nome*"><input id="nA" placeholder="Artista"><select id="nEst"><option value="">Estilo...</option><option>MPB</option><option>ROCK NACIONAL</option><option>ROCK INTERNACIONAL</option><option>PAGODE</option><option>GOSPEL</option><option>FORRÓ</option><option>REGGAE</option><option>SAMBA</option><option>FUNK</option><option>SERTANEJO</option><option>POP</option><option>ESTILO DO MÚSICO</option><option>BLUES</option><option>JAZZ</option></select><div style="font-size:11px;opacity:.6;margin-top:8px">REPERTÓRIOS</div><div class="repCheck" id="nReps"></div><textarea id="nC" rows="12" placeholder="Cifra..."></textarea><button class="btn btn-black" id="btnSalvarNova" style="width:100%;padding:13px;background:#d97706;color:#fff;border:none;font-weight:800" onclick="salvar()">Salvar música</button><button class="btn" style="width:100%;margin-top:8px" onclick="fecharNova()">Cancelar</button></div></div>
 
 <script>
 const $ = id => document.getElementById(id);
-let pInst=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pInst=e;});
-function instalarApp(){
-  if(pInst){pInst.prompt();pInst.userChoice.then(r=>{if(r.outcome==='accepted'){$('btnInst').innerText='✅ App Instalado';}});}
-  else{if(window.matchMedia('(display-mode: standalone)').matches){alert('✅ Já está instalado!');}else{alert('Para instalar:\n\nAndroid Chrome: 3 pontinhos ⋮ > Instalar app\n\niPhone Safari: compartilhar □↑ > Adicionar à Tela de Início');}}
+let pInst=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pInst=e;});
+function instalarApp(){if(pInst){pInst.prompt();pInst.userChoice.then(r=>{if(r.outcome==='accepted'){$('btnInst').innerText='✅ App Instalado';}});}else{if(window.matchMedia('(display-mode: standalone)').matches){alert('✅ Já está instalado!');}else{alert('Para instalar:\nAndroid: 3 pontinhos ⋮ > Instalar app\niPhone: compartilhar □↑ > Adicionar à Tela de Início');}}}
+function compartilharApp(){
+  let url=window.location.href.split('?')[0];
+  let txt="🎸 Olha esse app de cifras que eu uso offline: Minhas Cifras";
+  if(navigator.share){
+    navigator.share({title:'Minhas Cifras', text:txt, url:url});
+  }else{
+    navigator.clipboard.writeText(txt+" - "+url).then(()=>{alert('🔗 Link copiado!\n\n'+url+'\n\nAgora cola no WhatsApp');});
+  }
 }
-window.addEventListener('appinstalled',()=>{$('btnInst').innerText='✅ App Instalado';});
-
-// TEMAS
-let temaAtual=localStorage.getItem('tema')||'claro';
-function setTema(t){
-  temaAtual=t;
-  localStorage.setItem('tema',t);
-  if(t==='claro') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme',t);
-  document.querySelectorAll('.temaBtn').forEach(b=>b.classList.remove('on'));
-  let el=$('t-'+t); if(el) el.classList.add('on');
-}
-setTema(temaAtual);
-
+let temaAtual=localStorage.getItem('tema')||'claro';function setTema(t){temaAtual=t;localStorage.setItem('tema',t);if(t==='claro')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',t);document.querySelectorAll('.temaBtn').forEach(b=>b.classList.remove('on'));let el=$('t-'+t);if(el)el.classList.add('on');}setTema(temaAtual);
 const ESTILOS=['TODOS','MPB','ROCK NACIONAL','ROCK INTERNACIONAL','PAGODE','GOSPEL','FORRÓ','REGGAE','SAMBA','FUNK','SERTANEJO','POP','ESTILO DO MÚSICO','BLUES','JAZZ'];
 let reps=JSON.parse(localStorage.getItem('reps')||'["Minhas músicas","Louvor","Show Barzinho","Estudo","Favoritas"]');
 let cifras=JSON.parse(localStorage.getItem('cifrasV59')||'[]');
