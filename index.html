@@ -2,7 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v52</title>
+<title>MINHAS CIFRAS</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="theme-color" content="#0f0f0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MINHAS CIFRAS">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -42,14 +50,14 @@ textarea,input[type=text]{width:100%;padding:12px;border-radius:12px;border:1px 
 <body>
 <header>
 <button class="btn" id="btnMenu" style="font-weight:800;font-size:16px">☰ Menu</button>
-<div style="font-weight:800;letter-spacing:-0.5px">MINHAS CIFRAS</div>
+<div style="font-weight:800;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px"><img src="icon-192.png" style="width:28px;height:28px;border-radius:7px;object-fit:cover"> MINHAS CIFRAS</div>
 <button class="btn btn-amarelo" id="btnHome"><span id="total">0</span></button>
 </header>
 <button id="btnOlho">👁️</button>
 
 <div id="modalMenuLateral" class="modal"><div class="modal-box">
-<h2 style="font-weight:800;margin-bottom:16px">Menu • Minhas Cifras</h2>
-<div style="margin:16px 0"><div style="font-size:11px;opacity:0.6;margin-bottom:8px;font-weight:700">TEMA DO LEITOR - ESCOLHA</div><div style="display:flex;gap:8px"><button class="btn btn-ativo" id="btnTemaPapel">Papel claro</button><button class="btn" id="btnTemaDark">Preto palco</button></div><div style="font-size:11px;opacity:0.5;margin-top:6px">No preto, letra fica branca nítida agora</div></div>
+<h2 style="font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px"><img src="icon-192.png" style="width:36px;height:36px;border-radius:8px"> Menu • Minhas Cifras</h2>
+<div style="margin:16px 0"><div style="font-size:11px;opacity:0.6;margin-bottom:8px;font-weight:700">TEMA DO LEITOR - ESCOLHA</div><div style="display:flex;gap:8px"><button class="btn btn-ativo" id="btnTemaPapel">Papel claro</button><button class="btn" id="btnTemaDark">Preto palco</button></div><div style="font-size:11px;opacity:0.5;margin-top:6px">No preto, letra fica branca nítida agora - bug do v51 corrigido</div></div>
 <div style="margin:16px 0"><div style="font-size:11px;opacity:0.6;margin-bottom:8px;font-weight:700">COR DA CIFRA</div><div style="display:flex;gap:8px"><button class="btn btn-ativo" id="corAmbar">Âmbar</button><button class="btn" id="corPreta">Preta/Branca</button></div></div>
 <div style="margin:16px 0"><button class="btn btn-amarelo" id="btnExportar" style="width:100%">Exportar backup</button><label class="btn" style="width:100%;text-align:center;display:block;margin-top:8px">Importar<input type="file" id="importFile" hidden></label></div>
 <button class="btn" id="btnFecharMenu" style="width:100%;margin-top:12px">Fechar menu</button>
@@ -86,7 +94,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderCifraTextoAtual();
  }
  function renderLista(){ const b=$('busca').value.toLowerCase(); const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b)); $('total').innerText=f.length; $('lista').innerHTML=f.length?f.map(c=>`<div class="cifra-item" data-id="${c.id}"><div><b style="font-weight:800">${c.titulo}</b><div style="opacity:0.5;font-size:12px">${c.artista}</div></div><span style="opacity:0.2">›</span></div>`).join(''):'<div style="padding:20px;text-align:center;opacity:0.3">Nenhuma cifra - clique em + Nova</div>'; document.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>abrirLeitor(Number(el.dataset.id))));}
- function abrirLeitor(id){ const c=cifras.find(x=>x.id==id); if(!c) return; originalConteudo=c.conteudo; tom=0; const m=c.conteudo.match(/[A-G][#b]?/); acordeOriginal=m?m[0]:'G'; $('tomOriginal'); criarBarraTons(); $('leitorTitulo').innerText=c.titulo+' • '+c.artista; $('modalLeitor').classList.add('aberto'); $('btnOlho').style.display='none'; topoVisivel=true; $('topoFixo').classList.remove('escondido'); aplicarTemaLeitor(); $('leitorConteudo').scrollTop=0; }
+ function abrirLeitor(id){ const c=cifras.find(x=>x.id==id); if(!c) return; originalConteudo=c.conteudo; tom=0; const m=c.conteudo.match(/[A-G][#b]?/); acordeOriginal=m?m[0]:'G'; criarBarraTons(); $('leitorTitulo').innerText=c.titulo+' • '+c.artista; $('modalLeitor').classList.add('aberto'); $('btnOlho').style.display='none'; topoVisivel=true; $('topoFixo').classList.remove('escondido'); aplicarTemaLeitor(); $('leitorConteudo').scrollTop=0; }
  function criarBarraTons(){const cont=$('barraTons'); cont.innerHTML=''; for(let i=-5;i<=5;i++){const btn=document.createElement('button'); btn.className=i===0?'tom-btn ativo':'tom-btn'; btn.innerText=(i>0?'+'+i:i); btn.addEventListener('click',()=>{tom=i; atualizarTons(); aplicarTransposicao();}); cont.appendChild(btn);} atualizarTons();}
  function atualizarTons(){$('barraTons').querySelectorAll('.tom-btn').forEach((b,idx)=>{let v=idx-5; b.className=v===tom?'tom-btn ativo':'tom-btn';}); const novo=transporNota(acordeOriginal,tom); $('tomInfo').innerText=`TOM ${acordeOriginal} → ${tom>0?'+'+tom:tom} (${novo})`;}
  function transporNota(nota,s){const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'}; let base=MAP[nota]||nota; let i=NOTAS.indexOf(base); if(i==-1) return nota; return NOTAS[(i+s+120)%12];}
@@ -103,8 +111,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   $('leitorConteudo').innerHTML=html; $('labelFonte').innerText=fontSize+'px';
  }
- function renderCifraTexto(txt){originalConteudoTransposto=txt; renderCifraTextoAtual();}
- // Eventos
  $('btnMenu').addEventListener('click',()=>{ $('modalMenuLateral').classList.add('aberto'); });
  $('btnFecharMenu').addEventListener('click',()=>{ $('modalMenuLateral').classList.remove('aberto'); });
  $('busca').addEventListener('input',renderLista);
@@ -129,6 +135,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
  $('corAmbar').addEventListener('click',()=>{corAtual='ambar'; $('corAmbar').className='btn btn-ativo'; $('corPreta').className='btn'; renderCifraTextoAtual();});
  $('corPreta').addEventListener('click',()=>{corAtual='preta'; $('corPreta').className='btn btn-ativo'; $('corAmbar').className='btn'; renderCifraTextoAtual();});
  renderLista(); aplicarTemaLeitor();
+ // PWA install
+ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
 });
 </script>
 </body>
