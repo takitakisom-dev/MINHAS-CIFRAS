@@ -1,10 +1,25 @@
 {
-  "name": "Minhas Cifras v28",
+  "name": "Minhas Cifras v29",
   "short_name": "Minhas Cifras",
-  "start_url": "./index.html?v=28FINAL",
+  "start_url": "./index.html?v=29",
   "display": "standalone",
   "background_color": "#0a2f1e",
   "theme_color": "#0a2f1e",
-  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/3659/3659899.png","sizes": "512x512","type": "image/png","purpose": "any maskable"}],
-  "share_target": {"action": "./index.html","method": "GET","params": {"title": "title","text": "text","url": "url"}}
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3659/3659899.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
