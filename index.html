@@ -1,11 +1,11 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#d97706">
+<title>MINHAS CIFRAS V81</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#d97706">
 <style>
-:root{--bg:#f3ece0;--card:#ffffff;--text:#2a211a;--bord:#e8ddd0;--leitor:#fdfbf7;--cifra:#9a5a10;--letra:#111}
-[data-theme="escuro"]{--bg:#121212;--card:#1e1e1e;--text:#e5e5e5;--bord:#333;--leitor:#1a1a1a;--cifra:#fbbf24;--letra:#f5f5f5}
-[data-theme="sepia"]{--bg:#e8dcc8;--card:#fdf6e3;--text:#433422;--bord:#d6c7a8;--leitor:#fdf6e3;--cifra:#8b5a2b;--letra:#3e2f1f}
-[data-theme="azul"]{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--bord:#334155;--leitor:#0f172a;--cifra:#60a5fa;--letra:#f1f5f9}
-[data-theme="palco"]{--bg:#000;--card:#111;--text:#facc15;--bord:#333;--leitor:#000;--cifra:#facc15;--letra:#fef08a}
+:root{--bg:#f3ece0;--card:#ffffff;--text:#2a211a;--bord:#e8ddd0;--leitor:#fdfbf7;--cifra:#d97706;--letra:#1a1a1a}
+[data-theme="escuro"]{--bg:#121212;--card:#1e1e1e;--text:#e5e5e5;--bord:#333;--leitor:#1e1e1e;--cifra:#fbbf24;--letra:#f5f5f5}
+[data-theme="sepia"]{--bg:#e8dcc8;--card:#fdf6e3;--text:#433422;--bord:#d6c7a8;--leitor:#fdf6e3;--cifra:#b45309;--letra:#3e2f1f}
+[data-theme="azul"]{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--bord:#334155;--leitor:#0f172a;--cifra:#60a5fa;--letra:#e2e8f0}
+[data-theme="palco"]{--bg:#000;--card:#111;--text:#facc15;--bord:#333;--leitor:#000;--cifra:#facc15;--letra:#ffffff}
 *{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}
 header{background:var(--card);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;border-bottom:1px solid var(--bord)}
 .btn{border:1.5px solid var(--bord);background:var(--card);color:var(--text);padding:10px 14px;border-radius:100px;font-weight:700;font-size:13px;cursor:pointer}
@@ -19,8 +19,9 @@ header{background:var(--card);padding:12px 16px;display:flex;justify-content:spa
 .repRow{display:flex;gap:10px;margin:10px 0}.repRow input{flex:1;padding:14px;border-radius:12px;border:1.5px solid var(--bord);background:var(--bg);color:var(--text)}.btnSalvar{width:72px;height:52px;border-radius:100px;background:#1a1611;color:#fff;border:none;font-weight:800}
 .btnFull{width:100%;padding:14px;border-radius:100px;font-weight:800;margin:6px 0;text-align:center;display:block}.btnExport{background:#d97706;color:#fff;border:none}.btnOutline{background:var(--card);border:1.5px solid var(--bord);color:var(--text)}
 #boxLeitor{width:100%;max-width:780px;height:96vh;background:var(--leitor);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;position:relative}
-#leitor{flex:1;overflow:auto;padding:18px;color:var(--letra)}
-.cLine{font-family:monospace;font-weight:800;white-space:pre-wrap;color:var(--cifra);font-size:15px}.lLine{font-weight:600;margin:0 0 10px 0;font-size:17px;color:var(--letra)}
+#leitor{flex:1;overflow:auto;padding:18px 16px}
+.cLine{font-family:monospace;font-weight:900;white-space:pre-wrap;color:var(--cifra);font-size:16px;letter-spacing:0.5px;line-height:1.2}
+.lLine{font-weight:500;margin:2px 0 14px 0;font-size:18px;color:var(--letra);line-height:1.5}
 .tons{display:flex;gap:5px;overflow-x:auto;padding:8px 0}.tBtn{min-width:38px;height:38px;border-radius:100px;border:1px solid var(--bord);background:var(--card);font-weight:800;flex-shrink:0;color:var(--text)}.tBtn.on{background:#d97706;color:#fff}
 input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--bord);background:var(--bg);margin:6px 0;color:var(--text)}
 .repCheck{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.repOpt{padding:7px 12px;border-radius:100px;border:1.5px solid var(--bord);background:var(--card);font-size:11px;cursor:pointer;color:var(--text)}.repOpt.on{background:#d97706;color:#fff}
