@@ -3,53 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v28</title>
+<title>Minhas Cifras v29 FINAL</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a2f1e;--card:#123a25;--accent:#ffeb3b;--text:#fff;--cifra:#ffeb3b;}
+:root{--bg:#0a2f1e;--card:#123a25;--accent:#ffeb3b;--text:#fff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .logo{color:var(--accent);font-weight:bold;font-size:18px}
 .btn{border:2px solid var(--accent);background:transparent;color:var(--accent);padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;margin:4px}
-.btn-amarelo{background:var(--accent);color:var(--bg)}
+.btn-amarelo{background:var(--accent);color:#0a2f1e}
 .btn-vermelho{background:#ff4444;color:white;border-color:#ff4444}
 .card{background:var(--card);border:1px solid rgba(255,235,59,0.3);border-radius:16px;padding:14px;margin:12px}
 .input-busca{width:100%;padding:12px;border-radius:12px;border:2px solid rgba(255,235,59,0.3);background:rgba(0,0,0,0.3);color:white;margin-top:8px}
 .cifra-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
 .cifra-item b{color:var(--accent);text-transform:uppercase}
-.acoes button{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);margin-left:6px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;justify-content:center;align-items:center;z-index:100;padding:10px}
+.acoes button{width:38px;height:38px;border-radius:50%;border:2px solid var(--accent);margin-left:6px;font-size:16px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;justify-content:center;align-items:center;z-index:100;padding:10px}
 .modal.aberto{display:flex}
-.modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:16px;width:100%;max-width:600px;max-height:90vh;overflow:auto;color:white}
-textarea,input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin:8px 0}
-.leitor{white-space:pre-wrap;line-height:1.9;font-size:18px;padding:10px}
+.modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:16px;width:100%;max-width:650px;max-height:92vh;overflow:auto;color:white}
+textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin:8px 0}
+.leitor{white-space:pre-wrap;line-height:2.1;font-size:22px;padding:10px}
 .estilo-mao{font-family:'Kalam',cursive}
 .estilo-maquina{font-family:'Courier Prime',monospace}
-.cifra-line{color:var(--cifra);font-weight:bold}
+.cifra-line{color:var(--accent);font-weight:bold}
 .cifra-line.vermelha{color:#ff4444!important}
 .cifra-line.dourada{color:#ffeb3b!important}
-.toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;padding:10px;background:rgba(0,0,0,0.2);border-radius:10px}
-#btnInstalar{display:none;background:#ffeb3b;color:#0a2f1e;font-size:16px;padding:12px 20px;width:100%;margin:10px 0}
-#btnInstalar.visivel{display:block}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;padding:10px;background:rgba(0,0,0,0.3);border-radius:12px;align-items:center}
+#btnInstalar{width:100%;padding:14px;font-size:16px;margin-bottom:12px;display:block}
+.secao-menu{margin:12px 0;padding:10px;border-bottom:1px solid rgba(255,235,59,0.2)}
+.secao-menu h4{color:var(--accent);margin-bottom:6px}
 </style>
 </head>
 <body>
 <header>
 <button class="btn" onclick="toggleMenu()">☰</button>
-<div class="logo">♪ MINHAS CIFRAS v28</div>
-<button class="btn btn-amarelo">Home</button>
+<div class="logo">♪ MINHAS CIFRAS v29</div>
+<button class="btn btn-amarelo" onclick="renderLista()">Home</button>
 </header>
 
-<div id="menuLateral" class="modal">
-<div class="modal-box">
-<h3 style="color:var(--accent)">Menu</h3>
-<button id="btnInstalar" class="btn btn-amarelo" onclick="instalarApp()">📲 Instalar App na Tela Inicial</button>
-<p style="margin:10px 0;font-size:12px">Se o botão não aparecer, vá nos 3 pontinhos do Chrome > Instalar app</p>
-<button class="btn" onclick="toggleMenu()">Fechar</button>
+<div id="menuLateral" class="modal"><div class="modal-box">
+<h2 style="color:var(--accent)">Menu Completo</h2>
+<button id="btnInstalar" class="btn btn-amarelo" onclick="instalarApp()">📲 INSTALAR APP NA TELA INICIAL</button>
+<p style="font-size:11px;margin-bottom:10px">Se não instalar, vá nos 3 pontinhos do Chrome > Instalar app</p>
+
+<div class="secao-menu"><h4>🎨 Aparência do Leitor</h4>
+<button class="btn" onclick="mudarEstilo('mao')">✍️ Mão</button>
+<button class="btn" onclick="mudarEstilo('maquina')">⌨️ Máquina</button><br>
+<button class="btn" onclick="mudarCorCifra('dourada')">Cifra Dourada</button>
+<button class="btn btn-vermelho" onclick="mudarCorCifra('vermelha')">Cifra Vermelha</button><br>
+<button class="btn" onclick="mudarTemaLeitor('verde')">Fundo Verde</button>
+<button class="btn" onclick="mudarTemaLeitor('branco')">Fundo Branco</button>
+<button class="btn" onclick="mudarTemaLeitor('preto')">Fundo Preto</button>
 </div>
+
+<div class="secao-menu"><h4>🔤 Tamanho da Letra</h4>
+<input type="range" min="14" max="36" value="22" id="rangeFonte" oninput="mudarFonte(this.value)"><span id="valFonte">22px</span>
 </div>
+
+<div class="secao-menu"><h4>📜 Rolagem Automática</h4>
+<input type="range" min="1" max="10" value="3" id="rangeVel" oninput="mudarVelocidade(this.value)"><span id="valVel">Vel: 3</span><br>
+<button class="btn btn-amarelo" onclick="iniciarRolagem()">▶️ Iniciar Rolagem</button>
+<button class="btn" onclick="pararRolagem()">⏸️ Parar</button>
+</div>
+
+<div class="secao-menu"><h4>💾 Dados</h4>
+<button class="btn" onclick="fazerBackup()">Backup</button>
+<button class="btn" onclick="fecharMenu()">Fechar Menu</button>
+</div>
+</div></div>
 
 <div class="card">
 <button class="btn btn-amarelo" onclick="abrirNova()">+ Nova Cifra Manual</button>
@@ -57,69 +80,64 @@ textarea,input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px s
 <input id="busca" class="input-busca" placeholder="🔍 Buscar nas minhas..." oninput="renderLista()">
 </div>
 
-<div class="card">
-<h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2>
-<div id="lista"></div>
-</div>
+<div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2><div id="lista"></div></div>
 
-<div id="modalLeitor" class="modal">
-<div class="modal-box" id="boxLeitor" style="max-width:95%;width:95%">
-<div style="display:flex;justify-content:space-between">
+<div id="modalLeitor" class="modal"><div class="modal-box" id="boxLeitor" style="max-width:98%;width:98%">
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap">
 <button class="btn" onclick="fecharLeitor()">⬅ Voltar</button>
-<div><button class="btn" onclick="mudarEstilo('mao')">✍️ Mão</button><button class="btn" onclick="mudarEstilo('maquina')">⌨️ Máquina</button></div>
+<div><button class="btn" onclick="mudarFonte(-1)">A-</button><button class="btn" onclick="mudarFonte(1)">A+</button><button class="btn btn-amarelo" onclick="toggleTelaCheia()">⛶ Tela Cheia</button></div>
 </div>
 <div class="toolbar">
-<button class="btn" onclick="mudarCorCifra('dourada')">Cifra Dourada</button>
-<button class="btn btn-vermelho" onclick="mudarCorCifra('vermelha')">Cifra Vermelha</button>
-<button class="btn" onclick="mudarTemaLeitor('verde')">Fundo Verde</button>
-<button class="btn" onclick="mudarTemaLeitor('branco')">Fundo Branco</button>
-<button class="btn" onclick="mudarTemaLeitor('preto')">Fundo Preto</button>
+<button class="btn" id="btnRola" onclick="toggleRolagem()">▶️ Rolagem</button>
+<button class="btn" onclick="mudarEstilo('mao')">✍️ Mão</button><button class="btn" onclick="mudarEstilo('maquina')">⌨️ Máquina</button>
+<button class="btn" onclick="mudarCorCifra('dourada')">Dourada</button><button class="btn btn-vermelho" onclick="mudarCorCifra('vermelha')">Vermelha</button>
 </div>
 <h2 id="leitorTitulo" style="color:var(--accent)"></h2>
 <div id="leitorConteudo" class="leitor estilo-mao"></div>
-</div>
-</div>
+</div></div>
 
 <div id="modalEditar" class="modal"><div class="modal-box">
-<input id="editTitulo" type="text" placeholder="Nome da música">
-<input id="editArtista" type="text" placeholder="Artista">
-<textarea id="editConteudo" rows="12" placeholder="Cifra aqui"></textarea>
-<button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button>
-<button class="btn" onclick="fecharEditar()">Cancelar</button>
+<input id="editTitulo" type="text" placeholder="Nome da música"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="14"></textarea>
+<button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button><button class="btn" onclick="fecharEditar()">Cancelar</button>
 </div></div>
 
-<div id="modalColar" class="modal"><div class="modal-box">
-<textarea id="colarTexto" rows="12" placeholder="Cole do Cifra Club"></textarea>
-<button class="btn btn-amarelo" onclick="processarColar()">Importar</button>
-<button class="btn" onclick="fecharColar()">Cancelar</button>
-</div></div>
+<div id="modalColar" class="modal"><div class="modal-box"><textarea id="colarTexto" rows="14" placeholder="Cole do Cifra Club"></textarea><button class="btn btn-amarelo" onclick="processarColar()">Importar</button><button class="btn" onclick="fecharColar()">Cancelar</button></div></div>
 
 <script>
-let cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||'[]');
-let editId=null;let estiloAtual=localStorage.getItem('estilo')||'mao';let corCifra=localStorage.getItem('corCifra')||'dourada';
-let deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('btnInstalar').classList.add('visivel');});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Clique nos 3 pontinhos do Chrome > Instalar app');}}
+let cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||localStorage.getItem('minhasCifras')||'[]');
+let editId=null,estiloAtual=localStorage.getItem('estilo')||'mao',corCifra=localStorage.getItem('corCifra')||'dourada',fontSize=parseInt(localStorage.getItem('fontSize')||'22'),velRolagem=parseInt(localStorage.getItem('velRolagem')||'3'),rolando=false,intervaloRolagem=null,deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Vai nos 3 pontinhos do Chrome > Instalar app');}}
 function toggleMenu(){document.getElementById('menuLateral').classList.toggle('aberto');}
-function salvarStorage(){localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));}
-function renderLista(){const busca=document.getElementById('busca').value.toLowerCase();const f=cifras.filter(c=>c.titulo.toLowerCase().includes(busca));document.getElementById('total').innerText=f.length;document.getElementById('lista').innerHTML=f.map(c=>`<div class="cifra-item"><div><b>${c.titulo}</b><br><small>${c.artista}</small></div><div class="acoes"><button class="btn" onclick="editarCifra(${c.id})">✏️</button><button class="btn btn-vermelho" onclick="excluirCifra(${c.id})">🗑️</button><button class="btn btn-amarelo" onclick="abrirLeitor(${c.id})">+</button></div></div>`).join('');}
+function fecharMenu(){document.getElementById('menuLateral').classList.remove('aberto');}
+function salvarStorage(){localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));localStorage.setItem('minhasCifras',JSON.stringify(cifras));}
+function renderLista(){const busca=document.getElementById('busca').value.toLowerCase();const f=cifras.filter(c=>c.titulo.toLowerCase().includes(busca)||c.artista.toLowerCase().includes(busca));document.getElementById('total').innerText=f.length;document.getElementById('lista').innerHTML=f.map(c=>`<div class="cifra-item"><div><b>${c.titulo}</b><br><small>${c.artista}</small></div><div class="acoes"><button class="btn" onclick="editarCifra(${c.id})">✏️</button><button class="btn btn-vermelho" onclick="excluirCifra(${c.id})">🗑️</button><button class="btn btn-amarelo" onclick="abrirLeitor(${c.id})">+</button></div></div>`).join('');}
 renderLista();
-function abrirNova(){editId=null;document.getElementById('editTitulo').value='';document.getElementById('editArtista').value='';document.getElementById('editConteudo').value='';document.getElementById('modalEditar').classList.add('aberto');}
-function editarCifra(id){const c=cifras.find(x=>x.id===id);editId=id;document.getElementById('editTitulo').value=c.titulo;document.getElementById('editArtista').value=c.artista;document.getElementById('editConteudo').value=c.conteudo;document.getElementById('modalEditar').classList.add('aberto');}
-function fecharEditar(){document.getElementById('modalEditar').classList.remove('aberto');}
-function salvarCifra(){const t=document.getElementById('editTitulo').value;const a=document.getElementById('editArtista').value;const co=document.getElementById('editConteudo').value;if(editId){const c=cifras.find(x=>x.id===editId);c.titulo=t;c.artista=a;c.conteudo=co;}else{cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:co});}salvarStorage();fecharEditar();renderLista();}
+function abrirNova(){editId=null;editTitulo.value='';editArtista.value='';editConteudo.value='';modalEditar.classList.add('aberto');}
+function editarCifra(id){const c=cifras.find(x=>x.id===id);editId=id;editTitulo.value=c.titulo;editArtista.value=c.artista;editConteudo.value=c.conteudo;modalEditar.classList.add('aberto');}
+function fecharEditar(){modalEditar.classList.remove('aberto');}
+function salvarCifra(){const t=editTitulo.value,a=editArtista.value,co=editConteudo.value;if(editId){Object.assign(cifras.find(x=>x.id===editId),{titulo:t,artista:a,conteudo:co});}else{cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:co});}salvarStorage();fecharEditar();renderLista();}
 function excluirCifra(id){if(confirm('Excluir?')){cifras=cifras.filter(x=>x.id!==id);salvarStorage();renderLista();}}
-function abrirColar(){document.getElementById('modalColar').classList.add('aberto');}
-function fecharColar(){document.getElementById('modalColar').classList.remove('aberto');}
-function processarColar(){const txt=document.getElementById('colarTexto').value;cifras.push({id:Date.now(),titulo:'IMPORTADA',artista:'Cifra Club',conteudo:txt});salvarStorage();fecharColar();renderLista();}
-function abrirLeitor(id){const c=cifras.find(x=>x.id===id);document.getElementById('leitorTitulo').innerText=c.titulo;renderConteudoCifra(c.conteudo);document.getElementById('modalLeitor').classList.add('aberto');aplicarEstilo();}
-function fecharLeitor(){document.getElementById('modalLeitor').classList.remove('aberto');}
-function renderConteudoCifra(texto){let html='';texto.split('\n').forEach(l=>{if(/^[A-G][#b]?(m|7|9|sus|dim|maj)?/.test(l.trim())&&l.trim().length<30){html+=`<div class="cifra-line ${corCifra}">${l}</div>`;}else{html+=`<div>${l}</div>`;}});document.getElementById('leitorConteudo').innerHTML=html;}
+function abrirColar(){modalColar.classList.add('aberto');}
+function fecharColar(){modalColar.classList.remove('aberto');}
+function processarColar(){const txt=colarTexto.value;cifras.push({id:Date.now(),titulo:'IMPORTADA',artista:'Cifra Club',conteudo:txt});salvarStorage();fecharColar();renderLista();}
+function abrirLeitor(id){const c=cifras.find(x=>x.id===id);leitorTitulo.innerText=c.titulo+' - '+c.artista;renderConteudoCifra(c.conteudo);modalLeitor.classList.add('aberto');aplicarEstilo();aplicarFonte();}
+function fecharLeitor(){pararRolagem();modalLeitor.classList.remove('aberto');}
+function renderConteudoCifra(texto){let html='';texto.split('\n').forEach(l=>{const trim=l.trim();if(trim && /^[A-G][#b]?(m|maj|min|7|9|6|4|sus|dim|aug|add)?[0-9]*(\/[A-G][#b]?)?(\s+[A-G][#b]?(m|maj|min|7|9|6|4|sus|dim|aug|add)?[0-9]*(\/[A-G][#b]?)?)*\s*$/.test(trim) && trim.length<40){html+=`<div class="cifra-line ${corCifra}">${l}</div>`;}else{html+=`<div>${l}</div>`;}});leitorConteudo.innerHTML=html;}
 function mudarEstilo(e){estiloAtual=e;localStorage.setItem('estilo',e);aplicarEstilo();}
-function aplicarEstilo(){const el=document.getElementById('leitorConteudo');el.className='leitor '+(estiloAtual==='mao'?'estilo-mao':'estilo-maquina');}
+function aplicarEstilo(){leitorConteudo.className='leitor '+(estiloAtual==='mao'?'estilo-mao':'estilo-maquina');}
 function mudarCorCifra(c){corCifra=c;localStorage.setItem('corCifra',c);document.querySelectorAll('.cifra-line').forEach(l=>l.className='cifra-line '+c);}
-function mudarTemaLeitor(t){const box=document.getElementById('boxLeitor');box.style.background=t==='branco'?'white':t==='preto'?'black':'#123a25';box.style.color=t==='branco'?'black':'white';}
-window.addEventListener('DOMContentLoaded',()=>{const p=new URLSearchParams(location.search);const url=p.get('url')||'';const text=p.get('text')||'';const title=p.get('title')||'';if(url||text){document.getElementById('editTitulo').value=title||'Compartilhada';document.getElementById('editConteudo').value=(text||'')+'\n'+url;document.getElementById('modalEditar').classList.add('aberto');history.replaceState({},'',location.pathname);}});
+function mudarTemaLeitor(t){boxLeitor.style.background=t==='branco'?'white':t==='preto'?'black':'#123a25';boxLeitor.style.color=t==='branco'?'black':'white';}
+function mudarFonte(v){if(typeof v==='number'){fontSize+=v;}else{fontSize=parseInt(v);}fontSize=Math.max(12,Math.min(40,fontSize));localStorage.setItem('fontSize',fontSize);aplicarFonte();}
+function aplicarFonte(){leitorConteudo.style.fontSize=fontSize+'px';valFonte.innerText=fontSize+'px';rangeFonte.value=fontSize;}
+function mudarVelocidade(v){velRolagem=parseInt(v);localStorage.setItem('velRolagem',v);valVel.innerText='Vel: '+v;if(rolando){pararRolagem();iniciarRolagem();}}
+function iniciarRolagem(){if(rolando) return;rolando=true;btnRola.innerText='⏸️ Parar';intervaloRolagem=setInterval(()=>{boxLeitor.scrollTop+=1;}, 120 - velRolagem*10);}
+function pararRolagem(){rolando=false;btnRola.innerText='▶️ Rolagem';clearInterval(intervaloRolagem);}
+function toggleRolagem(){rolando?pararRolagem():iniciarRolagem();}
+function toggleTelaCheia(){if(!document.fullscreenElement){boxLeitor.requestFullscreen();}else{document.exitFullscreen();}}
+function fazerBackup(){const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-cifras.json';a.click();}
+aplicarFonte();aplicarEstilo();
+const p=new URLSearchParams(location.search);const url=p.get('url')||'';const text=p.get('text')||'';const title=p.get('title')||'';if(url||text){editTitulo.value=title||'Compartilhada';editConteudo.value=(text||'')+'\n'+url;modalEditar.classList.add('aberto');history.replaceState({},'',location.pathname);}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
 </script>
 </body>
