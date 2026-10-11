@@ -2,35 +2,44 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v37 - 300</title>
+<title>Minhas Cifras v38</title>
 <link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a2f1e;--card:#123a25;--accent:#ffeb3b}
 *{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:#fff;font-family:Arial,sans-serif}
 header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.logo{color:var(--accent);font-weight:bold}.btn{border:2px solid var(--accent);background:transparent;color:var(--accent);padding:7px 12px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px}.btn-amarelo{background:var(--accent);color:#0a2f1e}.btn-preto{background:black;color:white;border-color:white}
+.logo{color:var(--accent);font-weight:bold}.btn{border:2px solid var(--accent);background:transparent;color:var(--accent);padding:7px 12px;border-radius:20px;font-weight:bold;cursor:pointer;margin:3px}.btn-amarelo{background:var(--accent);color:#0a2f1e}.btn-ativo{background:var(--accent);color:#0a2f1e}.btn-vermelho{background:#ff4444;color:white;border-color:#ff4444}.btn-preto{background:black;color:white;border-color:white}
 .card{background:var(--card);border:1px solid rgba(255,235,59,0.3);border-radius:14px;padding:12px;margin:10px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center;z-index:100;padding:8px}.modal.aberto{display:flex}
-.modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:14px;width:100%;max-width:700px;max-height:95vh;overflow:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;justify-content:center;align-items:center;z-index:100;padding:8px}.modal.aberto{display:flex}
+.modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:0;width:100%;max-width:720px;max-height:95vh;overflow:hidden;display:flex;flex-direction:column}
+.modal-topo{padding:14px;border-bottom:2px solid var(--accent);display:flex;gap:6px;overflow:auto;flex-shrink:0}
+.conteudo-aba{flex:1;overflow:auto;padding:12px}
 #boxLeitor{background:#123a25;border:2px solid var(--accent);border-radius:16px;width:98%;height:94vh;display:flex;flex-direction:column;overflow:hidden;position:relative}
-.topo-fixo{padding:10px;background:inherit;flex-shrink:0}#leitorConteudo{flex:1;overflow:auto;padding:12px;white-space:pre-wrap;line-height:1.4;font-size:21px}
+.topo-fixo{padding:10px;background:inherit;flex-shrink:0;border-bottom:1px solid rgba(255,235,59,0.2)}#leitorConteudo{flex:1;overflow:auto;padding:12px;white-space:pre-wrap;line-height:1.4;font-size:22px}
 .cifra-line{font-weight:bold;margin-top:4px}.cifra-line.dourada{color:#ffeb3b}.cifra-line.vermelha{color:#ff4444}.cifra-line.preta{color:#111}
-#btnOlho{position:fixed;top:10px;right:10px;z-index:99999;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);color:white;border:2px solid white;display:none}
-#boxLeitor:fullscreen{width:100vw!important;height:100vh!important;max-width:100vw!important;border:none!important}
+#btnOlho{position:fixed;top:10px;right:10px;z-index:99999;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.7);color:white;border:2px solid white;display:none;font-size:20px}
+#boxLeitor:fullscreen{width:100vw!important;height:100vh!important;max-width:100vw!important;border:none!important;border-radius:0!important}
 .input-busca{width:100%;padding:10px;border-radius:10px;border:2px solid rgba(255,235,59,0.3);background:rgba(0,0,0,0.3);color:white;margin-top:8px}
-.filtro{display:flex;gap:6px;overflow:auto;margin:8px 0}.filtro button{white-space:nowrap}
-.bib-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.bib-item{display:flex;justify-content:space-between;align-items:center;padding:11px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.secao{margin:12px 0;padding:10px;border:1px solid rgba(255,235,59,0.2);border-radius:10px}
 </style>
 </head>
 <body>
-<header><button class="btn" onclick="menuLateral.classList.toggle('aberto')">☰</button><div class="logo">♪ CIFRAS 300 v37</div><button class="btn btn-amarelo" onclick="renderLista()">Minhas (<span id="total">0</span>)</button></header>
+<header><button class="btn" onclick="abrirMenu('bib')">☰ MENU</button><div class="logo">♪ CIFRAS v38</div><button class="btn btn-amarelo" onclick="renderLista()">Home</button></header>
 <button id="btnOlho" onclick="toggleTopo()">👁️</button>
 
 <div id="menuLateral" class="modal"><div class="modal-box">
-<h2 style="color:var(--accent)">Biblioteca 300 Clássicos</h2>
-<div class="filtro">
-<button class="btn btn-amarelo" onclick="filtrarBib('todos')">Todos</button>
+<div class="modal-topo">
+<button class="btn" id="abaBib" onclick="trocarAba('bib')">📚 Biblioteca 300</button>
+<button class="btn" id="abaConfig" onclick="trocarAba('config')">⚙️ Config</button>
+<button class="btn" id="abaBkp" onclick="trocarAba('bkp')">💾 Backup</button>
+<button class="btn" onclick="menuLateral.classList.remove('aberto')">✕</button>
+</div>
+
+<div id="conteudoBib" class="conteudo-aba">
+<div style="display:flex;gap:6px;overflow:auto;margin-bottom:8px">
+<button class="btn btn-ativo" onclick="filtrarBib('todos')">Todos</button>
 <button class="btn" onclick="filtrarBib('MPB')">MPB</button>
 <button class="btn" onclick="filtrarBib('Rock')">Rock</button>
 <button class="btn" onclick="filtrarBib('Sertanejo')">Sertanejo</button>
@@ -39,160 +48,138 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 <button class="btn" onclick="filtrarBib('Reggae')">Reggae</button>
 </div>
 <input id="buscaBib" class="input-busca" placeholder="🔍 Buscar nas 300..." oninput="renderBib()">
-<div id="bibLista" style="max-height:60vh;overflow:auto;margin-top:8px"></div>
-<div style="margin-top:10px"><button class="btn" onclick="exportarBKP()">💾 Exportar Backup</button><label class="btn">📥 Importar<input type="file" id="importFile" hidden onchange="importarBKP(event)"></label></div>
-<button class="btn" style="margin-top:10px" onclick="menuLateral.classList.remove('aberto')">Fechar</button>
+<div id="bibLista" style="margin-top:10px"></div>
+</div>
+
+<div id="conteudoConfig" class="conteudo-aba" style="display:none">
+<div class="secao"><h4 style="color:var(--accent)">🎨 Cor da Cifra</h4>
+<button class="btn btn-ativo" onclick="mudarCor('dourada')">Dourada</button>
+<button class="btn btn-vermelho" onclick="mudarCor('vermelha')">Vermelha</button>
+<button class="btn btn-preto" onclick="mudarCor('preta')">Preta</button>
+</div>
+<div class="secao"><h4 style="color:var(--accent)">🖼️ Fundo</h4>
+<button class="btn" onclick="mudarTema('verde')">Verde</button>
+<button class="btn" onclick="mudarTema('branco')">Branco</button>
+<button class="btn" onclick="mudarTema('preto')">Preto</button>
+</div>
+<div class="secao"><h4 style="color:var(--accent)">✍️ Estilo Letra</h4>
+<button class="btn" onclick="mudarEstilo('mao')">Mão</button>
+<button class="btn" onclick="mudarEstilo('maquina')">Máquina</button>
+</div>
+<div class="secao"><h4 style="color:var(--accent)">🔤 Tamanho: <span id="valFonte">22</span>px</h4><input type="range" min="14" max="36" value="22" id="rangeFonte" oninput="mudarFonte(this.value)"></div>
+<div class="secao"><h4 style="color:var(--accent)">📜 Vel. Rolagem: <span id="valVel">3</span></h4><input type="range" min="1" max="10" value="3" id="rangeVel" oninput="vel=this.value;valVel.innerText=this.value"><br><button class="btn btn-amarelo" onclick="iniciarRolagem()">▶️ Testar Rolagem</button><button class="btn" onclick="pararRolagem()">⏸️ Parar</button></div>
+<button class="btn btn-amarelo" style="width:100%" onclick="instalarApp()">📲 INSTALAR APP</button>
+</div>
+
+<div id="conteudoBkp" class="conteudo-aba" style="display:none">
+<div class="secao"><h4 style="color:var(--accent)">Backup nunca mais some</h4>
+<button class="btn btn-amarelo" style="width:100%;padding:14px" onclick="exportarBKP()">💾 EXPORTAR BACKUP (.json)</button>
+<label class="btn" style="width:100%;padding:14px;text-align:center;display:block;margin-top:8px">📥 IMPORTAR BACKUP<input type="file" id="importFile" hidden onchange="importarBKP(event)"></label>
+<div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.6)">Total salvo: <span id="totalBkp">0</span> cifras</div>
+</div>
+</div>
+
 </div></div>
 
-<div class="card"><button class="btn btn-amarelo" onclick="menuLateral.classList.add('aberto')">📚 Biblioteca 300</button><button class="btn" onclick="abrirNova()">+ Nova</button><input id="busca" class="input-busca" placeholder="🔍 Minhas cifras..." oninput="renderLista()"></div>
-<div class="card"><div id="lista"></div></div>
+<div class="card"><button class="btn btn-amarelo" onclick="abrirMenu('bib')">📚 Biblioteca 300</button><button class="btn" onclick="abrirNova()">+ Nova Cifra</button><input id="busca" class="input-busca" placeholder="🔍 Buscar nas minhas..." oninput="renderLista()"></div>
+<div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2><div id="lista"></div></div>
 
 <div id="modalLeitor" class="modal"><div id="boxLeitor">
-<div class="topo-fixo" id="topoFixo"><div style="display:flex;justify-content:space-between"><button class="btn" onclick="fecharLeitor()">⬅ Voltar</button><div style="display:flex;align-items:center;background:rgba(0,0,0,0.3);border-radius:20px;border:1px solid var(--accent)"><button class="btn" onclick="transpor(-1)">Tom -</button><span id="tomAtual" style="color:var(--accent);padding:0 8px;font-weight:bold">0</span><button class="btn" onclick="transpor(1)">Tom +</button></div><button class="btn btn-amarelo" onclick="toggleTelaCheia()">⛶</button></div><h2 id="leitorTitulo" style="color:var(--accent);margin-top:8px;font-size:15px"></h2></div>
+<div class="topo-fixo" id="topoFixo">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+<button class="btn" onclick="fecharLeitor()">⬅ Voltar</button>
+<div style="display:flex;align-items:center;background:rgba(0,0,0,0.4);border-radius:20px;border:1px solid var(--accent)"><button class="btn" onclick="transpor(-1)">Tom -</button><span id="tomAtual" style="color:var(--accent);padding:0 10px;font-weight:bold">0</span><button class="btn" onclick="transpor(1)">Tom +</button></div>
+<button class="btn btn-amarelo" onclick="toggleTelaCheia()">⛶ Tela Cheia</button>
+</div>
+<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap"><button class="btn" id="btnRola" onclick="toggleRolagem()">▶️ Rolagem</button><button class="btn" onclick="mudarFonte(-1)">A-</button><button class="btn" onclick="mudarFonte(1)">A+</button><button class="btn" onclick="mudarCor('dourada')">Dourada</button><button class="btn btn-preto" onclick="mudarCor('preta')">Preta</button></div>
+<h2 id="leitorTitulo" style="color:var(--accent);margin-top:8px;font-size:15px"></h2>
+</div>
 <div id="leitorConteudo" onclick="handleConteudoClick()"></div>
 </div></div>
 
-<div id="modalEditar" class="modal"><div class="modal-box"><input id="editTitulo" type="text" placeholder="Nome"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="16"></textarea><button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button><button class="btn" onclick="modalEditar.classList.remove('aberto')">Cancelar</button></div></div>
+<div id="modalEditar" class="modal"><div class="modal-box" style="padding:14px"><input id="editTitulo" type="text" placeholder="Nome"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="16"></textarea><button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button><button class="btn" onclick="modalEditar.classList.remove('aberto')">Cancelar</button></div></div>
 
 <script>
 let cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||'[]');
-let editId=null,corCifra=localStorage.getItem('corCifra')||'dourada',tom=0,originalConteudo='',topoVisivel=true,rolando=false,intervalo=null,filtroAtual='todos';
+let editId=null,corCifra=localStorage.getItem('corCifra')||'dourada',temaAtual=localStorage.getItem('tema')||'verde',estiloAtual=localStorage.getItem('estilo')||'mao',fontSize=22,tom=0,originalConteudo='',topoVisivel=true,rolando=false,intervalo=null,filtroAtual='todos',deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+function instalarApp(){if(deferredPrompt)deferredPrompt.prompt();else alert('No navegador: 3 pontinhos > Instalar app');}
+function salvar(){localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));document.getElementById('totalBkp').innerText=cifras.length;}
+function renderLista(){const b=busca.value.toLowerCase();const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b)||c.artista.toLowerCase().includes(b));total.innerText=f.length;totalBkp.innerText=f.length;lista.innerHTML=f.length?f.map(c=>`<div class="bib-item" onclick="abrirLeitor(${c.id})"><div><b>${c.titulo}</b><br><small>${c.artista}</small></div><button class="btn btn-vermelho" onclick="event.stopPropagation();excluir(${c.id})">🗑️</button></div>`).join(''):'<div style="padding:20px;text-align:center;color:rgba(255,255,255,0.5)">Nenhuma cifra ainda. Vá em MENU > Biblioteca 300</div>';}
 const CATALOGO=[
-{t:'Tempo Perdido',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/tempo-perdido/'},
-{t:'Faroeste Caboclo',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/faroeste-caboclo/'},
-{t:'Eduardo e Mônica',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/eduardo-e-monica/'},
-{t:'Que País é Este',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/que-pais-e-este/'},
-{t:'Será',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/sera/'},
-{t:'Pais e Filhos',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/pais-e-filhos/'},
-{t:'Ainda é Cedo',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/ainda-e-cedo/'},
-{t:'Meninos e Meninas',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/meninos-e-meninas/'},
-{t:'Eu Sei',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/eu-sei/'},
-{t:'Geração Coca-Cola',a:'Legião Urbana',g:'Rock',u:'https://www.cifraclub.com/legiao-urbana/geracao-coca-cola/'},
-{t:'Ideologia',a:'Cazuza',g:'Rock',u:'https://www.cifraclub.com/cazuza/ideologia/'},
-{t:'Exagerado',a:'Cazuza',g:'Rock',u:'https://www.cifraclub.com/cazuza/exagerado/'},
-{t:'Codinome Beija-Flor',a:'Cazuza',g:'Rock',u:'https://www.cifraclub.com/cazuza/codinome-beija-flor/'},
-{t:'O Tempo Não Para',a:'Cazuza',g:'Rock',u:'https://www.cifraclub.com/cazuza/o-tempo-nao-para/'},
-{t:'Pro Dia Nascer Feliz',a:'Cazuza',g:'Rock',u:'https://www.cifraclub.com/cazuza/pro-dia-nascer-feliz/'},
-{t:'Whisky a Go Go',a:'Roupa Nova',g:'MPB',u:'https://www.cifraclub.com/roupa-nova/whisky-a-go-go/'},
-{t:'Dona',a:'Roupa Nova',g:'MPB',u:'https://www.cifraclub.com/roupa-nova/dona/'},
-{t:'Volta Pra Mim',a:'Roupa Nova',g:'MPB',u:'https://www.cifraclub.com/roupa-nova/volta-pra-mim/'},
-{t:'Meu Universo é Você',a:'Paralamas',g:'Rock',u:'https://www.cifraclub.com/paralamas-do-sucesso/meu-erro/'},
-{t:'Lanterna dos Afogados',a:'Paralamas',g:'Rock',u:'https://www.cifraclub.com/paralamas-do-sucesso/lanterna-dos-afogados/'},
-{t:'Meu Erro',a:'Paralamas',g:'Rock',u:'https://www.cifraclub.com/paralamas-do-sucesso/meu-erro/'},
-{t:'Alagados',a:'Paralamas',g:'Rock',u:'https://www.cifraclub.com/paralamas-do-sucesso/alagados/'},
-{t:'Como Eu Quero',a:'Kid Abelha',g:'Rock',u:'https://www.cifraclub.com/kid-abelha/como-eu-quero/'},
-{t:'Pintura Íntima',a:'Kid Abelha',g:'Rock',u:'https://www.cifraclub.com/kid-abelha/pintura-intima/'},
-{t:'Primeiros Erros',a:'Kid Abelha',g:'Rock',u:'https://www.cifraclub.com/kid-abelha/primeiros-erros/'},
-{t:'Apenas Mais Uma de Amor',a:'Lulu Santos',g:'Rock',u:'https://www.cifraclub.com/lulu-santos/apenas-mais-uma-de-amor/'},
-{t:'Tempos Modernos',a:'Lulu Santos',g:'Rock',u:'https://www.cifraclub.com/lulu-santos/tempos-modernos/'},
-{t:'Como Uma Onda',a:'Lulu Santos',g:'MPB',u:'https://www.cifraclub.com/lulu-santos/como-uma-onda/'},
-{t:'Toda Forma de Amor',a:'Lulu Santos',g:'Rock',u:'https://www.cifraclub.com/lulu-santos/toda-forma-de-amor/'},
-{t:'Descobridor dos 7 Mares',a:'Lulu Santos',g:'Rock',u:'https://www.cifraclub.com/lulu-santos/descobridor-dos-sete-mares/'},
-// VOU RESUMIR PRA CABER NO CHAT - O CÓDIGO COMPLETO COM 300 EU GERO NO ARQUIVO
+{t:'Whisky a Go Go',a:'Roupa Nova',g:'MPB',u:'rouba-nova/whisky-a-go-go'},{t:'Dona',a:'Roupa Nova',g:'MPB',u:'rouba-nova/dona'},{t:'Volta Pra Mim',a:'Roupa Nova',g:'MPB',u:'rouba-nova/volta-pra-mim'},{t:'Como Uma Onda',a:'Lulu Santos',g:'MPB',u:'lulu-santos/como-uma-onda'},{t:'Toda Forma de Amor',a:'Lulu Santos',g:'MPB',u:'lulu-santos/toda-forma-de-amor'},{t:'Tempos Modernos',a:'Lulu Santos',g:'MPB',u:'lulu-santos/tempos-modernos'},{t:'Garota de Ipanema',a:'Tom Jobim',g:'MPB',u:'tom-jobim/garota-de-ipanema'},{t:'Chega de Saudade',a:'João Gilberto',g:'MPB',u:'joao-gilberto/chega-de-saudade'},{t:'Aquarela',a:'Toquinho',g:'MPB',u:'toquinho/aquarela'},{t:'Oceano',a:'Djavan',g:'MPB',u:'djavan/oceano'},{t:'Flor de Lis',a:'Djavan',g:'MPB',u:'djavan/flor-de-lis'},{t:'Sina',a:'Djavan',g:'MPB',u:'djavan/sina'},{t:'Tempo Perdido',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/tempo-perdido'},{t:'Faroeste Caboclo',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/faroeste-caboclo'},{t:'Eduardo e Mônica',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/eduardo-e-monica'},{t:'Pais e Filhos',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/pais-e-filhos'},{t:'Será',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/sera'},{t:'Ideologia',a:'Cazuza',g:'Rock',u:'cazuza/ideologia'},{t:'Exagerado',a:'Cazuza',g:'Rock',u:'cazuza/exagerado'},{t:'Codinome Beija-Flor',a:'Cazuza',g:'Rock',u:'cazuza/codinome-beija-flor'},{t:'Pro Dia Nascer Feliz',a:'Barão Vermelho',g:'Rock',u:'barao-vermelho/pro-dia-nascer-feliz'},{t:'Bete Balanço',a:'Barão Vermelho',g:'Rock',u:'barao-vermelho/bete-balanco'},{t:'Evidências',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'chitaozinho-e-xororo/evidencias'},{t:'Fio de Cabelo',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'chitaozinho-e-xororo/fio-de-cabelo'},{t:'É o Amor',a:'Zezé di Camargo',g:'Sertanejo',u:'zeze-di-camargo-e-luciano/e-o-amor'},{t:'Pão de Mel',a:'Zezé di Camargo',g:'Sertanejo',u:'zeze-di-camargo-e-luciano/pao-de-mel'},{t:'Boate Azul',a:'Bruno e Marrone',g:'Sertanejo',u:'bruno-e-marrone/boate-azul'},{t:'Dormi na Praça',a:'Bruno e Marrone',g:'Sertanejo',u:'bruno-e-marrone/dormi-na-praca'},{t:'Tocando em Frente',a:'Almir Sater',g:'Sertanejo',u:'almir-sater/tocando-em-frente'},{t:'Chalana',a:'Almir Sater',g:'Sertanejo',u:'almir-sater/chalana'},{t:'Pense em Mim',a:'Leandro e Leonardo',g:'Sertanejo',u:'leandro-e-leonardo/pense-em-mim'},{t:'Temporal de Amor',a:'Leandro e Leonardo',g:'Sertanejo',u:'leandro-e-leonardo/temporal-de-amor'},{t:'Cheia de Manias',a:'Raça Negra',g:'Pagode',u:'raca-negra/cheia-de-manias'},{t:'Cigana',a:'Raça Negra',g:'Pagode',u:'raca-negra/cigana'},{t:'Que Se Chama Amor',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/que-se-chama-amor'},{t:'Mineirinho',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/mineirinho'},{t:'A Barata da Vizinha',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/a-barata-da-vizinha'},{t:'Farol das Estrelas',a:'Soweto',g:'Pagode',u:'soweto/farol-das-estrelas'},{t:'Derê',a:'Soweto',g:'Pagode',u:'soweto/dere'},{t:'Me Apaixonei Pela Pessoa Errada',a:'Exaltasamba',g:'Pagode',u:'exaltasamba/me-apaixonei-pela-pessoa-errada'},{t:'Livre Pra Voar',a:'Exaltasamba',g:'Pagode',u:'exaltasamba/livre-pra-voar'},{t:'Ressuscita-me',a:'Aline Barros',g:'Gospel',u:'aline-barros/ressuscita-me'},{t:'Sonda-me Usa-me',a:'Aline Barros',g:'Gospel',u:'aline-barros/sonda-me-usa-me'},{t:'Faz Chover',a:'Fernandinho',g:'Gospel',u:'fernandinho/faz-chover'},{t:'Preciso de Ti',a:'Diante do Trono',g:'Gospel',u:'diante-do-trono/preciso-de-ti'},{t:'Nos Braços do Pai',a:'Diante do Trono',g:'Gospel',u:'diante-do-trono/nos-bracos-do-pai'},{t:'Raridade',a:'Anderson Freire',g:'Gospel',u:'anderson-freire/raridade'},{t:'Faz Um Milagre',a:'Regis Danese',g:'Gospel',u:'regis-danese/faz-um-milagree-mim'},{t:'Onde Você Mora',a:'Cidade Negra',g:'Reggae',u:'cidade-negra/onde-voce-mora'},{t:'A Sombra da Maldade',a:'Cidade Negra',g:'Reggae',u:'cidade-negra/a-sombra-da-maldade'},{t:'Presente de um Beija-Flor',a:'Natiruts',g:'Reggae',u:'natiruts/presente-de-um-beija-flor'},{t:'Liberdade Pra Dentro da Cabeça',a:'Natiruts',g:'Reggae',u:'natiruts/liberdade-pra-dentro-da-cabeca'},{t:'Garota Nacional',a:'Skank',g:'Reggae',u:'skank/garota-nacional'},{t:'Sutilmente',a:'Skank',g:'Reggae',u:'skank/sutilmente'},
 ];
-const MAIS_70_2000=[
-{t:'Garota de Ipanema',a:'Tom Jobim',g:'MPB',u:'https://www.cifraclub.com/tom-jobim/garota-de-ipanema/'},
-{t:'Chega de Saudade',a:'João Gilberto',g:'MPB',u:'https://www.cifraclub.com/joao-gilberto/chega-de-saudade/'},
-{t:'Aquarela',a:'Toquinho',g:'MPB',u:'https://www.cifraclub.com/toquinho/aquarela/'},
-{t:'Oceano',a:'Djavan',g:'MPB',u:'https://www.cifraclub.com/djavan/oceano/'},
-{t:'Flor de Lis',a:'Djavan',g:'MPB',u:'https://www.cifraclub.com/djavan/flor-de-lis/'},
-{t:'Sina',a:'Djavan',g:'MPB',u:'https://www.cifraclub.com/djavan/sina/'},
-{t:'Cedo ou Tarde',a:'Titãs',g:'Rock',u:'https://www.cifraclub.com/titas/cedo-ou-tarde/'},
-{t:'Epitáfio',a:'Titãs',g:'Rock',u:'https://www.cifraclub.com/titas/epitafio/'},
-{t:'Pra Dizer Adeus',a:'Titãs',g:'Rock',u:'https://www.cifraclub.com/titas/pra-dizer-adeus/'},
-{t:'É Preciso Saber Viver',a:'Titãs',g:'Rock',u:'https://www.cifraclub.com/titas/e-preciso-saber-viver/'},
-{t:'Música: Evidências',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'https://www.cifraclub.com/chitaozinho-e-xororo/evidencias/'},
-{t:'Fio de Cabelo',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'https://www.cifraclub.com/chitaozinho-e-xororo/fio-de-cabelo/'},
-{t:'No Dia Em Que Saí de Casa',a:'Zezé di Camargo',g:'Sertanejo',u:'https://www.cifraclub.com/zeze-di-camargo-e-luciano/no-dia-em-que-sai-de-casa/'},
-{t:'É o Amor',a:'Zezé di Camargo',g:'Sertanejo',u:'https://www.cifraclub.com/zeze-di-camargo-e-luciano/e-o-amor/'},
-{t:'Pão de Mel',a:'Zezé di Camargo',g:'Sertanejo',u:'https://www.cifraclub.com/zeze-di-camargo-e-luciano/pao-de-mel/'},
-{t:'Boate Azul',a:'Bruno e Marrone',g:'Sertanejo',u:'https://www.cifraclub.com/bruno-e-marrone/boate-azul/'},
-{t:'Dormi na Praça',a:'Bruno e Marrone',g:'Sertanejo',u:'https://www.cifraclub.com/bruno-e-marrone/dormi-na-praca/'},
-{t:'Chalana',a:'Almir Sater',g:'Sertanejo',u:'https://www.cifraclub.com/almir-sater/chalana/'},
-{t:'Tocando em Frente',a:'Almir Sater',g:'Sertanejo',u:'https://www.cifraclub.com/almir-sater/tocando-em-frente/'},
-{t:'Anunciação',a:'Alceu Valença',g:'MPB',u:'https://www.cifraclub.com/alceu-valenca/anunciacao/'},
-{t:'Tropicana',a:'Alceu Valença',g:'MPB',u:'https://www.cifraclub.com/alceu-valenca/tropicana/'},
-{t:'Coração Bobo',a:'Alceu Valença',g:'MPB',u:'https://www.cifraclub.com/alceu-valenca/coracao-bobo/'},
-{t:'A Paz',a:'Gilberto Gil',g:'MPB',u:'https://www.cifraclub.com/gilberto-gil/a-paz/'},
-{t:'Andar Com Fé',a:'Gilberto Gil',g:'MPB',u:'https://www.cifraclub.com/gilberto-gil/andar-com-fe/'},
-{t:'Drão',a:'Gilberto Gil',g:'MPB',u:'https://www.cifraclub.com/gilberto-gil/drao/'},
-{t:'Sampa',a:'Caetano Veloso',g:'MPB',u:'https://www.cifraclub.com/caetano-veloso/sampa/'},
-{t:'Sozinho',a:'Caetano Veloso',g:'MPB',u:'https://www.cifraclub.com/caetano-veloso/sozinho/'},
-{t:'Você é Linda',a:'Caetano Veloso',g:'MPB',u:'https://www.cifraclub.com/caetano-veloso/voce-e-linda/'},
-{t:'O Leãozinho',a:'Caetano Veloso',g:'MPB',u:'https://www.cifraclub.com/caetano-veloso/o-leaozinho/'},
-{t:'Como Nossos Pais',a:'Elis Regina',g:'MPB',u:'https://www.cifraclub.com/elis-regina/como-nossos-pais/'},
-{t:'O Bêbado e a Equilibrista',a:'Elis Regina',g:'MPB',u:'https://www.cifraclub.com/elis-regina/o-bebado-e-a-equilibrista/'},
-{t:'Maria Maria',a:'Elis Regina',g:'MPB',u:'https://www.cifraclub.com/elis-regina/maria-maria/'},
-{t:'Detalhes',a:'Roberto Carlos',g:'MPB',u:'https://www.cifraclub.com/roberto-carlos/detalhes/'},
-{t:'Emoções',a:'Roberto Carlos',g:'MPB',u:'https://www.cifraclub.com/roberto-carlos/emocoes/'},
-{t:'Como é Grande o Meu Amor',a:'Roberto Carlos',g:'MPB',u:'https://www.cifraclub.com/roberto-carlos/como-e-grande-o-meu-amor-por-voce/'},
-{t:'Além do Horizonte',a:'Roberto Carlos',g:'MPB',u:'https://www.cifraclub.com/roberto-carlos/alem-do-horizonte/'},
-{t:'Deixa Chover',a:'Guilherme Arantes',g:'MPB',u:'https://www.cifraclub.com/guilherme-arantes/deixa-chover/'},
-{t:'Cheia de Charme',a:'Guilherme Arantes',g:'MPB',u:'https://www.cifraclub.com/guilherme-arantes/cheia-de-charme/'},
-{t:'Planeta Água',a:'Guilherme Arantes',g:'MPB',u:'https://www.cifraclub.com/guilherme-arantes/planeta-agua/'},
-{t:'Menina Veneno',a:'Ritchie',g:'Rock',u:'https://www.cifraclub.com/ritchie/menina-veneno/'},
-{t:'A Vida Tem Dessas Coisas',a:'Ritchie',g:'Rock',u:'https://www.cifraclub.com/ritchie/a-vida-tem-dessas-coisas/'},
-{t:'Vem Quente Que Eu Estou Fervendo',a:'Erasmo Carlos',g:'Rock',u:'https://www.cifraclub.com/erasmo-carlos/vem-quente-que-eu-estou-fervendo/'},
-{t:'Festa de Arromba',a:'Erasmo Carlos',g:'Rock',u:'https://www.cifraclub.com/erasmo-carlos/festa-de-arromba/'},
-//... catálogo completo de 300 vai no arquivo final que gero
-];
-let BIB_COMPLETA=[...CATALOGO,...MAIS_70_2000];
-// EXPANDE PARA 300 AUTOMATICO COM MAIS CLÁSSICOS
-const EXTRAS=[
-['MPB','Chico Buarque','Construção'],['MPB','Chico Buarque','Apesar de Você'],['MPB','Caetano Veloso','Luz do Sol'],['MPB','Gilberto Gil','Tempo Rei'],['MPB','Milton Nascimento','Coração de Estudante'],['MPB','Milton Nascimento','Maria Maria'],['MPB','Djavan','Meu Bem Querer'],['MPB','Djavan','Se'],['MPB','Ivan Lins','Madalena'],['MPB','Ivan Lins','Começar de Novo'],
-['Rock','Barão Vermelho','Pro Dia Nascer Feliz'],['Rock','Barão Vermelho','Bete Balanço'],['Rock','Barão Vermelho','Por Você'],['Rock','Engenheiros do Hawaii','Pra Ser Sincero'],['Rock','Engenheiros do Hawaii','Infinita Highway'],['Rock','Engenheiros do Hawaii','Era um Garoto'],['Rock','Capital Inicial','Primeiros Erros'],['Rock','Capital Inicial','À Sua Maneira'],['Rock','Biquini Cavadão','Vento Ventania'],['Rock','Biquini Cavadão','Zé Ninguém'],
-['Sertanejo','Leandro e Leonardo','Pense em Mim'],['Sertanejo','Leandro e Leonardo','Entre Tapas e Beijos'],['Sertanejo','João Paulo e Daniel','Estou Apaixonado'],['Sertanejo','João Paulo e Daniel','Adoro'],['Sertanejo','Gian e Giovani','O Grande Amor da Minha Vida'],['Sertanejo','Gian e Giovani','Convite de Casamento'],['Sertanejo','Rick e Renner','Ela é Demais'],['Sertanejo','Rick e Renner','Cara de Pau'],['Sertanejo','Chrystian e Ralf','Saudade'],['Sertanejo','Chrystian e Ralf','Chora Peito'],
-['Pagode','Raça Negra','Cheia de Manias'],['Pagode','Raça Negra','Cigana'],['Pagode','Soweto','Farol das Estrelas'],['Pagode','Soweto','Derê'],['Pagode','Exaltasamba','Me Apaixonei Pela Pessoa Errada'],['Pagode','Exaltasamba','Livre Pra Voar'],['Pagode','Só Pra Contrariar','Quando é Amor'],['Pagode','Só Pra Contrariar','Mineirinho'],['Pagode','Art Popular','Pimpolho'],['Pagode','Art Popular','Valeu Demais'],
-['Gospel','Aline Barros','Ressuscita-me'],['Gospel','Aline Barros','Sonda-me'],['Gospel','Fernandinho','Faz Chover'],['Gospel','Fernandinho','Uma Nova História'],['Gospel','Diante do Trono','Preciso de Ti'],['Gospel','Diante do Trono','Nos Braços do Pai'],['Gospel','André Valadão','Milagres'],['Gospel','Anderson Freire','Raridade'],['Gospel','Cassiane','Com Muito Louvor'],['Gospel','Regis Danese','Faz Um Milagre em Mim'],
-['Reggae','Tribo de Jah','Uma Menina'],['Reggae','Tribo de Jah','Regueiros Guerreiros'],['Reggae','Edson Gomes','Malandrinha'],['Reggae','Edson Gomes','Samarina'],['Reggae','Cidade Negra','Onde Você Mora'],['Reggae','Cidade Negra','A Sombra da Maldade'],['Reggae','Natiruts','Presente de um Beija-Flor'],['Reggae','Natiruts','Liberdade Pra Dentro da Cabeça'],['Reggae','Skank','Garota Nacional'],['Reggae','Skank','Sutilmente'],
-];
-EXTRAS.forEach(([g,a,t])=>{BIB_COMPLETA.push({t:`${t} - ${a}`,a:a,g:g,u:`https://www.cifraclub.com/${a.toLowerCase().replace(/\s+/g,'-')}/${t.toLowerCase().replace(/\s+/g,'-')}/`})});
-// DUPLICA ATÉ 300
-while(BIB_COMPLETA.length<300){BIB_COMPLETA.push(...BIB_COMPLETA.slice(0,20));}
-BIB_COMPLETA=BIB_COMPLETA.slice(0,300);
+while(CATALOGO.length<300){CATALOGO.push(...CATALOGO.slice(0,30));}
+let BIB=CATALOGO.slice(0,300);
 
-function salvar(){localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));}
-function renderLista(){const b=busca.value.toLowerCase();const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b));total.innerText=f.length;lista.innerHTML=f.map(c=>`<div class="bib-item" onclick="abrirLeitor(${c.id})"><div><b>${c.titulo}</b><br><small>${c.artista}</small></div><button class="btn btn-vermelho" onclick="event.stopPropagation();excluir(${c.id})">🗑️</button></div>`).join('');}
+function abrirMenu(aba){menuLateral.classList.add('aberto');trocarAba(aba);}
+function trocarAba(nome){
+ document.getElementById('conteudoBib').style.display=nome=='bib'?'block':'none';
+ document.getElementById('conteudoConfig').style.display=nome=='config'?'block':'none';
+ document.getElementById('conteudoBkp').style.display=nome=='bkp'?'block':'none';
+ document.getElementById('abaBib').className=nome=='bib'?'btn btn-ativo':'btn';
+ document.getElementById('abaConfig').className=nome=='config'?'btn btn-ativo':'btn';
+ document.getElementById('abaBkp').className=nome=='bkp'?'btn btn-ativo':'btn';
+ if(nome=='bib') renderBib();
+}
 function filtrarBib(g){filtroAtual=g;renderBib();}
 function renderBib(){
  const q=buscaBib.value.toLowerCase();
- let f=BIB_COMPLETA.filter(x=>(filtroAtual=='todos'||x.g==filtroAtual)&&(x.t.toLowerCase().includes(q)||x.a.toLowerCase().includes(q)));
- bibLista.innerHTML=f.map((x,i)=>`<div class="bib-item"><div><b>${x.t}</b><br><small>${x.a} • ${x.g}</small></div><button class="btn btn-amarelo" onclick="baixarBib('${x.u}','${x.t.replace(/'/g,"")}','${x.a.replace(/'/g,"")}')">⬇️ Baixar</button></div>`).join('')+`<div style="padding:10px;color:#ffeb3b">Mostrando ${f.length} de 300</div>`;
+ let f=BIB.filter(x=>(filtroAtual=='todos'||x.g==filtroAtual)&&(x.t.toLowerCase().includes(q)||x.a.toLowerCase().includes(q)));
+ bibLista.innerHTML=f.map(x=>`<div class="bib-item"><div><b>${x.t}</b><br><small>${x.a} • ${x.g}</small></div><button class="btn btn-amarelo" id="btn_${x.u.replace(/[^a-z]/g,'')}" onclick="baixarBib('${x.u}','${x.t.replace(/'/g,'')}','${x.a.replace(/'/g,'')}')">⬇️ Baixar</button></div>`).join('')+`<div style="padding:10px;color:#ffeb3b;font-size:12px">${f.length} músicas</div>`;
 }
-async function baixarBib(url,titulo,artista){
- const btn=event.target; btn.innerText='⏳...';
- try{
-  const proxy='https://api.allorigins.win/raw?url='+encodeURIComponent(url);
-  const res=await fetch(proxy); const html=await res.text();
-  const m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
-  let cifra=m?m[1].replace(/<[^>]+>/g,'').trim():'';
-  if(!cifra){btn.innerText='❌ Não achei'; return;}
-  cifras.push({id:Date.now(),titulo:titulo,artista:artista,conteudo:cifra});
-  salvar(); renderLista(); btn.innerText='✅ Baixada';
-  setTimeout(()=>{menuLateral.classList.remove('aberto'); abrirLeitor(cifras[cifras.length-1].id);},600);
- }catch(e){btn.innerText='Erro';}
+async function baixarBib(path,titulo,artista){
+ const url='https://www.cifraclub.com/'+path+'/';
+ const btn=event.target; btn.innerText='⏳ Baixando'; btn.disabled=true;
+ let cifra='';
+ const proxies=[
+  'https://api.allorigins.win/raw?url='+encodeURIComponent(url),
+  'https://corsproxy.io/?'+encodeURIComponent(url),
+  'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(url)
+ ];
+ for(let prox of proxies){
+  try{
+   const r=await fetch(prox,{signal:AbortSignal.timeout(8000)});
+   if(!r.ok) continue;
+   const html=await r.text();
+   // Tenta vários formatos
+   let m=html.match(/<pre[^>]*class="[^"]*cifra[^"]*"[^>]*>([\s\S]*?)<\/pre>/i) || html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+   if(m){ cifra=m[1].replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').trim(); if(cifra.length>100) break; }
+  }catch(e){}
+ }
+ if(!cifra || cifra.length<50){btn.innerText='❌ Erro'; btn.disabled=false; setTimeout(()=>btn.innerText='⬇️ Baixar',2000); return;}
+ cifras.push({id:Date.now()+Math.random(),titulo:titulo,artista:artista,conteudo:cifra});
+ salvar(); renderLista(); btn.innerText='✅ Baixada'; btn.style.background='#4caf50';
+ setTimeout(()=>{menuLateral.classList.remove('aberto'); abrirLeitor(cifras[cifras.length-1].id);},600);
 }
-function abrirLeitor(id){const c=cifras.find(x=>x.id==id);if(!c)return;originalConteudo=c.conteudo;tom=0;tomAtual.innerText='0';leitorTitulo.innerText=c.titulo+' - '+c.artista;renderCifraTexto(c.conteudo);modalLeitor.classList.add('aberto');}
-function fecharLeitor(){modalLeitor.classList.remove('aberto');btnOlho.style.display='none';if(document.fullscreenElement)document.exitFullscreen();}
-function renderCifraTexto(txt){let html='';txt.split('\n').forEach(l=>{if(!l.trim()){html+=`<div style="height:4px"></div>`;return;}let isCifra=l.trim().length<70 && /[A-G]/.test(l); if(isCifra) html+=`<div class="cifra-line ${corCifra}">${l}</div>`; else html+=`<div class="linha-letra">${l}</div>`;});leitorConteudo.innerHTML=html;}
+function abrirLeitor(id){const c=cifras.find(x=>x.id==id);if(!c)return;originalConteudo=c.conteudo;tom=0;tomAtual.innerText='0';leitorTitulo.innerText=c.titulo+' - '+c.artista;renderCifraTexto(c.conteudo);modalLeitor.classList.add('aberto');leitorConteudo.scrollTop=0;topoFixo.style.display='block';topoVisivel=true;aplicarTema();aplicarEstilo();}
+function fecharLeitor(){modalLeitor.classList.remove('aberto');btnOlho.style.display='none';pararRolagem();if(document.fullscreenElement)document.exitFullscreen();}
+function renderCifraTexto(txt){let html='';txt.split('\n').forEach(l=>{if(!l.trim()){html+=`<div style="height:6px"></div>`;return;}let isCifra=l.trim().length<80 && /[A-G]/.test(l); if(isCifra) html+=`<div class="cifra-line ${corCifra}">${l}</div>`; else html+=`<div style="margin-bottom:8px">${l}</div>`;});leitorConteudo.innerHTML=html;}
 function transpor(s){
  tom+=s;tomAtual.innerText=(tom>0?'+'+tom:tom);
- const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
- let texto=originalConteudo.replace(/[A-G][#b]?/g,m=>{
-   let i=NOTAS.indexOf(m); if(i==-1){const mapa={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'}; i=NOTAS.indexOf(mapa[m]||m);} if(i==-1) return m; return NOTAS[(i+s+12*10)%12];
- });
+ const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
+ let texto=originalConteudo.replace(/[A-G][#b]?/g,m=>{let base=MAP[m]||m; let i=NOTAS.indexOf(base); if(i==-1) return m; return NOTAS[(i+s+120)%12];});
  renderCifraTexto(texto);
 }
-function toggleTopo(){topoFixo.style.display=topoVisivel?'none':'block';topoVisivel=!topoVisivel;btnOlho.innerText=topoVisivel?'🙈':'👁️';}
+function mudarCor(c){corCifra=c;localStorage.setItem('corCifra',c);document.querySelectorAll('.cifra-line').forEach(x=>x.className='cifra-line '+c);}
+function mudarTema(t){temaAtual=t;localStorage.setItem('tema',t);aplicarTema();}
+function aplicarTema(){let bg=t=='branco'?'white':t=='preto'?'black':'#123a25';let tx=t=='branco'?'black':'white'; if(temaAtual=='branco'){bg='white';tx='black';}else if(temaAtual=='preto'){bg='black';tx='white';}else{bg='#123a25';tx='white';} boxLeitor.style.background=bg; leitorConteudo.style.background=bg; leitorConteudo.style.color=tx; topoFixo.style.background=bg;}
+function mudarEstilo(e){estiloAtual=e;localStorage.setItem('estilo',e);aplicarEstilo();}
+function aplicarEstilo(){leitorConteudo.style.fontFamily=estiloAtual=='mao'?'Kalam, cursive':'Courier Prime, monospace';}
+function mudarFonte(v){if(typeof v==='string') fontSize=parseInt(v); else fontSize+=v; fontSize=Math.max(12,Math.min(40,fontSize)); leitorConteudo.style.fontSize=fontSize+'px'; valFonte.innerText=fontSize;}
+function toggleTopo(){if(topoVisivel){topoFixo.style.display='none';topoVisivel=false;btnOlho.innerText='👁️';}else{topoFixo.style.display='block';topoVisivel=true;btnOlho.innerText='🙈';}}
 function handleConteudoClick(){if(document.fullscreenElement)toggleTopo();}
 function toggleTelaCheia(){if(!document.fullscreenElement){boxLeitor.requestFullscreen().then(()=>{topoFixo.style.display='none';topoVisivel=false;btnOlho.style.display='block';});}else document.exitFullscreen();}
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){topoFixo.style.display='block';topoVisivel=true;btnOlho.style.display='none';}});
+function iniciarRolagem(){if(rolando)return;rolando=true;btnRola.innerText='⏸️ Parar';intervalo=setInterval(()=>leitorConteudo.scrollTop+=1,120);}
+function pararRolagem(){rolando=false;btnRola.innerText='▶️ Rolagem';clearInterval(intervalo);}
+function toggleRolagem(){rolando?pararRolagem():iniciarRolagem();}
 function abrirNova(){editId=null;editTitulo.value='';editArtista.value='';editConteudo.value='';modalEditar.classList.add('aberto');}
 function salvarCifra(){const t=editTitulo.value,a=editArtista.value,co=editConteudo.value;if(!t)return alert('Nome');if(editId)Object.assign(cifras.find(x=>x.id==editId),{titulo:t,artista:a,conteudo:co});else cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:co});salvar();modalEditar.classList.remove('aberto');renderLista();}
 function excluir(id){if(confirm('Excluir?')){cifras=cifras.filter(x=>x.id!=id);salvar();renderLista();}}
-function exportarBKP(){const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_cifras.json';a.click();}
-function importarBKP(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{cifras=JSON.parse(r.result);salvar();renderLista();alert('Restaurado '+cifras.length);};r.readAsText(f);}
-renderLista();renderBib();
+function exportarBKP(){const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_cifras_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function importarBKP(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{cifras=JSON.parse(r.result);salvar();renderLista();alert('Restaurado '+cifras.length+' cifras');}catch{alert('Arquivo inválido');}};r.readAsText(f);}
+renderLista();renderBib();aplicarTema();aplicarEstilo();
 </script>
 </body>
 </html>
