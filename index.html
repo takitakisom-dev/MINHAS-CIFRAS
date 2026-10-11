@@ -1,62 +1,24 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
-<meta name="theme-color" content="#ffffff">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#f6efe4;color:#201a14;font-family:Inter,sans-serif}
-header{background:#fff;border-bottom:1px solid #eaddcf;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.btn{border:1px solid #eaddcf;background:#fff;color:#2b231c;padding:9px 14px;border-radius:100px;font-weight:700;font-size:12px;cursor:pointer}
-.btn-am{background:#1f1a14;color:#fff}.btn-on{background:#D97706;color:#fff;border-color:#D97706}
-#btnInst{background:#D97706;color:#fff;border:none;padding:13px;border-radius:100px;font-weight:800;width:calc(100% - 20px);margin:10px;display:block}
-.card{margin:10px;background:#fff;border:1px solid #efe3d3;border-radius:18px;padding:12px;box-shadow:0 4px 16px rgba(80,50,10,.07)}
-.tabs{display:flex;gap:6px;overflow-x:auto}.tab{white-space:nowrap;padding:10px 14px;border-radius:100px;border:1px solid #eaddcf;background:#fff7eb;font-size:12px;font-weight:700;color:#6b5a4a}.tab.on{background:#1f1a14;color:#fff}.tab.rep.on{background:#D97706;color:#fff}
-.estilos{display:flex;gap:6px;overflow-x:auto;margin-top:8px}.chipEst{padding:7px 12px;border-radius:100px;border:1px solid #eaddcf;font-size:11px;background:#fff;color:#6b5a4a}.chipEst.on{background:#1f1a14;color:#fff}
-.cifra{padding:13px;border-bottom:1px solid #f2e8d9;display:flex;justify-content:space-between}
-.badge{font-size:10px;padding:3px 8px;border-radius:100px;background:#fff0d9;color:#9a5a10;border:1px solid #f0d0a0}
-.modal{position:fixed;inset:0;background:rgba(40,30,20,.55);display:none;justify-content:center;align-items:center;z-index:100;padding:10px}.modal.on{display:flex}
-.box{background:#fff;border-radius:20px;padding:16px;width:100%;max-width:440px;max-height:92vh;overflow:auto}
-#boxLeitor{width:100%;max-width:780px;height:96vh;background:#fdfbf7;border-radius:20px;display:flex;flex-direction:column;overflow:hidden}
-#leitor{flex:1;overflow:auto;padding:16px}
-.cLine{font-family:monospace;font-weight:800;font-size:16px;white-space:pre-wrap}.lLine{font-weight:600;font-size:18px;margin:0 0 12px 0}
-.tons{display:flex;gap:5px;overflow-x:auto;padding:6px 0}.tBtn{min-width:36px;height:36px;border-radius:100px;border:1px solid #eaddcf;background:#fff;font-weight:800}.tBtn.on{background:#D97706;color:#fff}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #eaddcf;background:#fffcf6;color:#1f1a14;margin:5px 0}
-.repCheck{display:flex;flex-wrap:wrap;gap:6px}.repOpt{padding:6px 12px;border-radius:100px;border:1px solid #eaddcf;font-size:11px;background:#fff;color:#6b5a4a}.repOpt.on{background:#D97706;color:#fff}
-</style></head><body>
-<header><button class="btn" onclick="mMenu.classList.add('on')">☰</button><div style="font-weight:800;display:flex;gap:6px;align-items:center"><img src="icon-192.png" style="width:26px;border-radius:8px"> MINHAS CIFRAS</div><span id="tot" class="btn btn-am">0</span></header>
-<button id="btnInst">📲 INSTALAR APP</button>
-<div class="card"><div class="tabs" id="tabsRep"></div><div style="display:flex;gap:8px;margin-top:10px"><input id="busca" placeholder="Buscar..." style="flex:1" oninput="render()"><button class="btn btn-am" onclick="nova()">+ Nova</button></div><div class="estilos" id="filtEst"></div></div>
-<div class="card" style="padding:4px 12px"><div id="lista"></div></div>
-<div id="mMenu" class="modal"><div class="box"><h3>Repertórios (5)</h3><div id="editReps"></div><div style="display:flex;gap:6px;margin:12px 0"><button class="btn btn-on" id="bPapel" onclick="setTema('papel')">Papel</button><button class="btn" id="bDark" onclick="setTema('dark')">Preto</button><button class="btn btn-on" id="bAmbar" onclick="setCor('ambar')">Âmbar</button><button class="btn" id="bBranca" onclick="setCor('branca')">Branco</button></div><button class="btn btn-am" onclick="exportar()" style="width:100%;background:#D97706;color:#fff">Exportar</button><label class="btn" style="display:block;text-align:center;margin-top:8px;width:100%">Importar<input type="file" id="imp" hidden></label><button class="btn" style="width:100%;margin-top:10px" onclick="mMenu.classList.remove('on')">Fechar</button></div></div>
-<div id="mLeitor" class="modal"><div id="boxLeitor"><div style="padding:10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;background:#fff"><button class="btn" onclick="fechar()">← Voltar</button><div style="display:flex;gap:4px"><button class="btn" id="bAuto" onclick="toggleAuto()" style="background:#1f1a14;color:#fff">▶️ Auto</button><button class="btn" onclick="boxLeitor.requestFullscreen()" style="background:#1f1a14;color:#fff">⛶</button></div></div><div id="topoL" style="padding:10px 12px;background:#fffaf1"><div style="display:flex;justify-content:space-between;align-items:center"><span id="infTom" style="font-size:11px;opacity:.6"></span><div style="display:flex;gap:4px;align-items:center"><button class="btn" onclick="mFont(-2)">A-</button><span id="labF" style="font-size:11px">18px</span><button class="btn" onclick="mFont(2)">A+</button><button class="btn" id="bSimp" onclick="tSimp()">Simplif.</button></div></div><div class="tons" id="barTons"></div><div id="tTit" style="font-size:11px;opacity:.6;margin-top:4px"></div></div><div id="leitor"></div></div></div>
-<div id="mNova" class="modal"><div class="box"><h3>Nova música</h3><input id="nT" placeholder="Nome*"><input id="nA" placeholder="Artista"><select id="nEst"><option value="">Estilo...</option><option>MPB</option><option>ROCK NACIONAL</option><option>ROCK INTERNACIONAL</option><option>FORRÓ</option><option>REGGAE</option><option>SAMBA</option><option>PAGODE</option><option>ESTILO DO MUSICO</option><option>FUNK</option><option>SERTANEJO</option><option>GOSPEL</option><option>OUTRO</option></select><input id="nEstOutro" placeholder="Se OUTRO, digite..." style="display:none"><div class="repCheck" id="nReps"></div><textarea id="nC" rows="10" placeholder="Cifra..."></textarea><button class="btn" style="width:100%;padding:12px;background:#D97706;color:#fff;border:none;font-weight:800" onclick="salvar()">Salvar</button><button class="btn" style="width:100%;margin-top:8px" onclick="mNova.classList.remove('on')">Cancelar</button></div></div>
-<script>
-let pInst=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();pInst=e;});document.getElementById('btnInst').onclick=()=>{if(pInst)pInst.prompt();else alert('3 pontinhos > Instalar');};
-const ESTILOS=['TODOS','MPB','ROCK NACIONAL','ROCK INTERNACIONAL','FORRÓ','REGGAE','SAMBA','PAGODE','ESTILO DO MUSICO','FUNK'];
-let reps=JSON.parse(localStorage.getItem('reps')||'["Rep 1","Rep 2","Rep 3","Rep 4","Rep 5"]');
-let cifras=JSON.parse(localStorage.getItem('cifrasV59')||localStorage.getItem('minhasCifras')||'[]');
-let filtroRep='TODAS', filtroEst='TODOS', tom=0, origTxt='', acOrig='G', simp=false, fSize=18, tema='papel', cor='ambar', auto=null;
-let save=()=>{localStorage.setItem('cifrasV59',JSON.stringify(cifras));localStorage.setItem('reps',JSON.stringify(reps));};
-document.getElementById('nEst').onchange=(e)=>{document.getElementById('nEstOutro').style.display=e.target.value=='OUTRO'?'block':'none';};
-function buildTabs(){let h=`<button class="tab ${filtroRep=='TODAS'?'on':''}" onclick="setRep('TODAS')">🎸 Minhas músicas (${cifras.length})</button>`;reps.forEach((r,i)=>{let q=cifras.filter(c=>c.reps&&c.reps.includes(i)).length;h+=`<button class="tab rep ${filtroRep==i?'on':''}" onclick="setRep(${i})">📚 ${r} (${q})</button>`;});document.getElementById('tabsRep').innerHTML=h;let eh=`<button class="chipEst ${filtroEst=='TODOS'?'on':''}" onclick="setEst('TODOS')">TODOS</button>`;ESTILOS.slice(1).forEach(e=>{eh+=`<button class="chipEst ${filtroEst==e?'on':''}" onclick="setEst('${e}')">${e}</button>`;});document.getElementById('filtEst').innerHTML=eh;document.getElementById('editReps').innerHTML=reps.map((r,i)=>`<div style="display:flex;gap:6px;margin:6px 0"><input id="r${i}" value="${r}" style="flex:1"><button class="btn btn-on" onclick="renRep(${i})">Salvar</button></div>`).join('');}
-function setRep(v){filtroRep=v;buildTabs();render();}function setEst(v){filtroEst=v;buildTabs();render();}
-function renRep(i){reps[i]=document.getElementById('r'+i).value||`Rep ${i+1}`;save();buildTabs();buildNovaReps();render();}
-function render(){let b=document.getElementById('busca').value.toLowerCase();let f=cifras.filter(c=>{let okB=!b||c.titulo.toLowerCase().includes(b)||(c.artista||'').toLowerCase().includes(b);let okR=filtroRep=='TODAS'||(c.reps&&c.reps.includes(filtroRep));let okE=filtroEst=='TODOS'||(c.estilo||'').toUpperCase()==filtroEst;return okB&&okR&&okE;});document.getElementById('tot').innerText=f.length;if(!f.length){document.getElementById('lista').innerHTML='<div style="padding:20px;text-align:center;opacity:.5">Nenhuma música</div>';return;}document.getElementById('lista').innerHTML=f.map(c=>`<div class="cifra" onclick="abrir(${c.id})"><div><b style="color:#1f1a14">${c.titulo}</b><div style="font-size:11px;opacity:.7">${c.artista||''} ${c.estilo?`• <span class="badge">${c.estilo}</span>`:''}</div><div style="font-size:10px;opacity:.5">${c.reps?c.reps.map(r=>reps[r]).join(', '):''}</div></div><span>›</span></div>`).join('');}
-function buildNovaReps(){document.getElementById('nReps').innerHTML=reps.map((r,i)=>`<div class="repOpt" id="ro${i}" onclick="togRep(${i})">${r}</div>`).join('');}
-let selReps=[];function togRep(i){let el=document.getElementById('ro'+i);if(selReps.includes(i)){selReps=selReps.filter(x=>x!=i);el.classList.remove('on');}else{selReps.push(i);el.classList.add('on');}}
-function nova(){selReps=[];document.getElementById('nT').value='';document.getElementById('nA').value='';document.getElementById('nC').value='';document.getElementById('nEst').value='';buildNovaReps();document.getElementById('mNova').classList.add('on');}
-function salvar(){if(!document.getElementById('nT').value.trim())return alert('Nome obrigatório');let estilo=document.getElementById('nEst').value=='OUTRO'?document.getElementById('nEstOutro').value.toUpperCase():document.getElementById('nEst').value;cifras.push({id:Date.now(),titulo:document.getElementById('nT').value.trim(),artista:document.getElementById('nA').value.trim(),estilo,reps:[...selReps],conteudo:document.getElementById('nC').value});save();document.getElementById('mNova').classList.remove('on');buildTabs();render();}
-function abrir(id){let c=cifras.find(x=>x.id==id);origTxt=c.conteudo;tom=0;let m=c.conteudo.match(/[A-G][#b]?/);acOrig=m?m[0]:'G';document.getElementById('tTit').innerText=c.titulo+' • '+c.artista+' • '+c.estilo;criaTons();document.getElementById('mLeitor').classList.add('on');aplicaTema();document.getElementById('leitor').scrollTop=0;}
-function criaTons(){let ct=document.getElementById('barTons');ct.innerHTML='';for(let i=-5;i<=5;i++){let b=document.createElement('button');b.className=i==0?'tBtn on':'tBtn';b.innerText=(i>0?'+'+i:i);b.onclick=()=>{tom=i;updTons();transp();};ct.appendChild(b);}updTons();}
-function updTons(){[...document.getElementById('barTons').children].forEach((b,idx)=>b.className=(idx-5)==tom?'tBtn on':'tBtn');document.getElementById('infTom').innerText=`TOM ${acOrig} → ${transN(acOrig,tom)} (${tom})`;}
-function transN(n,s){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=M[n]||n;let i=N.indexOf(b);return i<0?n:N[(i+s+120)%12];}
-let curTxt='';function transp(){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let t=origTxt.replace(/[A-G][#b]?/g,m=>{let b=M[m]||m;let i=N.indexOf(b);return i<0?m:N[(i+tom+120)%12];});if(simp){t=t.replace(/[A-G][#b]?m?(?:7M|maj7|m7|7|9|6|sus|dim|aug|add9|\(.*?\)|\/[\\w#b]+)*/g,a=>{let mm=a.match(/^([A-G][#b]?)(m)?/);return mm?mm[1]+(mm[2]||''):a;});}curTxt=t;show();}
-function show(){let txt=curTxt||origTxt;let getC=()=>cor=='ambar'?'#B45309':'#111';let getL=()=>tema=='dark'?'#fff':'#111';let h='';txt.split('\n').forEach(l=>{if(!l.trim()){h+='<div style="height:10px"></div>';return;}let eh=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=12 && /^[A-G\s#b0-9\/\(\)mMaj7\-]+$/.test(l.trim());if(eh)h+=`<div class="cLine" style="font-size:${fSize-1}px;color:${getC()}">${l}</div>`;else h+=`<div class="lLine" style="font-size:${fSize}px;color:${getL()}">${l}</div>`;});document.getElementById('leitor').innerHTML=h;document.getElementById('labF').innerText=fSize+'px';}
-function fechar(){if(auto){clearInterval(auto);auto=null;document.getElementById('bAuto').innerText='▶️ Auto';}document.getElementById('mLeitor').classList.remove('on');}
-function mFont(d){fSize=Math.max(12,Math.min(32,fSize+d));show();}function tSimp(){simp=!simp;document.getElementById('bSimp').className=simp?'btn btn-on':'btn';transp();}
-function aplicaTema(){let b=document.getElementById('boxLeitor');if(tema=='dark'){b.style.background='#0f0f0f';document.getElementById('leitor').style.background='#0f0f0f';}else{b.style.background='#fdfbf7';document.getElementById('leitor').style.background='#fdfbf7';}show();}
-function setTema(t){tema=t;document.getElementById('bPapel').className=t=='papel'?'btn btn-on':'btn';document.getElementById('bDark').className=t=='dark'?'btn btn-on':'btn';aplicaTema();}
-function setCor(c){cor=c;document.getElementById('bAmbar').className=c=='ambar'?'btn btn-on':'btn';document.getElementById('bBranca').className=c=='branca'?'btn btn-on':'btn';show();}
-function toggleAuto(){if(auto){clearInterval(auto);auto=null;document.getElementById('bAuto').innerText='▶️ Auto';}else{document.getElementById('bAuto').innerText='⏸️ Parar';auto=setInterval(()=>document.getElementById('leitor').scrollTop+=1,55);}}
-function exportar(){let blob=new Blob([JSON.stringify({cifras,reps})],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup.json';a.click();}
-document.getElementById('imp').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let j=JSON.parse(r.result);if(j.cifras){cifras=j.cifras;reps=j.reps||reps;}else cifras=j;save();buildTabs();render();}catch{alert('Inválido');}};r.readAsText(f);});
-buildTabs();buildNovaReps();render();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
-</script></body></html>
+{
+  "name": "MINHAS CIFRAS",
+  "short_name": "CIFRAS",
+  "description": "Suas cifras com repertórios e estilos",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6efe4",
+  "theme_color": "#ffffff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
