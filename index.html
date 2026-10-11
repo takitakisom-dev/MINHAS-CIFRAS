@@ -16,19 +16,17 @@
 .row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:none;padding:10px 16px;border-radius:999px;font-weight:700;background:#111;color:white}.btn.out{background:white;color:#111;border:1px solid #ddd}
 .chip{white-space:nowrap;padding:10px 14px;border-radius:999px;border:1px solid #ddd;background:white;font-weight:600}.chip.on{background:#111;color:white}
 .search{display:flex;gap:10px;margin-top:12px}.search input{flex:1;padding:14px;border:1px solid #e8e0c9;border-radius:14px;background:#fdfbf1}
-.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}.btnVer{border:2px solid #111;background:white;padding:8px 18px;border-radius:999px;font-weight:800}
+.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}.btnVer{border:2px solid #111;background:white;padding:8px 16px;border-radius:999px;font-weight:800;margin-left:6px}.btnDel{border:2px solid #fecaca;background:#fff5f5;color:#b91c1c;padding:8px 12px;border-radius:999px;font-weight:800}
 #boxInst{display:none;margin:10px 14px;padding:12px;background:#fff7ed;border:2px dashed #d97706;border-radius:16px;text-align:center}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:50}#modal.on{display:flex}
 .sheet{background:white;width:100%;border-radius:22px 22px 0 0;padding:18px;max-height:85vh;overflow:auto}
 .sheet input,.sheet textarea{width:100%;padding:12px;border:2px solid #eee;border-radius:12px;margin-top:8px}.sheet textarea{height:200px;font-family:monospace}
-
-/* MENU FIX - AGORA CERTO */
-#drawer{position:fixed;inset:0;z-index:100;display:none}
-#drawer.open{display:block}
+#drawer{position:fixed;inset:0;z-index:100;display:none}#drawer.open{display:block}
 .fundoMenu{position:fixed;inset:0;background:rgba(0,0,0,.5)}
-.painelMenu{position:fixed;left:0;top:0;bottom:0;width:280px;background:#fffdf6;padding:20px 16px;box-shadow:10px 0 30px rgba(0,0,0,.3)}
-.op{width:100%;padding:14px;margin-top:10px;border-radius:12px;border:1px solid #eee;background:white;text-align:left;font-size:15px}
-.op.verm{color:#b91c1c;background:#fef2f2}
+.painelMenu{position:fixed;left:0;top:0;bottom:0;width:290px;background:#fffdf6;padding:20px 16px;overflow:auto;box-shadow:10px 0 30px rgba(0,0,0,.3)}
+.op{width:100%;padding:14px;margin-top:10px;border-radius:12px;border:1px solid #eee;background:white;text-align:left;font-weight:600}
+.op.on{background:#111;color:white;border-color:#111}
+.tituloMenu{font-size:12px;font-weight:800;color:#999;margin-top:18px;margin-bottom:6px;letter-spacing:.5px}
 .btnFechar{width:100%;margin-top:20px;padding:14px;border-radius:12px;background:#111;color:white;border:none;font-weight:800}
 </style>
 </head>
@@ -36,16 +34,32 @@
 <div class="topo"></div>
 <div class="barra"><button class="btnMenu" onclick="abre()">☰</button><b>🎸 MINHAS CIFRAS</b><div class="badge" id="badge">2</div></div>
 
-<div id="boxInst"><button id="btnInst" style="background:#d97706;color:white;border:none;padding:11px 22px;border-radius:999px;font-weight:800">📲 INSTALAR APP</button><div style="font-size:11px;margin-top:4px">Instala e some sozinho!</div></div>
+<div id="boxInst"><button id="btnInst" style="background:#d97706;color:white;border:none;padding:11px 22px;border-radius:999px;font-weight:800">📲 INSTALAR APP</button></div>
 
 <div class="card"><h2 style="margin:0">Sua coleção particular</h2><p style="color:#6b5a4e;font-size:13px">Crie, importe e organize. Tudo offline.</p><div class="row"><button class="btn" onclick="nova()">+ Nova Cifra</button><button class="btn out" onclick="importar()">Importar.txt</button><button class="btn out" onclick="novoRep()">+ Repertório</button></div></div>
 
 <div class="card"><div class="row" id="reps" style="overflow:auto;flex-wrap:nowrap"></div><div class="search"><input id="q" placeholder="Buscar..."><button class="btn" onclick="nova()">+ Nova</button></div><div class="row" id="cats" style="margin-top:12px;overflow:auto;flex-wrap:nowrap"></div><div id="lista"></div></div>
 
-<div id="modal" onclick="if(event.target==this)fechar()"><div class="sheet"><h3 id="mtit" style="margin:0">Nova Cifra</h3><input id="tit" placeholder="Nome - Artista"><input id="cat" placeholder="Categoria"><textarea id="cont" placeholder="Cifra..."></textarea><button class="btn" style="width:100%;margin-top:10px;padding:14px" onclick="salvar()">Salvar</button><button class="btn out" style="width:100%;margin-top:8px;padding:12px" onclick="fechar()">Cancelar</button></div></div>
+<div id="modal" onclick="if(event.target==this)fechar()"><div class="sheet"><h3 id="mtit" style="margin:0">Nova Cifra</h3><input id="tit" placeholder="Nome - Artista"><input id="cat" placeholder="Categoria: MPB, ROCK NACIONAL..."><textarea id="cont"></textarea><div class="row" style="margin-top:10px"><button class="btn" style="flex:1;padding:14px" onclick="salvar()">Salvar</button><button id="btnExcluirModal" class="btn" style="display:none;background:#fee2e2;color:#b91c1c;padding:14px" onclick="excluirAtual()">🗑️ Excluir</button></div><button class="btn out" style="width:100%;margin-top:8px;padding:12px" onclick="fechar()">Cancelar</button></div></div>
 
-<!-- MENU -->
-<div id="drawer"><div class="fundoMenu" onclick="fecha()"></div><div class="painelMenu"><h3 style="margin:0 0 16px">🎸 Minhas Cifras</h3><button class="op" onclick="nova();fecha()">➕ Nova Cifra</button><button class="op" onclick="importar();fecha()">📥 Importar.txt</button><button class="op" onclick="exportar();fecha()">📤 Exportar tudo</button><button class="op verm" onclick="if(confirm('Apagar tudo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button><div style="margin-top:18px;font-size:12px;color:#999">Offline • vFinal • Corrigido</div><button class="btnFechar" onclick="fecha()">Fechar</button></div></div>
+<div id="drawer"><div class="fundoMenu" onclick="fecha()"></div><div class="painelMenu">
+<h3 style="margin:0">🎸 Minhas Cifras</h3>
+
+<div class="tituloMenu">AÇÕES</div>
+<button class="op" onclick="nova();fecha()">➕ Nova Cifra</button>
+<button class="op" onclick="importar();fecha()">📥 Importar.txt</button>
+<button class="op" onclick="exportar();fecha()">📤 Exportar tudo</button>
+
+<div class="tituloMenu">FILTRAR POR ESTILO</div>
+<div id="catsMenu"></div>
+
+<div class="tituloMenu">REPERTÓRIOS</div>
+<div id="repsMenu"></div>
+
+<button class="op" style="margin-top:18px;color:#b91c1c;background:#fef2f2" onclick="if(confirm('Apagar TUDO mesmo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button>
+<div style="margin-top:18px;font-size:11px;color:#999">Offline • Corrigido com excluir + estilos</div>
+<button class="btnFechar" onclick="fecha()">Fechar</button>
+</div></div>
 
 <script>
 let cifras=JSON.parse(localStorage.getItem('cifrasV_FINAL')||'[{"t":"Será","a":"LEGIÃO URBANA","c":"[C] Será...","cat":"MPB"},{"t":"IMPORTADA","a":"Cifra Club","c":"Importada","cat":"ROCK NACIONAL"}]');
@@ -53,13 +67,15 @@ let reps=JSON.parse(localStorage.getItem('repsV')||'["Minhas músicas","Rep 1","
 let repAtivo=localStorage.getItem('repAt')||"Minhas músicas";let catAtiva="TODOS";let cats=["TODOS","MPB","ROCK NACIONAL","ROCK INTERNACIONAL","GOSPEL"];let edit=-1;
 const $=id=>document.getElementById(id);
 function save(){localStorage.setItem('cifrasV_FINAL',JSON.stringify(cifras));localStorage.setItem('repsV',JSON.stringify(reps));localStorage.setItem('repAt',repAtivo);render();}
-function renderReps(){$('reps').innerHTML=reps.map(r=>`<button class="chip ${r==repAtivo?'on':''}" onclick="repAtivo='${r}';save()">${r}</button>`).join('');}
-function renderCats(){$('cats').innerHTML=cats.map(c=>`<button class="chip ${c==catAtiva?'on':''}" onclick="catAtiva='${c}';render()">${c}</button>`).join('');}
-function render(){renderReps();renderCats();const q=$('q').value.toLowerCase();const fil=cifras.filter(x=> (catAtiva=='TODOS'||x.cat==catAtiva) && (!q || (x.t+x.a).toLowerCase().includes(q)) );$('badge').textContent=fil.length;$('lista').innerHTML=fil.map((c,i)=>`<div class="item"><div><b>${c.t}</b><div style="font-size:12px;color:#777">${c.a}</div></div><button class="btnVer" onclick="ver(${i})">Ver</button></div>`).join('');}
-function nova(){edit=-1;$('mtit').textContent='Nova Cifra';$('tit').value='';$('cat').value='';$('cont').value='';$('modal').classList.add('on');}
-function ver(i){edit=i;$('mtit').textContent=cifras[i].t;$('tit').value=cifras[i].t+' - '+cifras[i].a;$('cat').value=cifras[i].cat||'';$('cont').value=cifras[i].c;$('modal').classList.add('on');}
+function renderReps(){$('reps').innerHTML=reps.map(r=>`<button class="chip ${r==repAtivo?'on':''}" onclick="repAtivo='${r}';save()">${r}</button>`).join('');$('repsMenu').innerHTML=reps.map(r=>`<button class="op ${r==repAtivo?'on':''}" onclick="repAtivo='${r}';save();fecha()">${r}</button>`).join('');}
+function renderCats(){$('cats').innerHTML=cats.map(c=>`<button class="chip ${c==catAtiva?'on':''}" onclick="catAtiva='${c}';render()">${c}</button>`).join('');$('catsMenu').innerHTML=cats.map(c=>`<button class="op ${c==catAtiva?'on':''}" onclick="catAtiva='${c}';render();fecha()">${c}</button>`).join('');}
+function render(){renderReps();renderCats();const q=$('q').value.toLowerCase();const fil=cifras.filter(x=> (catAtiva=='TODOS'||x.cat==catAtiva) && (!q || (x.t+x.a).toLowerCase().includes(q)) );$('badge').textContent=fil.length;$('lista').innerHTML=fil.map((c,i)=>`<div class="item"><div><b>${c.t}</b><div style="font-size:12px;color:#777">${c.a} • ${c.cat||''}</div></div><div><button class="btnDel" onclick="excluir(${i})">🗑️</button><button class="btnVer" onclick="ver(${i})">Ver</button></div></div>`).join('') || '<p style="text-align:center;color:#999;padding:20px">Nenhuma cifra</p>';}
+function nova(){edit=-1;$('mtit').textContent='Nova Cifra';$('tit').value='';$('cat').value='';$('cont').value='';$('btnExcluirModal').style.display='none';$('modal').classList.add('on');}
+function ver(i){edit=i;$('mtit').textContent=cifras[i].t;$('tit').value=cifras[i].t+' - '+cifras[i].a;$('cat').value=cifras[i].cat||'';$('cont').value=cifras[i].c;$('btnExcluirModal').style.display='block';$('modal').classList.add('on');}
 function fechar(){$('modal').classList.remove('on');}
 function salvar(){let ta=$('tit').value.split(' - ');let t=ta[0]||'Sem título';let a=ta[1]||'Cifra Club';let obj={t:t,a:a.toUpperCase(),c:$('cont').value,cat:$('cat').value||'MPB'};if(edit>=0)cifras[edit]=obj;else cifras.unshift(obj);save();fechar();render();}
+function excluir(i){if(confirm('Excluir "'+cifras[i].t+'"?')){cifras.splice(i,1);save();}}
+function excluirAtual(){if(edit>=0)excluir(edit);fechar();}
 function importar(){let inp=document.createElement('input');inp.type='file';inp.accept='.txt';inp.onchange=e=>{let r=new FileReader();r.onload=()=>{cifras.unshift({t:e.target.files[0].name.replace('.txt',''),a:'IMPORTADA',c:r.result,cat:'MPB'});save();};r.readAsText(e.target.files[0]);};inp.click();}
 function novoRep(){let n=prompt('Nome:');if(n){reps.push(n);save();}}
 function abre(){$('drawer').classList.add('open');}function fecha(){$('drawer').classList.remove('open');}
