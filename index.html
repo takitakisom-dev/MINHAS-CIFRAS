@@ -8,36 +8,48 @@
 <link rel="icon" href="icon-192.png">
 <title>MINHAS CIFRAS</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#f6f1e6;color:#1a1a1a}
-.top{background:#d97706;height:36px}.bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:white;color:#111;box-shadow:0 4px 10px rgba(0,0,0,.08)}
-.menu{width:44px;height:44px;border-radius:50%;border:1px solid #ddd;background:white;font-size:18px}.badge{width:44px;height:44px;border-radius:50%;background:black;color:white;display:flex;align-items:center;justify-content:center;font-weight:800}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#f6f1e6;color:#1a1a1a;overflow-x:hidden}
+.topo-laranja{background:#d97706;height:44px}
+.barra{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:white;box-shadow:0 4px 10px rgba(0,0,0,.08);position:sticky;top:0;z-index:5}
+.btnMenu{width:44px;height:44px;border-radius:50%;border:1px solid #ddd;background:white;font-size:20px}
+.badge{width:44px;height:44px;border-radius:50%;background:black;color:white;display:flex;align-items:center;justify-content:center;font-weight:900}
 .card{background:white;margin:14px;border-radius:22px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-.card h2{margin:0;font-size:22px}.card p{margin:6px 0 12px;color:#6b5a4e}
-.row{display:flex;gap:8px;flex-wrap:wrap}.btn{background:black;color:white;border:none;padding:10px 16px;border-radius:999px;font-weight:700}.btn.out{background:white;color:#1a1a1a;border:1px solid #ddd}
+.row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:none;padding:10px 16px;border-radius:999px;font-weight:700;background:black;color:white}.btn.out{background:white;color:#1a1a1a;border:1px solid #ddd}
 .chip{white-space:nowrap;padding:10px 14px;border-radius:999px;border:1px solid #ddd;background:white;font-weight:600}.chip.on{background:#1a1a1a;color:white}
-.search{display:flex;gap:10px;margin-top:12px}.search input{flex:1;padding:14px;border:1px solid #e8e0c9;border-radius:14px;background:#fdfbf1}
-.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}.small{font-size:13px;color:#777}.btnVer{border:2px solid #1a1a1a;background:white;padding:8px 18px;border-radius:999px;font-weight:800}
-#boxInst{display:none;margin:0 14px;padding:12px;background:#fff7ed;border:2px dashed #d97706;border-radius:16px;text-align:center}
+.search{display:flex;gap:10px;margin-top:12px}.search input{flex:1;padding:14px;border:1px solid #e8e0c9;border-radius:14px;background:#fdfbf1;outline:none}
+.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}.small{font-size:12px;color:#777}.btnVer{border:2px solid #1a1a1a;background:white;padding:8px 18px;border-radius:999px;font-weight:800}
+#boxInst{display:none;margin:12px 14px;padding:12px;background:#fff7ed;border:2px dashed #d97706;border-radius:16px;text-align:center}
 #btnInst{background:#d97706;color:white;border:none;padding:11px 22px;border-radius:999px;font-weight:800}
-#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:30}#modal.on{display:flex}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:40}#modal.on{display:flex}
 .sheet{background:white;width:100%;border-radius:24px 24px 0 0;padding:18px;max-height:85vh;overflow:auto}
 .sheet input,.sheet textarea{width:100%;padding:12px;border:2px solid #f0e6c8;border-radius:12px;margin-top:8px}.sheet textarea{height:220px;font-family:monospace}
-#drawer{position:fixed;inset:0;z-index:99;display:none}#drawer.bg{position:absolute;inset:0;background:rgba(0,0,0,.4)}#drawer.panel{position:absolute;left:0;top:0;bottom:0;width:280px;background:white;padding:18px;border-radius:0 20px 20px 0;box-shadow:8px 0 20px rgba(0,0,0,.2)}
+
+/* MENU BONITO - CORRIGIDO */
+#drawer{position:fixed;inset:0;z-index:99;display:none}
+#drawer.open{display:block}
+#drawer.fundo{position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(2px)}
+#drawer.painel{position:absolute;left:0;top:0;bottom:0;width:285px;background:#fffdf6;padding:20px 16px;box-shadow:10px 0 30px rgba(0,0,0,.2);animation:slide.25s ease}
+@keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.painel h3{margin:0 0 18px;font-size:20px}
+.op{width:100%;padding:14px 14px;margin-top:10px;border-radius:14px;border:1px solid #eee;background:white;text-align:left;font-weight:600;display:flex;gap:10px;align-items:center}
+.op.danger{color:#991b1b;background:#fef2f2;border-color:#fecaca}
+.fecharMenu{width:100%;margin-top:22px;padding:14px;border-radius:14px;background:black;color:white;border:none;font-weight:800}
 </style>
 </head>
 <body>
-<div class="top"></div>
-<div class="bar"><button class="menu" onclick="abreMenu()">☰</button><b>🎸 MINHAS CIFRAS</b><div class="badge" id="badge">2</div></div>
+<div class="topo-laranja"></div>
+<div class="barra"><button class="btnMenu" onclick="abreMenu()">☰</button><b>🎸 MINHAS CIFRAS</b><div class="badge" id="badge">2</div></div>
 
 <div id="boxInst"><button id="btnInst">📲 INSTALAR APP</button><div style="font-size:11px;color:#92400e;margin-top:4px">Instala e some sozinho!</div></div>
 
-<div class="card"><h2>Sua coleção particular</h2><p>Crie, importe e organize. Tudo offline.</p><div class="row"><button class="btn" onclick="nova()">+ Nova Cifra</button><button class="btn out" onclick="importar()">Importar.txt</button><button class="btn out" onclick="novoRep()">+ Repertório</button></div></div>
+<div class="card"><h2 style="margin:0">Sua coleção particular</h2><p style="margin:6px 0 12px;color:#6b5a4e;font-size:14px">Crie, importe e organize. Tudo offline.</p><div class="row"><button class="btn" onclick="nova()">+ Nova Cifra</button><button class="btn out" onclick="importar()">Importar.txt</button><button class="btn out" onclick="novoRep()">+ Repertório</button></div></div>
 
 <div class="card"><div class="row" id="reps" style="overflow:auto;flex-wrap:nowrap"></div><div class="search"><input id="q" placeholder="Buscar..."><button class="btn" onclick="nova()">+ Nova</button></div><div class="row" id="cats" style="margin-top:12px;overflow:auto;flex-wrap:nowrap"></div><div id="lista"></div></div>
 
-<div id="modal" onclick="if(event.target==this)fechar()"><div class="sheet"><h3 id="mtit" style="margin:0">Nova Cifra</h3><input id="tit" placeholder="Nome - Artista (Ex: Será - Legião Urbana)"><input id="cat" placeholder="Categoria: MPB, ROCK NACIONAL..."><textarea id="cont" placeholder="Cola a cifra aqui com [C] [G]..."></textarea><button class="btn" style="width:100%;margin-top:10px;padding:14px" onclick="salvar()">Salvar</button><button class="btn out" style="width:100%;margin-top:8px;padding:12px" onclick="fechar()">Cancelar</button></div></div>
+<div id="modal" onclick="if(event.target==this)fechar()"><div class="sheet"><h3 id="mtit" style="margin:0">Nova Cifra</h3><input id="tit" placeholder="Nome - Artista (Ex: Será - Legião Urbana)"><input id="cat" placeholder="Categoria: MPB, ROCK..."><textarea id="cont" placeholder="Cola a cifra com [C] [G]..."></textarea><button class="btn" style="width:100%;margin-top:10px;padding:14px" onclick="salvar()">Salvar</button><button class="btn out" style="width:100%;margin-top:8px;padding:12px" onclick="fechar()">Cancelar</button></div></div>
 
-<div id="drawer"><div class="bg" onclick="fechaMenu()"></div><div class="panel"><h3>🎸 Minhas Cifras</h3><button style="width:100%;padding:12px;margin-top:12px;border-radius:12px;border:1px solid #ddd;background:white;text-align:left" onclick="nova();fechaMenu()">+ Nova Cifra</button><button style="width:100%;padding:12px;margin-top:8px;border-radius:12px;border:1px solid #ddd;background:white;text-align:left" onclick="importar();fechaMenu()">📥 Importar.txt</button><button style="width:100%;padding:12px;margin-top:8px;border-radius:12px;border:1px solid #ddd;background:white;text-align:left" onclick="exportar();fechaMenu()">📤 Exportar tudo</button><button style="width:100%;padding:12px;margin-top:8px;border-radius:12px;border:1px solid #ddd;background:white;text-align:left" onclick="if(confirm('Apagar tudo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button><div style="margin-top:20px;font-size:12px;color:#888">Offline • vFinal • Ícone laranja</div><button style="margin-top:20px;width:100%;padding:12px;border-radius:12px;background:black;color:white;border:none" onclick="fechaMenu()">Fechar</button></div></div>
+<!-- MENU LATERAL BONITO -->
+<div id="drawer"><div class="fundo" onclick="fechaMenu()"></div><div class="painel"><h3>🎸 Minhas Cifras</h3><button class="op" onclick="nova();fechaMenu()">➕ Nova Cifra</button><button class="op" onclick="importar();fechaMenu()">📥 Importar.txt</button><button class="op" onclick="exportar();fechaMenu()">📤 Exportar tudo</button><button class="op danger" onclick="if(confirm('Apagar TUDO mesmo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button><div style="margin-top:22px;font-size:12px;color:#999">Offline • vFinal • Ícone laranja</div><button class="fecharMenu" onclick="fechaMenu()">Fechar</button></div></div>
 
 <script>
 let cifras=JSON.parse(localStorage.getItem('cifrasV_FINAL')||'[{"t":"Será","a":"LEGIÃO URBANA","c":"[C] Será que...","cat":"MPB"},{"t":"IMPORTADA","a":"Cifra Club","c":"Cifra importada...","cat":"ROCK NACIONAL"}]');
@@ -47,23 +59,21 @@ const $=id=>document.getElementById(id);
 function save(){localStorage.setItem('cifrasV_FINAL',JSON.stringify(cifras));localStorage.setItem('repsV',JSON.stringify(reps));localStorage.setItem('repAt',repAtivo);render();}
 function renderReps(){$('reps').innerHTML=reps.map(r=>`<button class="chip ${r==repAtivo?'on':''}" onclick="repAtivo='${r}';save()">${r==reps[0]?'🎸 ':'📚 '}${r} (${r==reps[0]?cifras.length:0})</button>`).join('');}
 function renderCats(){$('cats').innerHTML=cats.map(c=>`<button class="chip ${c==catAtiva?'on':''}" onclick="catAtiva='${c}';render()">${c}</button>`).join('');}
-function render(){renderReps();renderCats();const q=$('q').value.toLowerCase();const fil=cifras.filter(x=> (catAtiva=='TODOS'||x.cat==catAtiva) && (!q || (x.t+x.a).toLowerCase().includes(q)) );$('badge').textContent=fil.length;$('lista').innerHTML=fil.map((c,i)=>`<div class="item"><div><b>${c.t}</b><div class="small">${c.a} •</div></div><button class="btnVer" onclick="ver(${i})">Ver</button></div>`).join('') || '<p style="text-align:center;color:#8a7566;padding:20px">Nenhuma cifra. Clique em + Nova</p>';}
+function render(){renderReps();renderCats();const q=$('q').value.toLowerCase();const fil=cifras.filter(x=> (catAtiva=='TODOS'||x.cat==catAtiva) && (!q || (x.t+x.a).toLowerCase().includes(q)) );$('badge').textContent=fil.length;$('lista').innerHTML=fil.map((c,i)=>`<div class="item"><div><b>${c.t}</b><div class="small">${c.a}</div></div><button class="btnVer" onclick="ver(${i})">Ver</button></div>`).join('') || '<p style="text-align:center;color:#8a7566;padding:20px">Nenhuma cifra. + Nova</p>';}
 function nova(){edit=-1;$('mtit').textContent='Nova Cifra';$('tit').value='';$('cat').value='';$('cont').value='';$('modal').classList.add('on');}
 function ver(i){edit=i;$('mtit').textContent=cifras[i].t;$('tit').value=cifras[i].t+' - '+cifras[i].a;$('cat').value=cifras[i].cat||'';$('cont').value=cifras[i].c;$('modal').classList.add('on');}
 function fechar(){$('modal').classList.remove('on');}
 function salvar(){let ta=$('tit').value.split(' - ');let t=ta[0]||'Sem título';let a=ta[1]||'Cifra Club';let obj={t:t,a:a.toUpperCase(),c:$('cont').value,cat:$('cat').value||'MPB'};if(edit>=0)cifras[edit]=obj;else cifras.unshift(obj);save();fechar();render();}
 function importar(){let inp=document.createElement('input');inp.type='file';inp.accept='.txt';inp.onchange=e=>{let r=new FileReader();r.onload=()=>{cifras.unshift({t:e.target.files[0].name.replace('.txt',''),a:'IMPORTADA',c:r.result,cat:'MPB'});save();};r.readAsText(e.target.files[0]);};inp.click();}
 function novoRep(){let n=prompt('Nome do repertório:');if(n){reps.push(n);save();}}
-function abreMenu(){$('drawer').style.display='block';}function fechaMenu(){$('drawer').style.display='none';}
+function abreMenu(){$('drawer').classList.add('open');}function fechaMenu(){$('drawer').classList.remove('open');}
 function exportar(){let blob=new Blob([JSON.stringify(cifras,null,2)],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='minhas-cifras.json';a.click();}
 $('q').addEventListener('input',render);render();
-
-// PWA - BOTÃO QUE SOME QUANDO INSTALA
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 let pEv=null;const box=$('boxInst');const b=$('btnInst');
 const jaApp=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
-if(!jaApp){window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pEv=e;box.style.display='block';});setTimeout(()=>{box.style.display='block';},800);}
-b.onclick=async()=>{if(pEv){pEv.prompt();let r=await pEv.userChoice;if(r.outcome=='accepted')box.style.display='none';pEv=null;}else alert('3 pontinhos ⋮ > Instalar app');};
+if(!jaApp){window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pEv=e;box.style.display='block';});setTimeout(()=>{if(!pEv)box.style.display='block';},800);}
+b.onclick=async()=>{if(pEv){pEv.prompt();let r=await pEv.userChoice;if(r.outcome=='accepted')box.style.display='none';pEv=null;}else alert('No topo: 3 pontinhos ⋮ > Instalar app');};
 window.addEventListener('appinstalled',()=>box.style.display='none');if(jaApp)box.style.display='none';
 </script>
 </body>
