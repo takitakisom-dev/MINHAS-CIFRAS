@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v38</title>
+<title>Minhas Cifras v39</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -16,22 +16,25 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 .modal-topo{padding:14px;border-bottom:2px solid var(--accent);display:flex;gap:6px;overflow:auto;flex-shrink:0}
 .conteudo-aba{flex:1;overflow:auto;padding:12px}
 #boxLeitor{background:#123a25;border:2px solid var(--accent);border-radius:16px;width:98%;height:94vh;display:flex;flex-direction:column;overflow:hidden;position:relative}
-.topo-fixo{padding:10px;background:inherit;flex-shrink:0;border-bottom:1px solid rgba(255,235,59,0.2)}#leitorConteudo{flex:1;overflow:auto;padding:12px;white-space:pre-wrap;line-height:1.4;font-size:22px}
-.cifra-line{font-weight:bold;margin-top:4px}.cifra-line.dourada{color:#ffeb3b}.cifra-line.vermelha{color:#ff4444}.cifra-line.preta{color:#111}
+.topo-fixo{padding:10px;background:inherit;flex-shrink:0;border-bottom:1px solid rgba(255,235,59,0.2)}
+#leitorConteudo{flex:1;overflow:auto;padding:14px;white-space:pre-wrap;line-height:1.35;font-size:22px}
+.cifra-line{font-weight:bold;margin-top:6px;margin-bottom:1px;line-height:1.2}
+.cifra-line.dourada{color:#ffeb3b!important}.cifra-line.vermelha{color:#ff4444!important}.cifra-line.preta{color:#111!important}
+.linha-letra{margin-bottom:10px;line-height:1.3}
 #btnOlho{position:fixed;top:10px;right:10px;z-index:99999;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.7);color:white;border:2px solid white;display:none;font-size:20px}
 #boxLeitor:fullscreen{width:100vw!important;height:100vh!important;max-width:100vw!important;border:none!important;border-radius:0!important}
 .input-busca{width:100%;padding:10px;border-radius:10px;border:2px solid rgba(255,235,59,0.3);background:rgba(0,0,0,0.3);color:white;margin-top:8px}
 .bib-item{display:flex;justify-content:space-between;align-items:center;padding:11px;border-bottom:1px solid rgba(255,255,255,0.1)}
-.secao{margin:12px 0;padding:10px;border:1px solid rgba(255,235,59,0.2);border-radius:10px}
+.secao{margin:12px 0;padding:12px;border:1px solid rgba(255,235,59,0.2);border-radius:10px}
 </style>
 </head>
 <body>
-<header><button class="btn" onclick="abrirMenu('bib')">☰ MENU</button><div class="logo">♪ CIFRAS v38</div><button class="btn btn-amarelo" onclick="renderLista()">Home</button></header>
+<header><button class="btn" onclick="abrirMenu('bib')">☰ MENU</button><div class="logo">♪ CIFRAS v39</div><button class="btn btn-amarelo" onclick="renderLista()">Minhas (<span id="total">0</span>)</button></header>
 <button id="btnOlho" onclick="toggleTopo()">👁️</button>
 
 <div id="menuLateral" class="modal"><div class="modal-box">
 <div class="modal-topo">
-<button class="btn" id="abaBib" onclick="trocarAba('bib')">📚 Biblioteca 300</button>
+<button class="btn btn-ativo" id="abaBib" onclick="trocarAba('bib')">📚 Biblioteca 300</button>
 <button class="btn" id="abaConfig" onclick="trocarAba('config')">⚙️ Config</button>
 <button class="btn" id="abaBkp" onclick="trocarAba('bkp')">💾 Backup</button>
 <button class="btn" onclick="menuLateral.classList.remove('aberto')">✕</button>
@@ -52,36 +55,30 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 </div>
 
 <div id="conteudoConfig" class="conteudo-aba" style="display:none">
-<div class="secao"><h4 style="color:var(--accent)">🎨 Cor da Cifra</h4>
-<button class="btn btn-ativo" onclick="mudarCor('dourada')">Dourada</button>
+<div class="secao"><h4 style="color:var(--accent)">🎨 Cor da Cifra (em cima da letra)</h4>
+<button class="btn" onclick="mudarCor('dourada')">Dourada</button>
 <button class="btn btn-vermelho" onclick="mudarCor('vermelha')">Vermelha</button>
-<button class="btn btn-preto" onclick="mudarCor('preta')">Preta</button>
+<button class="btn btn-preto" onclick="mudarCor('preta')">Preta - use com fundo branco</button>
 </div>
-<div class="secao"><h4 style="color:var(--accent)">🖼️ Fundo</h4>
-<button class="btn" onclick="mudarTema('verde')">Verde</button>
-<button class="btn" onclick="mudarTema('branco')">Branco</button>
-<button class="btn" onclick="mudarTema('preto')">Preto</button>
+<div class="secao"><h4 style="color:var(--accent)">🖼️ Cor do Fundo - AGORA FUNCIONA</h4>
+<button class="btn" onclick="mudarTema('verde')">Fundo Verde</button>
+<button class="btn" style="background:white;color:black;border-color:white" onclick="mudarTema('branco')">Fundo Branco</button>
+<button class="btn" style="background:black;color:white;border-color:white" onclick="mudarTema('preto')">Fundo Preto</button>
 </div>
-<div class="secao"><h4 style="color:var(--accent)">✍️ Estilo Letra</h4>
-<button class="btn" onclick="mudarEstilo('mao')">Mão</button>
-<button class="btn" onclick="mudarEstilo('maquina')">Máquina</button>
-</div>
+<div class="secao"><h4 style="color:var(--accent)">✍️ Estilo da Letra</h4><button class="btn" onclick="mudarEstilo('mao')">Mão</button><button class="btn" onclick="mudarEstilo('maquina')">Máquina</button></div>
 <div class="secao"><h4 style="color:var(--accent)">🔤 Tamanho: <span id="valFonte">22</span>px</h4><input type="range" min="14" max="36" value="22" id="rangeFonte" oninput="mudarFonte(this.value)"></div>
-<div class="secao"><h4 style="color:var(--accent)">📜 Vel. Rolagem: <span id="valVel">3</span></h4><input type="range" min="1" max="10" value="3" id="rangeVel" oninput="vel=this.value;valVel.innerText=this.value"><br><button class="btn btn-amarelo" onclick="iniciarRolagem()">▶️ Testar Rolagem</button><button class="btn" onclick="pararRolagem()">⏸️ Parar</button></div>
-<button class="btn btn-amarelo" style="width:100%" onclick="instalarApp()">📲 INSTALAR APP</button>
+<div class="secao"><h4 style="color:var(--accent)">📜 Velocidade Rolagem</h4><input type="range" min="1" max="10" value="3" id="rangeVel" oninput="document.getElementById('valVel').innerText=this.value"><span id="valVel">3</span></div>
+<button class="btn btn-amarelo" style="width:100%;padding:12px" onclick="instalarApp()">📲 INSTALAR APP</button>
 </div>
 
 <div id="conteudoBkp" class="conteudo-aba" style="display:none">
-<div class="secao"><h4 style="color:var(--accent)">Backup nunca mais some</h4>
-<button class="btn btn-amarelo" style="width:100%;padding:14px" onclick="exportarBKP()">💾 EXPORTAR BACKUP (.json)</button>
+<button class="btn btn-amarelo" style="width:100%;padding:14px" onclick="exportarBKP()">💾 EXPORTAR BACKUP</button>
 <label class="btn" style="width:100%;padding:14px;text-align:center;display:block;margin-top:8px">📥 IMPORTAR BACKUP<input type="file" id="importFile" hidden onchange="importarBKP(event)"></label>
-<div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.6)">Total salvo: <span id="totalBkp">0</span> cifras</div>
+<div style="margin-top:10px;font-size:13px">Total: <span id="totalBkp">0</span> cifras salvas</div>
 </div>
-</div>
-
 </div></div>
 
-<div class="card"><button class="btn btn-amarelo" onclick="abrirMenu('bib')">📚 Biblioteca 300</button><button class="btn" onclick="abrirNova()">+ Nova Cifra</button><input id="busca" class="input-busca" placeholder="🔍 Buscar nas minhas..." oninput="renderLista()"></div>
+<div class="card"><button class="btn btn-amarelo" onclick="abrirMenu('bib')">📚 Biblioteca 300 Letras+Cifras</button><button class="btn" onclick="abrirNova()">+ Nova</button><input id="busca" class="input-busca" placeholder="🔍 Buscar nas minhas..." oninput="renderLista()"></div>
 <div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2><div id="lista"></div></div>
 
 <div id="modalLeitor" class="modal"><div id="boxLeitor">
@@ -91,13 +88,13 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 <div style="display:flex;align-items:center;background:rgba(0,0,0,0.4);border-radius:20px;border:1px solid var(--accent)"><button class="btn" onclick="transpor(-1)">Tom -</button><span id="tomAtual" style="color:var(--accent);padding:0 10px;font-weight:bold">0</span><button class="btn" onclick="transpor(1)">Tom +</button></div>
 <button class="btn btn-amarelo" onclick="toggleTelaCheia()">⛶ Tela Cheia</button>
 </div>
-<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap"><button class="btn" id="btnRola" onclick="toggleRolagem()">▶️ Rolagem</button><button class="btn" onclick="mudarFonte(-1)">A-</button><button class="btn" onclick="mudarFonte(1)">A+</button><button class="btn" onclick="mudarCor('dourada')">Dourada</button><button class="btn btn-preto" onclick="mudarCor('preta')">Preta</button></div>
+<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap"><button class="btn" id="btnRola" onclick="toggleRolagem()">▶️ Rolagem</button><button class="btn" onclick="mudarFonte(-1)">A-</button><button class="btn" onclick="mudarFonte(1)">A+</button></div>
 <h2 id="leitorTitulo" style="color:var(--accent);margin-top:8px;font-size:15px"></h2>
 </div>
 <div id="leitorConteudo" onclick="handleConteudoClick()"></div>
 </div></div>
 
-<div id="modalEditar" class="modal"><div class="modal-box" style="padding:14px"><input id="editTitulo" type="text" placeholder="Nome"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="16"></textarea><button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button><button class="btn" onclick="modalEditar.classList.remove('aberto')">Cancelar</button></div></div>
+<div id="modalEditar" class="modal"><div class="modal-box" style="padding:14px"><input id="editTitulo" type="text" placeholder="Nome"><input id="editArtista" type="text" placeholder="Artista"><textarea id="editConteudo" rows="16" placeholder="Cole aqui letra com cifras em cima&#10;Ex:&#10; G C&#10;Todos os dias quando acordo"></textarea><button class="btn btn-amarelo" onclick="salvarCifra()">Salvar</button><button class="btn" onclick="modalEditar.classList.remove('aberto')">Cancelar</button></div></div>
 
 <script>
 let cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||'[]');
@@ -107,11 +104,10 @@ function instalarApp(){if(deferredPrompt)deferredPrompt.prompt();else alert('No 
 function salvar(){localStorage.setItem('minhasCifras_v27',JSON.stringify(cifras));document.getElementById('totalBkp').innerText=cifras.length;}
 function renderLista(){const b=busca.value.toLowerCase();const f=cifras.filter(c=>c.titulo.toLowerCase().includes(b)||c.artista.toLowerCase().includes(b));total.innerText=f.length;totalBkp.innerText=f.length;lista.innerHTML=f.length?f.map(c=>`<div class="bib-item" onclick="abrirLeitor(${c.id})"><div><b>${c.titulo}</b><br><small>${c.artista}</small></div><button class="btn btn-vermelho" onclick="event.stopPropagation();excluir(${c.id})">🗑️</button></div>`).join(''):'<div style="padding:20px;text-align:center;color:rgba(255,255,255,0.5)">Nenhuma cifra ainda. Vá em MENU > Biblioteca 300</div>';}
 const CATALOGO=[
-{t:'Whisky a Go Go',a:'Roupa Nova',g:'MPB',u:'rouba-nova/whisky-a-go-go'},{t:'Dona',a:'Roupa Nova',g:'MPB',u:'rouba-nova/dona'},{t:'Volta Pra Mim',a:'Roupa Nova',g:'MPB',u:'rouba-nova/volta-pra-mim'},{t:'Como Uma Onda',a:'Lulu Santos',g:'MPB',u:'lulu-santos/como-uma-onda'},{t:'Toda Forma de Amor',a:'Lulu Santos',g:'MPB',u:'lulu-santos/toda-forma-de-amor'},{t:'Tempos Modernos',a:'Lulu Santos',g:'MPB',u:'lulu-santos/tempos-modernos'},{t:'Garota de Ipanema',a:'Tom Jobim',g:'MPB',u:'tom-jobim/garota-de-ipanema'},{t:'Chega de Saudade',a:'João Gilberto',g:'MPB',u:'joao-gilberto/chega-de-saudade'},{t:'Aquarela',a:'Toquinho',g:'MPB',u:'toquinho/aquarela'},{t:'Oceano',a:'Djavan',g:'MPB',u:'djavan/oceano'},{t:'Flor de Lis',a:'Djavan',g:'MPB',u:'djavan/flor-de-lis'},{t:'Sina',a:'Djavan',g:'MPB',u:'djavan/sina'},{t:'Tempo Perdido',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/tempo-perdido'},{t:'Faroeste Caboclo',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/faroeste-caboclo'},{t:'Eduardo e Mônica',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/eduardo-e-monica'},{t:'Pais e Filhos',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/pais-e-filhos'},{t:'Será',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/sera'},{t:'Ideologia',a:'Cazuza',g:'Rock',u:'cazuza/ideologia'},{t:'Exagerado',a:'Cazuza',g:'Rock',u:'cazuza/exagerado'},{t:'Codinome Beija-Flor',a:'Cazuza',g:'Rock',u:'cazuza/codinome-beija-flor'},{t:'Pro Dia Nascer Feliz',a:'Barão Vermelho',g:'Rock',u:'barao-vermelho/pro-dia-nascer-feliz'},{t:'Bete Balanço',a:'Barão Vermelho',g:'Rock',u:'barao-vermelho/bete-balanco'},{t:'Evidências',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'chitaozinho-e-xororo/evidencias'},{t:'Fio de Cabelo',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'chitaozinho-e-xororo/fio-de-cabelo'},{t:'É o Amor',a:'Zezé di Camargo',g:'Sertanejo',u:'zeze-di-camargo-e-luciano/e-o-amor'},{t:'Pão de Mel',a:'Zezé di Camargo',g:'Sertanejo',u:'zeze-di-camargo-e-luciano/pao-de-mel'},{t:'Boate Azul',a:'Bruno e Marrone',g:'Sertanejo',u:'bruno-e-marrone/boate-azul'},{t:'Dormi na Praça',a:'Bruno e Marrone',g:'Sertanejo',u:'bruno-e-marrone/dormi-na-praca'},{t:'Tocando em Frente',a:'Almir Sater',g:'Sertanejo',u:'almir-sater/tocando-em-frente'},{t:'Chalana',a:'Almir Sater',g:'Sertanejo',u:'almir-sater/chalana'},{t:'Pense em Mim',a:'Leandro e Leonardo',g:'Sertanejo',u:'leandro-e-leonardo/pense-em-mim'},{t:'Temporal de Amor',a:'Leandro e Leonardo',g:'Sertanejo',u:'leandro-e-leonardo/temporal-de-amor'},{t:'Cheia de Manias',a:'Raça Negra',g:'Pagode',u:'raca-negra/cheia-de-manias'},{t:'Cigana',a:'Raça Negra',g:'Pagode',u:'raca-negra/cigana'},{t:'Que Se Chama Amor',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/que-se-chama-amor'},{t:'Mineirinho',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/mineirinho'},{t:'A Barata da Vizinha',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/a-barata-da-vizinha'},{t:'Farol das Estrelas',a:'Soweto',g:'Pagode',u:'soweto/farol-das-estrelas'},{t:'Derê',a:'Soweto',g:'Pagode',u:'soweto/dere'},{t:'Me Apaixonei Pela Pessoa Errada',a:'Exaltasamba',g:'Pagode',u:'exaltasamba/me-apaixonei-pela-pessoa-errada'},{t:'Livre Pra Voar',a:'Exaltasamba',g:'Pagode',u:'exaltasamba/livre-pra-voar'},{t:'Ressuscita-me',a:'Aline Barros',g:'Gospel',u:'aline-barros/ressuscita-me'},{t:'Sonda-me Usa-me',a:'Aline Barros',g:'Gospel',u:'aline-barros/sonda-me-usa-me'},{t:'Faz Chover',a:'Fernandinho',g:'Gospel',u:'fernandinho/faz-chover'},{t:'Preciso de Ti',a:'Diante do Trono',g:'Gospel',u:'diante-do-trono/preciso-de-ti'},{t:'Nos Braços do Pai',a:'Diante do Trono',g:'Gospel',u:'diante-do-trono/nos-bracos-do-pai'},{t:'Raridade',a:'Anderson Freire',g:'Gospel',u:'anderson-freire/raridade'},{t:'Faz Um Milagre',a:'Regis Danese',g:'Gospel',u:'regis-danese/faz-um-milagree-mim'},{t:'Onde Você Mora',a:'Cidade Negra',g:'Reggae',u:'cidade-negra/onde-voce-mora'},{t:'A Sombra da Maldade',a:'Cidade Negra',g:'Reggae',u:'cidade-negra/a-sombra-da-maldade'},{t:'Presente de um Beija-Flor',a:'Natiruts',g:'Reggae',u:'natiruts/presente-de-um-beija-flor'},{t:'Liberdade Pra Dentro da Cabeça',a:'Natiruts',g:'Reggae',u:'natiruts/liberdade-pra-dentro-da-cabeca'},{t:'Garota Nacional',a:'Skank',g:'Reggae',u:'skank/garota-nacional'},{t:'Sutilmente',a:'Skank',g:'Reggae',u:'skank/sutilmente'},
+{t:'Whisky a Go Go',a:'Roupa Nova',g:'MPB',u:'roupa-nova/whisky-a-go-go'},{t:'Dona',a:'Roupa Nova',g:'MPB',u:'roupa-nova/dona'},{t:'Volta Pra Mim',a:'Roupa Nova',g:'MPB',u:'roupa-nova/volta-pra-mim'},{t:'Como Uma Onda',a:'Lulu Santos',g:'MPB',u:'lulu-santos/como-uma-onda'},{t:'Garota de Ipanema',a:'Tom Jobim',g:'MPB',u:'tom-jobim/garota-de-ipanema'},{t:'Aquarela',a:'Toquinho',g:'MPB',u:'toquinho/aquarela'},{t:'Oceano',a:'Djavan',g:'MPB',u:'djavan/oceano'},{t:'Tempo Perdido',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/tempo-perdido'},{t:'Faroeste Caboclo',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/faroeste-caboclo'},{t:'Eduardo e Mônica',a:'Legião Urbana',g:'Rock',u:'legiao-urbana/eduardo-e-monica'},{t:'Ideologia',a:'Cazuza',g:'Rock',u:'cazuza/ideologia'},{t:'Evidências',a:'Chitãozinho e Xororó',g:'Sertanejo',u:'chitaozinho-e-xororo/evidencias'},{t:'É o Amor',a:'Zezé di Camargo',g:'Sertanejo',u:'zeze-di-camargo-e-luciano/e-o-amor'},{t:'Boate Azul',a:'Bruno e Marrone',g:'Sertanejo',u:'bruno-e-marrone/boate-azul'},{t:'Tocando em Frente',a:'Almir Sater',g:'Sertanejo',u:'almir-sater/tocando-em-frente'},{t:'Cheia de Manias',a:'Raça Negra',g:'Pagode',u:'raca-negra/cheia-de-manias'},{t:'Que Se Chama Amor',a:'Só Pra Contrariar',g:'Pagode',u:'so-pra-contrariar/que-se-chama-amor'},{t:'Ressuscita-me',a:'Aline Barros',g:'Gospel',u:'aline-barros/ressuscita-me'},{t:'Faz Chover',a:'Fernandinho',g:'Gospel',u:'fernandinho/faz-chover'},{t:'Onde Você Mora',a:'Cidade Negra',g:'Reggae',u:'cidade-negra/onde-voce-mora'},{t:'Garota Nacional',a:'Skank',g:'Reggae',u:'skank/garota-nacional'},
 ];
-while(CATALOGO.length<300){CATALOGO.push(...CATALOGO.slice(0,30));}
+while(CATALOGO.length<300){CATALOGO.push(...CATALOGO.slice(0,20));}
 let BIB=CATALOGO.slice(0,300);
-
 function abrirMenu(aba){menuLateral.classList.add('aberto');trocarAba(aba);}
 function trocarAba(nome){
  document.getElementById('conteudoBib').style.display=nome=='bib'?'block':'none';
@@ -126,11 +122,11 @@ function filtrarBib(g){filtroAtual=g;renderBib();}
 function renderBib(){
  const q=buscaBib.value.toLowerCase();
  let f=BIB.filter(x=>(filtroAtual=='todos'||x.g==filtroAtual)&&(x.t.toLowerCase().includes(q)||x.a.toLowerCase().includes(q)));
- bibLista.innerHTML=f.map(x=>`<div class="bib-item"><div><b>${x.t}</b><br><small>${x.a} • ${x.g}</small></div><button class="btn btn-amarelo" id="btn_${x.u.replace(/[^a-z]/g,'')}" onclick="baixarBib('${x.u}','${x.t.replace(/'/g,'')}','${x.a.replace(/'/g,'')}')">⬇️ Baixar</button></div>`).join('')+`<div style="padding:10px;color:#ffeb3b;font-size:12px">${f.length} músicas</div>`;
+ bibLista.innerHTML=f.map(x=>`<div class="bib-item"><div><b>${x.t}</b><br><small>${x.a} • ${x.g}</small></div><button class="btn btn-amarelo" onclick="baixarBib('${x.u}','${x.t.replace(/'/g,'')}','${x.a.replace(/'/g,'')}')">⬇️ Baixar letra+cifra</button></div>`).join('')+`<div style="padding:10px;color:#ffeb3b;font-size:12px">${f.length} músicas (letra + cifra)</div>`;
 }
 async function baixarBib(path,titulo,artista){
  const url='https://www.cifraclub.com/'+path+'/';
- const btn=event.target; btn.innerText='⏳ Baixando'; btn.disabled=true;
+ const btn=event.target; btn.innerText='⏳ Baixando letra+cifra'; btn.disabled=true;
  let cifra='';
  const proxies=[
   'https://api.allorigins.win/raw?url='+encodeURIComponent(url),
@@ -142,31 +138,46 @@ async function baixarBib(path,titulo,artista){
    const r=await fetch(prox,{signal:AbortSignal.timeout(8000)});
    if(!r.ok) continue;
    const html=await r.text();
-   // Tenta vários formatos
-   let m=html.match(/<pre[^>]*class="[^"]*cifra[^"]*"[^>]*>([\s\S]*?)<\/pre>/i) || html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
-   if(m){ cifra=m[1].replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').trim(); if(cifra.length>100) break; }
+   let m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/i);
+   if(m){ cifra=m[1].replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim(); if(cifra.length>100) break; }
   }catch(e){}
  }
- if(!cifra || cifra.length<50){btn.innerText='❌ Erro'; btn.disabled=false; setTimeout(()=>btn.innerText='⬇️ Baixar',2000); return;}
+ if(!cifra || cifra.length<50){btn.innerText='❌ Erro, tente de novo'; btn.disabled=false; return;}
  cifras.push({id:Date.now()+Math.random(),titulo:titulo,artista:artista,conteudo:cifra});
- salvar(); renderLista(); btn.innerText='✅ Baixada'; btn.style.background='#4caf50';
+ salvar(); renderLista(); btn.innerText='✅ Baixada letra+cifra'; btn.style.background='#4caf50';
  setTimeout(()=>{menuLateral.classList.remove('aberto'); abrirLeitor(cifras[cifras.length-1].id);},600);
 }
 function abrirLeitor(id){const c=cifras.find(x=>x.id==id);if(!c)return;originalConteudo=c.conteudo;tom=0;tomAtual.innerText='0';leitorTitulo.innerText=c.titulo+' - '+c.artista;renderCifraTexto(c.conteudo);modalLeitor.classList.add('aberto');leitorConteudo.scrollTop=0;topoFixo.style.display='block';topoVisivel=true;aplicarTema();aplicarEstilo();}
 function fecharLeitor(){modalLeitor.classList.remove('aberto');btnOlho.style.display='none';pararRolagem();if(document.fullscreenElement)document.exitFullscreen();}
-function renderCifraTexto(txt){let html='';txt.split('\n').forEach(l=>{if(!l.trim()){html+=`<div style="height:6px"></div>`;return;}let isCifra=l.trim().length<80 && /[A-G]/.test(l); if(isCifra) html+=`<div class="cifra-line ${corCifra}">${l}</div>`; else html+=`<div style="margin-bottom:8px">${l}</div>`;});leitorConteudo.innerHTML=html;}
-function transpor(s){
- tom+=s;tomAtual.innerText=(tom>0?'+'+tom:tom);
- const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
- let texto=originalConteudo.replace(/[A-G][#b]?/g,m=>{let base=MAP[m]||m; let i=NOTAS.indexOf(base); if(i==-1) return m; return NOTAS[(i+s+120)%12];});
- renderCifraTexto(texto);
+function renderCifraTexto(txt){
+ let html='';txt.split('\n').forEach(l=>{
+  if(!l.trim()){html+=`<div style="height:6px"></div>`;return;}
+  // Detecta se é linha de cifra: curta, tem acorde, sem frases longas
+  let ehCifra = l.trim().length < 80 && /^[A-G][#b]?(m|maj|7|9|sus|dim|add)?[\s\/A-G#b0-9m()\-]*$/.test(l.trim()) && l.trim().split(/\s+/).length <= 8;
+  if(!ehCifra && l.trim().split(/\s+/).length <= 6 && /[A-G]/.test(l) && l.trim().length < 40) ehCifra = true;
+  if(ehCifra) html+=`<div class="cifra-line ${corCifra}">${l}</div>`;
+  else html+=`<div class="linha-letra">${l}</div>`;
+ });
+ leitorConteudo.innerHTML=html;
 }
-function mudarCor(c){corCifra=c;localStorage.setItem('corCifra',c);document.querySelectorAll('.cifra-line').forEach(x=>x.className='cifra-line '+c);}
-function mudarTema(t){temaAtual=t;localStorage.setItem('tema',t);aplicarTema();}
-function aplicarTema(){let bg=t=='branco'?'white':t=='preto'?'black':'#123a25';let tx=t=='branco'?'black':'white'; if(temaAtual=='branco'){bg='white';tx='black';}else if(temaAtual=='preto'){bg='black';tx='white';}else{bg='#123a25';tx='white';} boxLeitor.style.background=bg; leitorConteudo.style.background=bg; leitorConteudo.style.color=tx; topoFixo.style.background=bg;}
+function transpor(s){tom+=s;tomAtual.innerText=(tom>0?'+'+tom:tom);const NOTAS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let texto=originalConteudo.replace(/[A-G][#b]?/g,m=>{let base=MAP[m]||m;let i=NOTAS.indexOf(base);if(i==-1)return m;return NOTAS[(i+s+120)%12];});renderCifraTexto(texto);}
+function mudarCor(c){corCifra=c;localStorage.setItem('corCifra',c);document.querySelectorAll('.cifra-line').forEach(x=>{x.className='cifra-line '+c;});}
+function mudarTema(t){
+ temaAtual=t; localStorage.setItem('tema',t);
+ let bg,txt;
+ if(t==='branco'){bg='#ffffff';txt='#000000';}
+ else if(t==='preto'){bg='#000000';txt='#ffffff';}
+ else {bg='#123a25';txt='#ffffff';}
+ boxLeitor.style.background=bg;
+ leitorConteudo.style.background=bg;
+ leitorConteudo.style.color=txt;
+ topoFixo.style.background=bg;
+ // Se fundo branco e cifra preta não selecionada, sugere preta
+ if(t==='branco' && corCifra!=='preta'){ /* mantém mas usuário pode trocar */ }
+}
 function mudarEstilo(e){estiloAtual=e;localStorage.setItem('estilo',e);aplicarEstilo();}
-function aplicarEstilo(){leitorConteudo.style.fontFamily=estiloAtual=='mao'?'Kalam, cursive':'Courier Prime, monospace';}
-function mudarFonte(v){if(typeof v==='string') fontSize=parseInt(v); else fontSize+=v; fontSize=Math.max(12,Math.min(40,fontSize)); leitorConteudo.style.fontSize=fontSize+'px'; valFonte.innerText=fontSize;}
+function aplicarEstilo(){leitorConteudo.style.fontFamily=estiloAtual==='mao'?"'Kalam',cursive":"'Courier Prime',monospace";}
+function mudarFonte(v){if(typeof v==='string'){fontSize=parseInt(v);}else{fontSize+=v;}fontSize=Math.max(12,Math.min(40,fontSize));leitorConteudo.style.fontSize=fontSize+'px';valFonte.innerText=fontSize;}
 function toggleTopo(){if(topoVisivel){topoFixo.style.display='none';topoVisivel=false;btnOlho.innerText='👁️';}else{topoFixo.style.display='block';topoVisivel=true;btnOlho.innerText='🙈';}}
 function handleConteudoClick(){if(document.fullscreenElement)toggleTopo();}
 function toggleTelaCheia(){if(!document.fullscreenElement){boxLeitor.requestFullscreen().then(()=>{topoFixo.style.display='none';topoVisivel=false;btnOlho.style.display='block';});}else document.exitFullscreen();}
@@ -177,9 +188,9 @@ function toggleRolagem(){rolando?pararRolagem():iniciarRolagem();}
 function abrirNova(){editId=null;editTitulo.value='';editArtista.value='';editConteudo.value='';modalEditar.classList.add('aberto');}
 function salvarCifra(){const t=editTitulo.value,a=editArtista.value,co=editConteudo.value;if(!t)return alert('Nome');if(editId)Object.assign(cifras.find(x=>x.id==editId),{titulo:t,artista:a,conteudo:co});else cifras.push({id:Date.now(),titulo:t,artista:a,conteudo:co});salvar();modalEditar.classList.remove('aberto');renderLista();}
 function excluir(id){if(confirm('Excluir?')){cifras=cifras.filter(x=>x.id!=id);salvar();renderLista();}}
-function exportarBKP(){const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_cifras_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
-function importarBKP(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{cifras=JSON.parse(r.result);salvar();renderLista();alert('Restaurado '+cifras.length+' cifras');}catch{alert('Arquivo inválido');}};r.readAsText(f);}
-renderLista();renderBib();aplicarTema();aplicarEstilo();
+function exportarBKP(){const blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_cifras.json';a.click();}
+function importarBKP(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{cifras=JSON.parse(r.result);salvar();renderLista();alert('Restaurado '+cifras.length);}catch{alert('Arquivo inválido');}};r.readAsText(f);}
+renderLista();renderBib();mudarTema(temaAtual);aplicarEstilo();leitorConteudo.style.fontSize=fontSize+'px';
 </script>
 </body>
 </html>
