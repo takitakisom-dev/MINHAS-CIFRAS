@@ -33,12 +33,15 @@ input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px soli
 
 <div id="mMenu" class="modal" onclick="if(event.target==this)this.classList.remove('on')"><div class="box">
 <h3>Menu</h3>
-<button class="btnFull btnExport" id="btnInst" style="display:none">📲 Instalar Aplicativo</button>
 <div style="font-size:11px;font-weight:800;color:#999;margin-top:14px">REPERTÓRIOS - RENOMEIE</div><div id="editReps"></div>
 <div style="font-size:11px;font-weight:800;color:#999;margin-top:14px">FILTRAR POR ESTILO</div><div class="chips" id="menuEst" style="flex-wrap:wrap"></div>
-<button class="btnFull btnExport" style="margin-top:14px;background:#1a1611" onclick="exportar()">📤 Exportar backup</button>
+
+<div style="font-size:11px;font-weight:800;color:#999;margin-top:18px">BACKUP E APP</div>
+<button class="btnFull btnExport" id="btnInst" onclick="instalarApp()">📲 Instalar Aplicativo</button>
+<button class="btnFull btnExport" style="background:#1a1611" onclick="exportar()">📤 Exportar backup</button>
 <label class="btnFull btnOutline">📥 Importar backup<input type="file" id="impBKP" accept=".json" hidden></label>
-<button class="btnFull" style="background:#fee2e2;color:#b91c1c;border:none" onclick="if(confirm('Apagar tudo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button>
+
+<button class="btnFull" style="background:#fee2e2;color:#b91c1c;border:none;margin-top:12px" onclick="if(confirm('Apagar tudo?')){localStorage.clear();location.reload()}">🗑️ Apagar tudo</button>
 <button class="btnFull btnOutline" onclick="document.getElementById('mMenu').classList.remove('on')">Fechar</button>
 </div></div>
 
@@ -49,12 +52,23 @@ input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px soli
 <script>
 const $ = id => document.getElementById(id);
 let pInst=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pInst=e;$('btnInst').style.display='block';});
-$('btnInst').onclick=()=>{
-  if(pInst){pInst.prompt();pInst.userChoice.then(()=>{$('btnInst').style.display='none';});}
-  else alert('Para instalar: no Chrome clica nos 3 pontinhos ⋮ > Instalar app / Adicionar à tela inicial');
-};
-window.addEventListener('appinstalled',()=>{$('btnInst').style.display='none';});
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pInst=e;});
+function instalarApp(){
+  if(pInst){
+    pInst.prompt();
+    pInst.userChoice.then(r=>{
+      if(r.outcome==='accepted'){$('btnInst').innerText='✅ App Instalado';}
+    });
+  } else {
+    if(window.matchMedia('(display-mode: standalone)').matches){
+      alert('✅ Já está instalado como app!');
+    } else {
+      alert('Para instalar:\n\nNo Android Chrome: 3 pontinhos ⋮ > Instalar app / Adicionar à tela inicial\n\nNo iPhone Safari: botão compartilhar □↑ > Adicionar à Tela de Início');
+    }
+  }
+}
+window.addEventListener('appinstalled',()=>{$('btnInst').innerText='✅ App Instalado';});
+
 const ESTILOS=['TODOS','MPB','ROCK NACIONAL','ROCK INTERNACIONAL','PAGODE','GOSPEL','FORRÓ','REGGAE','SAMBA','FUNK','SERTANEJO','POP','ESTILO DO MÚSICO','BLUES','JAZZ'];
 let reps=JSON.parse(localStorage.getItem('reps')||'["Minhas músicas","Louvor","Show Barzinho","Estudo","Favoritas"]');
 let cifras=JSON.parse(localStorage.getItem('cifrasV59')||'[]');
