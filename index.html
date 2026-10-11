@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minhas Cifras v32</title>
+<title>Minhas Cifras v33</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -24,8 +24,8 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;justify-content:center;align-items:center;z-index:100;padding:10px}
 .modal.aberto{display:flex}
 .modal-box{background:#123a25;border:2px solid var(--accent);border-radius:16px;padding:16px;width:100%;max-width:680px;max-height:94vh;overflow:auto;color:white}
-#boxLeitor{background:#123a25;border:2px solid var(--accent);border-radius:16px;width:98%;max-width:98%;height:94vh;display:flex;flex-direction:column;overflow:hidden;padding:0}
-.topo-fixo{padding:12px;background:inherit;border-bottom:1px solid rgba(255,235,59,0.2);flex-shrink:0}
+#boxLeitor{background:#123a25;border:2px solid var(--accent);border-radius:16px;width:98%;max-width:98%;height:94vh;display:flex;flex-direction:column;overflow:hidden;padding:0;position:relative}
+.topo-fixo{padding:12px;background:inherit;border-bottom:1px solid rgba(255,235,59,0.2);flex-shrink:0;transition:all 0.3s}
 #leitorConteudo{flex:1;overflow:auto;padding:12px;white-space:pre-wrap;line-height:1.4;font-size:22px}
 .estilo-mao{font-family:'Kalam',cursive}
 .estilo-maquina{font-family:'Courier Prime',monospace}
@@ -37,13 +37,18 @@ header{background:var(--bg);border-bottom:2px solid var(--accent);padding:12px;d
 #btnInstalar{width:100%;padding:14px;font-size:16px;margin-bottom:12px;display:block}
 .secao-menu{margin:12px 0;padding:10px;border-bottom:1px solid rgba(255,235,59,0.2)}
 .secao-menu h4{color:var(--accent);margin-bottom:6px}
+/* TELA CHEIA LIMPA */
+#boxLeitor:fullscreen{width:100vw;height:100vh;max-width:100vw;border:none;border-radius:0;background:#0a2f1e}
+#boxLeitor:fullscreen.topo-fixo{opacity:0;pointer-events:none;height:0;padding:0;overflow:hidden}
+#boxLeitor:fullscreen.topo-fixo.mostrar{opacity:1;pointer-events:auto;height:auto;padding:12px;position:absolute;top:0;left:0;right:0;z-index:999;background:#0a2f1e;border-bottom:2px solid var(--accent)}
+#boxLeitor:fullscreen #leitorConteudo{padding:20px;font-size:26px;background:#0a2f1e}
 textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin:8px 0}
 </style>
 </head>
 <body>
 <header>
 <button class="btn" onclick="toggleMenu()">☰</button>
-<div class="logo">♪ MINHAS CIFRAS v32</div>
+<div class="logo">♪ MINHAS CIFRAS v33</div>
 <button class="btn btn-amarelo" onclick="renderLista()">Home</button>
 </header>
 
@@ -73,7 +78,7 @@ textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radiu
 <div class="card"><h2 style="color:var(--accent)">Minhas Cifras (<span id="total">0</span>)</h2><div id="lista"></div></div>
 
 <div id="modalLeitor" class="modal"><div id="boxLeitor">
-<div class="topo-fixo">
+<div class="topo-fixo" id="topoFixo">
 <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
 <button class="btn" onclick="fecharLeitor()">⬅ Voltar</button>
 <div><button class="btn" onclick="mudarFonte(-1)">A-</button><button class="btn" onclick="mudarFonte(1)">A+</button><button class="btn btn-amarelo" onclick="toggleTelaCheia()">⛶ Tela Cheia</button></div>
@@ -84,6 +89,7 @@ textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radiu
 <button class="btn" onclick="mudarCorCifra('dourada')">Dourada</button><button class="btn btn-vermelho" onclick="mudarCorCifra('vermelha')">Vermelha</button>
 </div>
 <h2 id="leitorTitulo" style="color:var(--accent);margin-top:8px"></h2>
+<div style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:4px">Toque na letra na tela cheia pra mostrar os botões</div>
 </div>
 <div id="leitorConteudo" class="estilo-mao"></div>
 </div></div>
@@ -97,7 +103,7 @@ textarea,input[type=text],input[type=range]{width:100%;padding:10px;border-radiu
 
 <script>
 let cifras=JSON.parse(localStorage.getItem('minhasCifras_v27')||localStorage.getItem('minhasCifras')||'[]');
-let editId=null,estiloAtual=localStorage.getItem('estilo')||'mao',corCifra=localStorage.getItem('corCifra')||'dourada',fontSize=parseInt(localStorage.getItem('fontSize')||'22'),velRolagem=parseInt(localStorage.getItem('velRolagem')||'3'),rolando=false,intervaloRolagem=null,deferredPrompt=null;
+let editId=null,estiloAtual=localStorage.getItem('estilo')||'mao',corCifra=localStorage.getItem('corCifra')||'dourada',fontSize=parseInt(localStorage.getItem('fontSize')||'22'),velRolagem=parseInt(localStorage.getItem('velRolagem')||'3'),rolando=false,intervaloRolagem=null,deferredPrompt=null,escondeTopoTimer=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 function instalarApp(){if(deferredPrompt)deferredPrompt.prompt();else alert('3 pontinhos > Instalar app');}
 function toggleMenu(){menuLateral.classList.toggle('aberto');}
@@ -135,7 +141,23 @@ function mudarVelocidade(v){velRolagem=parseInt(v);localStorage.setItem('velRola
 function iniciarRolagem(){if(rolando)return;rolando=true;btnRola.innerText='⏸️ Parar';intervaloRolagem=setInterval(()=>{leitorConteudo.scrollTop+=1;}, 130 - velRolagem*11);}
 function pararRolagem(){rolando=false;btnRola.innerText='▶️ Rolagem';clearInterval(intervaloRolagem);}
 function toggleRolagem(){rolando?pararRolagem():iniciarRolagem();}
-function toggleTelaCheia(){if(!document.fullscreenElement){boxLeitor.requestFullscreen();}else{document.exitFullscreen();}}
+function toggleTelaCheia(){
+ if(!document.fullscreenElement){
+  boxLeitor.requestFullscreen().then(()=>{
+    topoFixo.classList.remove('mostrar');
+  });
+ }else{ document.exitFullscreen(); }
+}
+leitorConteudo.addEventListener('click', ()=>{
+ if(document.fullscreenElement){
+  topoFixo.classList.add('mostrar');
+  clearTimeout(escondeTopoTimer);
+  escondeTopoTimer=setTimeout(()=>topoFixo.classList.remove('mostrar'), 3500);
+ }
+});
+document.addEventListener('fullscreenchange', ()=>{
+ if(!document.fullscreenElement){ topoFixo.classList.remove('mostrar'); }
+});
 async function buscarCifraCompleta(url){
  try{
   const proxy='https://api.allorigins.win/raw?url='+encodeURIComponent(url);
