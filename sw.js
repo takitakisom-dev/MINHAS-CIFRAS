@@ -1,1 +1,3 @@
-const CACHE="cifras-final-clara-v64";self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(["./","./index.html","./manifest.json","./icon-192.png","./icon-512.png"])));self.skipWaiting()});self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
+self.addEventListener('install',e=>self.skipWaiting());
+self.addEventListener('activate',e=>{caches.keys().then(k=>k.forEach(c=>caches.delete(c))); self.clients.claim()});
+self.addEventListener('fetch',e=>e.respondWith(fetch(e.request)));
