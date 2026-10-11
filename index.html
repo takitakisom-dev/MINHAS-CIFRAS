@@ -2,113 +2,112 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#d97706">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<title>Minhas Cifras - Offline</title>
+<title>MINHAS CIFRAS</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system;background:#fdf6e9;color:#3b1f0a}
-header{background:#d97706;color:white;padding:16px 12px;text-align:center;position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:22px}
-header p{margin:4px 0 0;font-size:13px;opacity:.9}
-#boxInstalar{display:none;margin:12px;padding:14px;background:#fff7ed;border:2px dashed #d97706;border-radius:18px;text-align:center;animation:pop.3s}
-@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-#btnInst{background:#d97706;color:white;border:none;padding:12px 26px;border-radius:999px;font-weight:800;font-size:15px;box-shadow:0 4px 12px rgba(217,119,6,.4)}
-#busca{margin:12px;display:flex;gap:8px}
-#busca input{flex:1;padding:12px;border:2px solid #f5d0a3;border-radius:12px;outline:none}
-#busca button{background:#422006;color:white;border:none;padding:12px 16px;border-radius:12px;font-weight:bold}
-#lista{padding:0 12px 90px}
-.cifra{background:white;border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 2px 10px rgba(0,0,0,.06);white-space:pre-wrap;font-family:monospace;font-size:14px;line-height:1.4}
-.cifra b{font-family:system-ui;font-size:16px;display:block;margin-bottom:6px}
-.actions{display:flex;gap:8px;margin-top:10px}
-.actions button{flex:1;padding:8px;border-radius:10px;border:none;font-weight:bold}
-.del{background:#fee2e2;color:#991b1b}.edit{background:#fef3c7;color:#92400e}
-#fab{position:fixed;bottom:20px;right:20px;background:#d97706;color:white;border:none;width:56px;height:56px;border-radius:50%;font-size:28px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
-#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:end;z-index:20}
-#modal.open{display:flex}
-#sheet{background:white;width:100%;border-radius:24px 24px 0 0;padding:18px;max-height:85vh;overflow:auto}
-#sheet textarea{width:100%;height:220px;border:2px solid #f5d0a3;border-radius:12px;padding:12px;font-family:monospace}
-#sheet input{width:100%;padding:12px;border:2px solid #f5d0a3;border-radius:12px;margin-bottom:10px}
-.btnSave{width:100%;background:#d97706;color:white;border:none;padding:14px;border-radius:12px;font-weight:800;margin-top:10px}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#f6f1e6;color:#1a1a1a}
+.top{background:#d97706;color:white;padding:10px 0 0}.bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:white;color:#111;border-radius:0 0 20px 20px;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.bar b{font-size:18px}.menu{width:44px;height:44px;border-radius:50%;border:1px solid #ddd;background:white}
+.badge{width:44px;height:44px;border-radius:50%;background:black;color:white;display:flex;align-items:center;justify-content:center;font-weight:800}
+.card{background:white;margin:14px;border-radius:22px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.card h2{margin:0;font-size:22px}.card p{margin:6px 0 12px;color:#6b5a4e}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:black;color:white;border:none;padding:10px 16px;border-radius:999px;font-weight:700}
+.btn.out{background:white;color:#1a1a1a;border:1px solid #ddd}
+.chip{white-space:nowrap;padding:10px 14px;border-radius:999px;border:1px solid #ddd;background:white;font-weight:600}
+.chip.on{background:#1a1a1a;color:white}
+.search{display:flex;gap:10px;margin-top:12px}
+.search input{flex:1;padding:14px;border:1px solid #e8e0c9;border-radius:14px;background:#fdfbf1}
+.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}
+.item b{text-transform:uppercase}
+.small{font-size:13px;color:#777}
+.btnVer{border:2px solid #1a1a1a;background:white;padding:8px 18px;border-radius:999px;font-weight:800}
+#boxInst{display:none;margin:0 14px;padding:12px;background:#fff7ed;border:2px dashed #d97706;border-radius:16px;text-align:center}
+#btnInst{background:#d97706;color:white;border:none;padding:11px 22px;border-radius:999px;font-weight:800}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:30}#modal.on{display:flex}
+.sheet{background:white;width:100%;border-radius:24px 24px 0 0;padding:18px;max-height:85vh;overflow:auto}
+.sheet input,.sheet textarea{width:100%;padding:12px;border:2px solid #f0e6c8;border-radius:12px;margin-top:8px}
+.sheet textarea{height:220px;font-family:monospace}
 </style>
 </head>
 <body>
-<header>
-<h1>🎸 Minhas Cifras</h1>
-<p>Offline • Instala na tela inicial</p>
-</header>
+<div class="top" style="padding-bottom:10px"></div>
+<div class="bar"><button class="menu">☰</button><b>🎸 MINHAS CIFRAS</b><div class="badge" id="badge">2</div></div>
 
-<div id="boxInstalar">
-<button id="btnInst">📲 INSTALAR APP</button>
-<div style="font-size:11px;margin-top:6px;color:#92400e">Instala e some automaticamente!</div>
+<!-- BOTÃO INSTALAR QUE SOME DEPOIS QUE INSTALA - COMO VOCÊ QUERIA -->
+<div id="boxInst"><button id="btnInst">📲 INSTALAR APP</button><div style="font-size:11px;color:#92400e;margin-top:4px">Instala e some sozinho!</div></div>
+
+<div class="card">
+<h2>Sua coleção particular</h2><p>Crie, importe e organize. Tudo offline.</p>
+<div class="row"><button class="btn" onclick="nova()">+ Nova Cifra</button><button class="btn out" onclick="importar()">Importar.txt</button><button class="btn out" onclick="novoRep()">+ Repertório</button></div>
 </div>
 
-<div id="busca">
-<input id="q" placeholder="Buscar música, artista...">
-<button onclick="nova()">+ Nova</button>
-</div>
-
+<div class="card">
+<div class="row" id="reps" style="overflow:auto;flex-wrap:nowrap"></div>
+<div class="search"><input id="q" placeholder="Buscar..."><button class="btn" onclick="nova()">+ Nova</button></div>
+<div class="row" id="cats" style="margin-top:12px;overflow:auto;flex-wrap:nowrap"></div>
 <div id="lista"></div>
-<button id="fab" onclick="nova()">+</button>
+</div>
 
-<div id="modal" onclick="if(event.target===this)fechar()"><div id="sheet">
-<h3 id="mtit" style="margin:0 0 10px">Nova Cifra</h3>
-<input id="titulo" placeholder="Nome da música - Artista">
-<textarea id="conteudo" placeholder="Ex:
-[C] Hoje eu vou...
-[G] cantar...
-[Am]..."></textarea>
-<button class="btnSave" onclick="salvar()">Salvar cifra</button>
-<button onclick="fechar()" style="width:100%;margin-top:8px;background:#eee;border:none;padding:12px;border-radius:12px">Cancelar</button>
+<div id="modal" onclick="if(event.target==this)fechar()"><div class="sheet">
+<h3 id="mtit" style="margin:0">Nova Cifra</h3>
+<input id="tit" placeholder="Nome - Artista (Ex: Será - Legião Urbana)">
+<input id="cat" placeholder="Categoria: MPB, ROCK NACIONAL...">
+<textarea id="cont" placeholder="Cola a cifra aqui com [C] [G]..."></textarea>
+<button class="btn" style="width:100%;margin-top:10px;padding:14px" onclick="salvar()">Salvar</button>
+<button class="btn out" style="width:100%;margin-top:8px;padding:12px" onclick="fechar()">Cancelar</button>
 </div></div>
 
 <script>
-let cifras=JSON.parse(localStorage.getItem('minhasCifrasV3')||'[]');
-let editIdx=-1;
-const $=s=>document.getElementById(s);
-function salvarLS(){localStorage.setItem('minhasCifrasV3',JSON.stringify(cifras));}
+let cifras=JSON.parse(localStorage.getItem('cifrasV_FINAL')||'[{"t":"Será","a":"LEGIÃO URBANA","c":"[C] Será que...","cat":"MPB"},{"t":"IMPORTADA","a":"Cifra Club","c":"Cifra importada...","cat":"ROCK NACIONAL"}]');
+let reps=JSON.parse(localStorage.getItem('repsV')||'["Minhas músicas","Rep 1","Rep 2"]');
+let repAtivo=localStorage.getItem('repAt')||"Minhas músicas";
+let catAtiva="TODOS";
+let cats=["TODOS","MPB","ROCK NACIONAL","ROCK INTERNACIONAL","GOSPEL"];
+let edit=-1;
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem('cifrasV_FINAL',JSON.stringify(cifras));localStorage.setItem('repsV',JSON.stringify(reps));localStorage.setItem('repAt',repAtivo);render();}
+function renderReps(){
+ $('reps').innerHTML=reps.map(r=>`<button class="chip ${r==repAtivo?'on':''}" onclick="repAtivo='${r}';save()">${r==reps[0]?'🎸 ': '📚 '}${r} (${r==reps[0]?cifras.length:0})</button>`).join('');
+}
+function renderCats(){
+ $('cats').innerHTML=cats.map(c=>`<button class="chip ${c==catAtiva?'on':''}" onclick="catAtiva='${c}';render()">${c}</button>`).join('');
+}
 function render(){
- const f=$('q').value.toLowerCase();
- $('lista').innerHTML=cifras.map((c,i)=>{
-  if(f &&!(c.t+c.c).toLowerCase().includes(f)) return '';
-  return `<div class="cifra"><b>${c.t}</b>${c.c.replace(/</g,'&lt;')}
-  <div class="actions"><button class="edit" onclick="editar(${i})">Editar</button><button class="del" onclick="apagar(${i})">Apagar</button></div></div>`;
- }).join('') || '<p style="text-align:center;padding:40px;color:#a16207">Nenhuma cifra.<br>Clique em + Nova</p>';
+ renderReps();renderCats();
+ const q=$('q').value.toLowerCase();
+ const fil=cifras.filter(x=> (catAtiva=='TODOS'||x.cat==catAtiva) && (!q || (x.t+x.a).toLowerCase().includes(q)) );
+ $('badge').textContent=fil.length;
+ $('lista').innerHTML=fil.map((c,i)=>`
+ <div class="item"><div><b>${c.t}</b><div class="small">${c.a} •</div></div><button class="btnVer" onclick="ver(${i})">Ver</button></div>`).join('') || '<p style="text-align:center;color:#8a7566;padding:20px">Nenhuma cifra aqui. Clique em + Nova</p>';
 }
-function nova(){editIdx=-1;$('mtit').textContent='Nova Cifra';$('titulo').value='';$('conteudo').value='';$('modal').classList.add('open');}
-function editar(i){editIdx=i;$('mtit').textContent='Editar Cifra';$('titulo').value=cifras[i].t;$('conteudo').value=cifras[i].c;$('modal').classList.add('open');}
-function fechar(){$('modal').classList.remove('open');}
+function nova(){edit=-1;$('mtit').textContent='Nova Cifra';$('tit').value='';$('cat').value='';$('cont').value='';$('modal').classList.add('on');}
+function ver(i){edit=i;$('mtit').textContent=cifras[i].t;$('tit').value=cifras[i].t+' - '+cifras[i].a;$('cat').value=cifras[i].cat||'';$('cont').value=cifras[i].c;$('modal').classList.add('on');}
+function fechar(){$('modal').classList.remove('on');}
 function salvar(){
- if(!$('titulo').value.trim()) return alert('Coloca o nome da música');
- const obj={t:$('titulo').value.trim(),c:$('conteudo').value};
- if(editIdx>=0) cifras[editIdx]=obj; else cifras.unshift(obj);
- salvarLS();render();fechar();
+ let ta=$('tit').value.split(' - ');let t=ta[0]||'Sem título';let a=ta[1]||'Cifra Club';
+ let obj={t:t,a:a.toUpperCase(),c:$('cont').value,cat:$('cat').value||'MPB'};
+ if(edit>=0)cifras[edit]=obj;else cifras.unshift(obj);save();fechar();render();
 }
-function apagar(i){if(confirm('Apagar "'+cifras[i].t+'"?')){cifras.splice(i,1);salvarLS();render();}}
+function importar(){let inp=document.createElement('input');inp.type='file';inp.accept='.txt';inp.onchange=e=>{let r=new FileReader();r.onload=()=>{cifras.unshift({t:e.target.files[0].name.replace('.txt',''),a:'IMPORTADA',c:r.result,cat:'MPB'});save();};r.readAsText(e.target.files[0]);};inp.click();}
+function novoRep(){let n=prompt('Nome do repertório:');if(n){reps.push(n);save();}}
 $('q').addEventListener('input',render);
 render();
 
-// PWA
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
-
-// BOTÃO INSTALAR INTELIGENTE QUE VOCÊ QUERIA
-let promptEv=null;
-const box=$('boxInstalar');
-const btn=$('btnInst');
-const jaApp = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+// PWA + BOTÃO QUE SOME QUANDO INSTALA
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+let pEv=null;const box=$('boxInst');const b=$('btnInst');
+const jaApp=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
 if(!jaApp){
- window.addEventListener('beforeinstallprompt',e=>{
-  e.preventDefault();promptEv=e;box.style.display='block';
- });
- setTimeout(()=>{ if(!promptEv) box.style.display='block'; },1200);
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pEv=e;box.style.display='block';});
+ setTimeout(()=>{box.style.display='block';},1000);
 }
-btn.onclick=async()=>{
- if(promptEv){promptEv.prompt();const ch=await promptEv.userChoice;if(ch.outcome==='accepted') box.style.display='none';promptEv=null;}
- else alert('No Chrome: 3 pontinhos ⋮ > Instalar app\nNo iPhone: Compartilhar > Adicionar à Tela de Início');
-};
-window.addEventListener('appinstalled',()=>{box.style.display='none';});
+b.onclick=async()=>{if(pEv){pEv.prompt();let r=await pEv.userChoice;if(r.outcome=='accepted')box.style.display='none';pEv=null;}else alert('3 pontinhos ⋮ > Instalar app');};
+window.addEventListener('appinstalled',()=>box.style.display='none');
+if(jaApp)box.style.display='none';
 </script>
 </body>
 </html>
