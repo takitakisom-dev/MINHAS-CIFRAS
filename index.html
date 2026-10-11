@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS V81</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#d97706">
+<title>MINHAS CIFRAS V82</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#d97706">
 <style>
 :root{--bg:#f3ece0;--card:#ffffff;--text:#2a211a;--bord:#e8ddd0;--leitor:#fdfbf7;--cifra:#d97706;--letra:#1a1a1a}
 [data-theme="escuro"]{--bg:#121212;--card:#1e1e1e;--text:#e5e5e5;--bord:#333;--leitor:#1e1e1e;--cifra:#fbbf24;--letra:#f5f5f5}
@@ -20,8 +20,8 @@ header{background:var(--card);padding:12px 16px;display:flex;justify-content:spa
 .btnFull{width:100%;padding:14px;border-radius:100px;font-weight:800;margin:6px 0;text-align:center;display:block}.btnExport{background:#d97706;color:#fff;border:none}.btnOutline{background:var(--card);border:1.5px solid var(--bord);color:var(--text)}
 #boxLeitor{width:100%;max-width:780px;height:96vh;background:var(--leitor);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;position:relative}
 #leitor{flex:1;overflow:auto;padding:18px 16px}
-.cLine{font-family:monospace;font-weight:900;white-space:pre-wrap;color:var(--cifra);font-size:16px;letter-spacing:0.5px;line-height:1.2}
-.lLine{font-weight:500;margin:2px 0 14px 0;font-size:18px;color:var(--letra);line-height:1.5}
+.cLine{font-family:monospace;font-weight:900;white-space:pre-wrap;color:var(--cifra)!important;font-size:16px;letter-spacing:0.5px;line-height:1.2;text-shadow:0 0 1px rgba(0,0,0,.2)}
+.lLine{font-weight:500;margin:2px 0 14px 0;font-size:18px;color:var(--letra)!important;line-height:1.5}
 .tons{display:flex;gap:5px;overflow-x:auto;padding:8px 0}.tBtn{min-width:38px;height:38px;border-radius:100px;border:1px solid var(--bord);background:var(--card);font-weight:800;flex-shrink:0;color:var(--text)}.tBtn.on{background:#d97706;color:#fff}
 input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--bord);background:var(--bg);margin:6px 0;color:var(--text)}
 .repCheck{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.repOpt{padding:7px 12px;border-radius:100px;border:1.5px solid var(--bord);background:var(--card);font-size:11px;cursor:pointer;color:var(--text)}.repOpt.on{background:#d97706;color:#fff}
@@ -34,6 +34,20 @@ input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px soli
 #ctrlAuto button{width:30px;height:30px;border-radius:50%;border:1px solid var(--bord);background:var(--card);font-weight:900;font-size:16px;color:var(--text)}
 .temaGrid{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.temaBtn{padding:8px 12px;border-radius:100px;border:1.5px solid var(--bord);font-size:11px;font-weight:800;cursor:pointer;background:var(--card);color:var(--text)}.temaBtn.on{background:#d97706;color:#fff;border-color:#d97706}
 </style></head><body>
+<script>
+// DESTRUIDOR DE CACHE V82 - força atualizar tablet travado
+const APP_VERSION='v82-cifra-letra-diferente';
+if(localStorage.getItem('app_version')!==APP_VERSION){
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(r=>r.unregister());});
+    caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+  }
+  localStorage.setItem('app_version',APP_VERSION);
+  if(!location.search.includes('v82')){
+    location.href=location.pathname+'?v82='+Date.now();
+  }
+}
+</script>
 <header><button class="btn" onclick="document.getElementById('mMenu').classList.add('on')">☰</button><div style="font-weight:800">🎸 MINHAS CIFRAS</div><span class="btn btn-black" id="tot">0</span></header>
 <div class="card"><div style="font-size:22px;font-weight:800">Sua coleção particular</div><div style="opacity:.7;margin:6px 0 12px">Crie, importe e organize. Tudo offline.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-black" onclick="nova()">+ Nova Cifra</button><label class="btn">Importar.txt<input type="file" id="imp" hidden></label><button class="btn" onclick="document.getElementById('mMenu').classList.add('on')">☰ Menu</button></div></div>
 <div class="card"><div class="tabs" id="tabsRep"></div><div style="display:flex;gap:8px;margin-top:12px"><input id="busca" placeholder="Buscar..." style="flex:1" oninput="render()"><button class="btn btn-black" onclick="nova()">+ Nova</button></div><div class="chips" id="filtEst"></div><div id="lista" style="margin-top:12px"></div></div>
@@ -91,9 +105,10 @@ function criaTons(){$('barTons').innerHTML='';for(let i=-5;i<=5;i++){let b=docum
 function updTons(){[...$('barTons').children].forEach((b,idx)=>b.className=(idx-5)==tom?'tBtn on':'tBtn');$('infTom').innerText=`TOM ${acOrig} → ${transN(acOrig,tom)} (${tom})`;}
 function transN(n,s){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=M[n]||n;let i=N.indexOf(b);return i<0?n:N[(i+s+120)%12];}
 let curTxt='';function transp(){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let t=origTxt.replace(/[A-G][#b]?/g,m=>{let b=M[m]||m;let i=N.indexOf(b);return i<0?m:N[(i+tom+120)%12];});if(simp){t=t.replace(/[A-G][#b]?m?(?:7M|maj7|m7|7|9|6|sus|dim|aug|add9|\(.*?\)|\/[\\w#b]+)*/g,a=>{let mm=a.match(/^([A-G][#b]?)(m)?/);return mm?mm[1]+(mm[2]||''):a;});}curTxt=t;show();}
-function show(){let txt=curTxt||origTxt;let h='';txt.split('\n').forEach(l=>{if(!l.trim()){h+='<div style="height:10px"></div>';return;}let eh=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=12;if(eh)h+=`<div class="cLine" style="font-size:${fSize-1}px">${l}</div>`;else h+=`<div class="lLine" style="font-size:${fSize}px">${l}</div>`;});$('leitor').innerHTML=h;$('labF').innerText=fSize+'px';}
+function show(){let txt=curTxt||origTxt;let h='';txt.split('\n').forEach(l=>{if(!l.trim()){h+='<div style="height:10px"></div>';return;}let eh=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=12;if(eh)h+=`<div class="cLine">${l}</div>`;else h+=`<div class="lLine">${l}</div>`;});$('leitor').innerHTML=h;$('labF').innerText=fSize+'px';}
 function fechar(){if(auto){clearInterval(auto);auto=null;$('bAuto').innerText='▶️ Auto';$('ctrlAuto').classList.remove('on');}$('mLeitor').classList.remove('on');if(document.fullscreenElement)document.exitFullscreen();$('btnSairFull').style.display='none';}
-function mFont(d){fSize=Math.max(12,Math.min(32,fSize+d));show();}function tSimp(){simp=!simp;$('bSimp').className=simp?'btn btn-black':'btn';transp();}
+function mFont(d){fSize=Math.max(12,Math.min(32,fSize+d));$('leitor').style.fontSize=fSize+'px';$('labF').innerText=fSize+'px';}
+function tSimp(){simp=!simp;$('bSimp').className=simp?'btn btn-black':'btn';transp();}
 function iniciaAuto(){if(auto)clearInterval(auto);if(vel===0){$('labVel').innerText='⏸️ 0';return;}let absV=Math.abs(vel);let intervalo=Math.max(8, 90 - absV*12);auto=setInterval(()=>{if(vel>0) $('leitor').scrollTop+=1; else $('leitor').scrollTop-=1;},intervalo);}
 function toggleAuto(){if(auto && vel!==0){clearInterval(auto);auto=null;$('bAuto').innerText='▶️ Auto';$('ctrlAuto').classList.remove('on');vel=2;}else{$('bAuto').innerText='⏸️ Parar';$('ctrlAuto').classList.add('on');if(vel===0) $('labVel').innerText='⏸️ 0'; else if(vel>0) $('labVel').innerText=vel+'x ▼'; else $('labVel').innerText=vel+'x ▲'; iniciaAuto();}}
 function ajustaVel(d){vel=Math.max(-5,Math.min(5,vel+d));if(vel===0) $('labVel').innerText='⏸️ 0'; else if(vel>0) $('labVel').innerText=vel+'x ▼'; else $('labVel').innerText=vel+'x ▲'; iniciaAuto();}
@@ -105,5 +120,5 @@ function excluirAtual(){if(!confirm('Apagar?'))return;cifras=cifras.filter(x=>x.
 $('imp').addEventListener('change',e=>{if(!e.target.files[0])return;let r=new FileReader();r.onload=()=>{cifras.push({id:Date.now(),titulo:e.target.files[0].name.replace('.txt',''),artista:'IMPORTADA',estilo:'MPB',reps:[],conteudo:r.result});save();buildTabs();render();};r.readAsText(e.target.files[0]);});
 $('impBKP').addEventListener('change',e=>{if(!e.target.files[0])return;let r=new FileReader();r.onload=()=>{try{let j=JSON.parse(r.result);if(j.cifras){cifras=j.cifras;reps=j.reps||reps;}else cifras=j;save();buildTabs();render();alert('Importado!');$('mMenu').classList.remove('on');}catch{alert('Inválido');}};r.readAsText(e.target.files[0]);});
 document.addEventListener('fullscreenchange',()=>{let btn=$('btnSairFull');if(!document.fullscreenElement)btn.style.display='none';else btn.style.display='block';});
-buildTabs();buildNovaReps();buildListaEstilos();render();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+buildTabs();buildNovaReps();buildListaEstilos();render();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js?v82='+Date.now());
 </script></body></html>
