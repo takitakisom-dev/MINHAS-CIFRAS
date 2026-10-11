@@ -1,6 +1,6 @@
 {
   "name": "Minhas Cifras",
-  "short_name": "Cifras",
+  "short_name": "Minhas Cifras",
   "start_url": "./index.html?source=pwa",
   "display": "standalone",
   "background_color": "#000000",
