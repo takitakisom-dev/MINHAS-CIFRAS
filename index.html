@@ -1,104 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MINHAS CIFRAS</title>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MINHAS CIFRAS</title><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
 <meta name="theme-color" content="#0f0f0f">
 <style>
-body{background:#111;color:#fff;font-family:sans-serif;margin:0}
-header{padding:12px;display:flex;justify-content:space-between;align-items:center;background:#000;position:sticky;top:0}
-.btn{padding:10px 16px;border-radius:20px;border:none;font-weight:700;cursor:pointer}
-.btn-branco{background:#fff;color:#000}.btn-laranja{background:#D97706;color:#fff}
-#instalar{background:#D97706;color:#fff;width:90%;margin:10px 5%;padding:14px;border:none;border-radius:30px;font-weight:800;font-size:16px}
-.card{margin:10px;background:#1a1a1a;padding:14px;border-radius:16px}
-input,textarea{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:none;background:#222;color:#fff}
-.cifra{padding:12px;border-bottom:1px solid #222;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;padding:10px;z-index:99}
-.modal.on{display:flex}.box{background:#222;padding:16px;border-radius:16px;width:100%;max-width:400px}
-#leitor{background:#fdfbf7;color:#111;max-width:700px;height:90vh;border-radius:16px;display:flex;flex-direction:column;overflow:hidden}
-#conteudo{flex:1;overflow:auto;padding:16px;white-space:pre-wrap;font-size:18px;line-height:1.4}
-.cifra-linha{color:#B45309;font-family:monospace;font-weight:800}
-</style>
-</head>
-<body>
-<header>
-<button class="btn" onclick="menu.classList.add('on')">☰</button>
-<b><img src="icon-192.png" style="width:24px;vertical-align:middle"> MINHAS CIFRAS</b>
-<span id="total" class="btn btn-branco">0</span>
-</header>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#0b0f0e;color:#e8e8e8;font-family:sans-serif}
+header{position:sticky;top:0;z-index:30;background:#0b0f0e;border-bottom:1px solid rgba(255,255,255,.08);padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.btn{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;padding:10px 16px;border-radius:100px;font-weight:700;font-size:13px;cursor:pointer}
+.btn-amarelo{background:#fff;color:#111;font-weight:800}.btn-ativo{background:#D97706;color:#fff;border-color:#D97706}
+#btnInstalar{background:#D97706;color:#fff;border:none;padding:14px 20px;border-radius:100px;font-weight:800;width:calc(100% - 20px);margin:10px;display:block}
+.card{margin:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:14px}
+.input-busca{width:100%;background:#000;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;color:#fff;margin-top:8px}
+.cifra-item{padding:12px;border-radius:12px;display:flex;justify-content:space-between;cursor:pointer}.cifra-item:hover{background:rgba(255,255,255,.05)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:100;padding:8px}.modal.on{display:flex}
+.modal-box{background:#1a1f1e;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:18px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
+#boxLeitor{width:100%;max-width:760px;height:96vh;background:#fdfbf7;border-radius:20px;display:flex;flex-direction:column;overflow:hidden}
+#leitorConteudo{flex:1;overflow-y:auto;padding:16px 14px 30px;line-height:1.3;white-space:pre-wrap;color:#111}
+.cifra-line{font-family:monospace;font-weight:800;font-size:17px;white-space:pre-wrap;color:#B45309;margin:0}
+.linha-letra{font-weight:700;font-size:19px;margin:0 0 14px 0;color:#111}
+.tons{display:flex;gap:6px;overflow-x:auto;padding:6px 0}.tom-btn{min-width:38px;height:38px;border-radius:100px;border:1px solid #ddd;background:#fff;font-weight:800;cursor:pointer}.tom-btn.ativo{background:#D97706;color:#fff;border-color:#D97706}
+.chip{padding:7px 12px;border-radius:100px;background:#111;color:#fff;font-size:12px;font-weight:700;border:none}.chip-ativo{background:#D97706}
+textarea,input[type=text]{width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#000;color:#fff;margin:5px 0}
+</style></head><body>
+<header><button class="btn" onclick="menu.classList.add('on')">☰</button><div style="font-weight:800;display:flex;align-items:center;gap:6px"><img src="icon-192.png" style="width:26px;border-radius:6px"> MINHAS CIFRAS</div><span id="total" class="btn btn-amarelo">0</span></header>
+<button id="btnInstalar">📲 INSTALAR APP</button>
+<div class="card"><div style="display:flex;gap:6px"><button class="btn btn-amarelo" onclick="nova()" style="flex:1">+ Nova cifra</button><button class="btn" onclick="colagem()" style="flex:1">Colar</button></div><input id="busca" class="input-busca" placeholder="Buscar..." oninput="render()"></div>
+<div class="card"><div id="lista"></div></div>
 
-<!-- INSTALADOR SEMPRE VISIVEL -->
-<button id="instalar" onclick="instalarApp()">📲 INSTALAR APP</button>
+<div id="menu" class="modal"><div class="modal-box"><h3 style="margin-bottom:12px">Menu</h3><div style="display:flex;gap:6px;margin:10px 0"><button class="btn btn-ativo" id="tPapel" onclick="setTema('papel')">Papel</button><button class="btn" id="tDark" onclick="setTema('dark')">Preto</button></div><div style="display:flex;gap:6px;margin:10px 0"><button class="btn btn-ativo" id="cAmbar" onclick="setCor('ambar')">Âmbar</button><button class="btn" id="cBranca" onclick="setCor('branca')">Branca</button></div><button class="btn btn-amarelo" onclick="exportar()" style="width:100%">Exportar</button><label class="btn" style="display:block;text-align:center;margin-top:6px;width:100%">Importar<input type="file" id="imp" hidden></label><button class="btn" style="width:100%;margin-top:10px" onclick="menu.classList.remove('on')">Fechar</button></div></div>
 
-<div class="card">
-<button class="btn btn-branco" onclick="nova()">+ Nova cifra</button>
-<input id="busca" placeholder="Buscar..." oninput="lista()">
-</div>
-<div class="card" id="listaCifras"></div>
+<div id="modalLeitor" class="modal"><div id="boxLeitor"><div style="padding:10px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap"><button class="btn" onclick="fechar()" style="background:#eee;color:#111">← Voltar</button><div style="display:flex;gap:4px"><button class="btn" id="btnAuto" onclick="toggleAuto()" style="background:#111;color:#fff;font-size:12px">▶️ Auto</button><button class="btn" onclick="boxLeitor.requestFullscreen()" style="background:#111;color:#fff">⛶</button><button class="btn" onclick="document.getElementById('topo').style.display=document.getElementById('topo').style.display=='none'?'block':'none'" style="background:#fff;color:#111">👁️</button></div></div><div id="topo" style="padding:8px 12px"><div style="display:flex;justify-content:space-between;align-items:center"><span id="tomInfo" style="font-size:11px;opacity:.6">TOM</span><div style="display:flex;gap:4px"><button class="btn" onclick="mudaFonte(-2)" style="padding:5px 8px">A-</button><span id="labFonte" style="font-size:11px">18px</span><button class="btn" onclick="mudaFonte(2)" style="padding:5px 8px">A+</button><button class="chip" id="btnSimp" onclick="toggleSimp()">Simplificada</button></div></div><div class="tons" id="barraTons"></div><div id="tit" style="font-size:10px;opacity:.5;margin-top:4px"></div></div><div id="leitorConteudo"></div></div></div>
 
-<!-- MENU -->
-<div id="menu" class="modal"><div class="box">
-<button class="btn btn-branco" onclick="menu.classList.remove('on')">Fechar</button>
-</div></div>
-
-<!-- LEITOR -->
-<div id="modalLeitor" class="modal"><div id="leitor">
-<div style="padding:10px;display:flex;justify-content:space-between;background:#eee">
-<button class="btn" onclick="fechar()">← Voltar</button>
-<button class="btn" onclick="document.getElementById('leitor').requestFullscreen()">⛶</button>
-</div>
-<div id="titulo" style="padding:0 16px;font-size:12px;opacity:.6"></div>
-<div id="conteudo"></div>
-</div></div>
-
-<!-- NOVA -->
-<div id="modalNova" class="modal"><div class="box">
-<input id="nTitulo" placeholder="Nome da música">
-<input id="nArtista" placeholder="Artista">
-<textarea id="nTexto" rows="10" placeholder="Cole a cifra aqui..."></textarea>
-<button class="btn btn-laranja" style="width:100%" onclick="salvar()">Salvar</button>
-<button class="btn" style="width:100%;margin-top:6px" onclick="modalNova.classList.remove('on')">Cancelar</button>
-</div></div>
+<div id="modalNova" class="modal"><div class="modal-box"><input id="nTitulo" type="text" placeholder="Nome"><input id="nArtista" type="text" placeholder="Artista"><textarea id="nTexto" rows="12" placeholder="Cifra..."></textarea><button class="btn btn-amarelo" style="width:100%" onclick="salvarNova()">Salvar</button><button class="btn" style="width:100%;margin-top:6px" onclick="modalNova.classList.remove('on')">Cancelar</button></div></div>
 
 <script>
-// INSTALADOR
-let promptInst=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptInst=e;});
-function instalarApp(){
- if(promptInst){promptInst.prompt();}
- else{alert('No Chrome: 3 pontinhos no topo > Instalar app ou Adicionar à tela inicial');}
-}
+let promptInst=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptInst=e;document.getElementById('btnInstalar').style.display='block';});
+document.getElementById('btnInstalar').onclick=()=>{if(promptInst)promptInst.prompt();else alert('3 pontinhos > Instalar app');};
 
-// CIFRAS SIMPLES
-let cifras=JSON.parse(localStorage.getItem('cifras')||'[]');
-function salvarLS(){localStorage.setItem('cifras',JSON.stringify(cifras));}
-function lista(){
- let b=busca.value.toLowerCase();
- let f=cifras.filter(c=>c.titulo.toLowerCase().includes(b));
- total.innerText=f.length;
- listaCifras.innerHTML=f.map(c=>`<div class="cifra" onclick="abrir(${c.id})"><b>${c.titulo}</b><br><small style="opacity:.5">${c.artista}</small></div>`).join('')||'Nenhuma cifra';
-}
-function nova(){nTitulo.value='';nArtista.value='';nTexto.value='';modalNova.classList.add('on');}
-function salvar(){
- if(!nTitulo.value)return alert('Nome');
- cifras.push({id:Date.now(),titulo:nTitulo.value,artista:nArtista.value,texto:nTexto.value});
- salvarLS();modalNova.classList.remove('on');lista();
-}
-function abrir(id){
- let c=cifras.find(x=>x.id==id);
- titulo.innerText=c.titulo+' - '+c.artista;
- // simples: pinta linhas com cifra
- conteudo.innerHTML=c.texto.split('\n').map(l=>{
-  if(l.trim().length<80 && /[A-G]/.test(l) && l.split(' ').length<10) return `<div class="cifra-linha">${l}</div>`;
-  return `<div>${l}</div>`;
- }).join('');
- modalLeitor.classList.add('on');
-}
-function fechar(){modalLeitor.classList.remove('on');}
-lista();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-</script>
-</body>
-</html>
+let cifras=JSON.parse(localStorage.getItem('minhasCifras')||'[]'), tom=0, original='', acordeOrig='G', simp=false, fSize=18, tema='papel', cor='ambar', autoInt=null;
+const $=id=>document.getElementById(id); const save=()=>localStorage.setItem('minhasCifras',JSON.stringify(cifras));
+function getCorCifra(){if(cor=='ambar')return tema=='dark'?'#FB923C':'#B45309';return tema=='dark'?'#fff':'#111';}
+function getCorLetra(){return tema=='dark'?'#fff':'#111';}
+function render(){let b=$('busca').value.toLowerCase();let f=cifras.filter(c=>c.titulo.toLowerCase().includes(b));$('total').innerText=f.length;$('lista').innerHTML=f.length?f.map(c=>`<div class="cifra-item" onclick="abrir(${c.id})"><div><b>${c.titulo}</b><div style="opacity:.5;font-size:12px">${c.artista}</div></div><span>›</span></div>`).join(''):'<div style="text-align:center;opacity:.3;padding:10px">Nenhuma cifra</div>';}
+function nova(){$('nTitulo').value='';$('nArtista').value='';$('nTexto').value='';$('modalNova').classList.add('on');}
+function colagem(){let t=prompt('Cole a cifra:');if(!t)return;let tit=prompt('Nome:')||'Importada';cifras.push({id:Date.now(),titulo:tit,artista:'',conteudo:t});save();render();}
+function salvarNova(){if(!$('nTitulo').value)return alert('Nome');cifras.push({id:Date.now(),titulo:$('nTitulo').value,artista:$('nArtista').value,conteudo:$('nTexto').value});save();$('modalNova').classList.remove('on');render();}
+function abrir(id){let c=cifras.find(x=>x.id==id);original=c.conteudo;tom=0;let m=c.conteudo.match(/[A-G][#b]?/);acordeOrig=m?m[0]:'G';criaTons();$('tit').innerText=c.titulo+' • '+c.artista;$('modalLeitor').classList.add('on');aplicaTema();$('leitorConteudo').scrollTop=0;}
+function criaTons(){let cont=$('barraTons');cont.innerHTML='';for(let i=-5;i<=5;i++){let b=document.createElement('button');b.className=i==0?'tom-btn ativo':'tom-btn';b.innerText=(i>0?'+'+i:i);b.onclick=()=>{tom=i;atualizaTons();transpoe();};cont.appendChild(b);}atualizaTons();}
+function atualizaTons(){$('barraTons').querySelectorAll('.tom-btn').forEach((b,idx)=>{let v=idx-5;b.className=v==tom?'tom-btn ativo':'tom-btn';});let novo=transpNota(acordeOrig,tom);$('tomInfo').innerText=`TOM ${acordeOrig} → ${tom} (${novo})`;}
+function transpNota(nota,s){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=M[nota]||nota;let i=N.indexOf(b);return i==-1?nota:N[(i+s+12*10)%12];}
+function transpoe(){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let txt=original.replace(/[A-G][#b]?/g,m=>{let b=M[m]||m;let i=N.indexOf(b);return i==-1?m:N[(i+tom+120)%12];});if(simp){txt=txt.replace(/[A-G][#b]?m?(?:7M|maj7|m7|7|9|6|sus|dim|aug|add9|\(.*?\)|\/[\w#b]+)*/g,a=>{let mm=a.match(/^([A-G][#b]?)(m)?/);return mm?mm[1]+(mm[2]||''):a;});}originalT=txt;mostra();} let originalT=null;
+function mostra(){let txt=originalT||original;let html='';txt.split('\n').forEach(l=>{if(!l.trim()){html+='<div style="height:10px"></div>';return;}let eh=l.trim().length<90 && /[A-G]/.test(l) && l.trim().split(/\s+/).length<=12 && /^[A-G\s#b0-9\/\(\)mMaj7\-]+$/.test(l.trim());if(eh){html+=`<div class="cifra-line" style="font-size:${fSize-1}px;color:${getCorCifra()}">${l}</div>`;}else{html+=`<div class="linha-letra" style="font-size:${fSize}px;color:${getCorLetra()}">${l}</div>`;}});$('leitorConteudo').innerHTML=html;$('labFonte').innerText=fSize+'px';}
+function fechar(){if(autoInt){clearInterval(autoInt);autoInt=null;$('btnAuto').innerText='▶️ Auto';}$('modalLeitor').classList.remove('on');if(document.fullscreenElement)document.exitFullscreen();}
+function mudaFonte(d){fSize=Math.max(12,Math.min(32,fSize+d));mostra();}
+function toggleSimp(){simp=!simp;$('btnSimp').className=simp?'chip chip-ativo':'chip';transpoe();}
+function setTema(t){tema=t;$('tPapel').className=t=='papel'?'btn btn-ativo':'btn';$('tDark').className=t=='dark'?'btn btn-ativo':'btn';aplicaTema();}
+function setCor(c){cor=c;$('cAmbar').className=c=='ambar'?'btn btn-ativo':'btn';$('cBranca').className=c=='branca'?'btn btn-ativo':'btn';mostra();}
+function aplicaTema(){let box=$('boxLeitor');if(tema=='dark'){box.style.background='#0f0f0f';$('leitorConteudo').style.background='#0f0f0f';}else{box.style.background='#fdfbf7';$('leitorConteudo').style.background='#fdfbf7';}mostra();}
+function toggleAuto(){if(autoInt){clearInterval(autoInt);autoInt=null;$('btnAuto').innerText='▶️ Auto';}else{$('btnAuto').innerText='⏸️ Parar';autoInt=setInterval(()=>{$('leitorConteudo').scrollTop+=1;},60);}}
+function exportar(){let blob=new Blob([JSON.stringify(cifras)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cifras.json';a.click();}
+$('imp').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{cifras=JSON.parse(r.result);save();render();}catch{alert('Invalido');}};r.readAsText(f);});
+render();if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+</script></body></html>
