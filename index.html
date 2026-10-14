@@ -12,7 +12,8 @@
 <div id="mMenu" class="modal" onclick="if(event.target==this)this.classList.remove('on')"><div class="box"><h3>Menu</h3><div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">TEMA</div><div class="temaGrid"><button class="temaBtn" id="t-claro" onclick="setTema('claro')">Claro</button><button class="temaBtn" id="t-escuro" onclick="setTema('escuro')">Escuro</button><button class="temaBtn" id="t-sepia" onclick="setTema('sepia')">Sepia</button><button class="temaBtn" id="t-azul" onclick="setTema('azul')">Azul</button><button class="temaBtn" id="t-palco" onclick="setTema('palco')">Palco</button></div><div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">REPERTORIOS</div><div id="editReps"></div><div style="font-size:11px;font-weight:800;opacity:.6;margin-top:14px">FILTRAR POR ESTILO</div><div class="chips" id="menuEst" style="flex-wrap:wrap"></div><div style="font-size:11px;font-weight:800;opacity:.6;margin-top:18px">APP</div><button class="btnFull btnExport" id="btnInst" onclick="instalarApp()">Instalar App</button><button class="btnFull btnExport" style="background:#1a1611" onclick="exportar()">Exportar Backup</button><label class="btnFull btnOutline">Importar Backup<input type="file" id="impBKP" accept=".json" hidden></label><button class="btnFull btnOutline" onclick="document.getElementById('mMenu').classList.remove('on')">Fechar</button></div></div>
 <div id="mLeitor" class="modal"><div id="boxLeitor"><button id="btnSairFull" onclick="toggleFull()">✕ Sair</button><div id="barraTopo" style="padding:10px;border-bottom:1px solid var(--bord);display:flex;justify-content:space-between;background:var(--card);flex-wrap:wrap;gap:6px"><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn" onclick="fechar()">← Voltar</button><button class="btn" onclick="editarAtual()">✏️ Editar</button><button class="btn" onclick="excluirAtual()">🗑️</button><button class="btn" onclick="copiarCifra()">📋</button></div><div style="display:flex;gap:6px;align-items:center"><div id="ctrlAuto"><button onclick="ajustaVel(-1)">−</button><span id="labVel" style="font-size:12px;font-weight:800;min-width:44px;text-align:center">1x ▼</span><button onclick="ajustaVel(1)">+</button></div><button class="btn btn-black" id="bAuto" onclick="toggleAuto()">▶️ Auto</button><button class="btn btn-black" onclick="toggleFull()">⛶ Tela</button></div></div><div id="barraTom" style="padding:12px;background:var(--bg);border-bottom:1px solid var(--bord)"><div style="display:flex;justify-content:space-between;align-items:center"><span id="infTom" style="font-size:11px;opacity:.7"></span><div style="display:flex;gap:6px;align-items:center"><button class="btn" onclick="mFont(-2)">A-</button><span id="labF" style="font-size:11px">18px</span><button class="btn" onclick="mFont(2)">A+</button><button class="btn" id="bSimp" onclick="tSimp()">Simplif.</button></div></div><div class="tons" id="barTons"></div><div id="tTit" style="font-size:11px;opacity:.6;margin-top:4px"></div></div><div id="leitor"></div></div></div>
 <div id="mNova" class="modal" onclick="if(event.target==this)fecharNova()"><div class="box"><h3 id="titNova">Nova música</h3><div id="statusImport"></div><input id="nT" placeholder="Nome*"><input id="nA" placeholder="Artista"><select id="nEst" style="width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--bord);background:var(--bg);color:var(--text);font-weight:700;margin:6px 0;font-size:14px"><option value="">Escolha o estilo...</option><option>MPB</option><option>ROCK NACIONAL</option><option>ROCK INTERNACIONAL</option><option>FORRÓ</option><option>SERTANEJO</option><option>PAGODE</option><option>SAMBA</option><option>GOSPEL</option><option>POP</option><option>FUNK</option><option>REGGAE</option><option>BLUES</option><option>JAZZ</option><option>ESTILO DO MÚSICO</option></select>
-<div style="display:flex;gap:6px"><input id="nLink" placeholder="Cole link do Cifra Club aqui..." style="flex:1"><button class="btn btn-black" onclick="botaoBuscarLink()" style="white-space:nowrap">🔍 Buscar</button></div>
+<div style="display:flex;gap:6px"><input id="nLink" placeholder="Cole link de QUALQUER site de cifras..." style="flex:1"><button class="btn btn-black" onclick="botaoBuscarLink()" style="white-space:nowrap">🔍 Buscar</button></div>
+<div style="font-size:10px;opacity:.6;margin:4px 0">Funciona com: Cifra Club, Banana Cifras, Cifrão, Só Cifras, Letras e outros</div>
 <div style="font-size:11px;opacity:.6;margin-top:8px">REPERTÓRIOS</div><div class="repCheck" id="nReps"></div><textarea id="nC" rows="18" placeholder="Cifra..."></textarea><button class="btn btn-black" style="width:100%;padding:13px;background:#d97706;color:#fff;border:none;font-weight:800" onclick="salvar()">Salvar</button><button class="btn" style="width:100%;margin-top:8px" onclick="fecharNova()">Cancelar</button></div></div>
 <script>
 const $=id=>document.getElementById(id);
@@ -42,7 +43,6 @@ function criaTons(){$('barTons').innerHTML='';for(let i=-5;i<=5;i++){let b=docum
 function updTons(){[...$('barTons').children].forEach((b,idx)=>b.className=(idx-5)==tom?'tBtn on':'tBtn');$('infTom').innerText=`TOM ${acOrig} → ${transN(acOrig,tom)} (${tom})`;}
 function transN(n,s){const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=M[n]||n;let i=N.indexOf(b);return i<0?n:N[(i+s+120)%12];}
 let curTxt='';function transp(){let t=origTxt.replace(/[A-G][#b]?/g,m=>{const N=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],M={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=M[m]||m;let i=N.indexOf(b);return i<0?m:N[(i+tom+120)%12];});if(simp){t=t.replace(/[A-G][#b]?m?(?:7M|maj7|m7|7|9|6|sus|dim|aug|add9|\(.*?\)|\/[\\w#b]+)*/g,a=>{let mm=a.match(/^([A-G][#b]?)(m)?/);return mm?mm[1]+(mm[2]||''):a;});}curTxt=t;show();}
-function isChordToken(tok){if(!tok)return false;let t=tok.trim().replace(/^[()\[\]|]+|[()\[\]|,;.]+$/g,'');if(!t||t.length>28)return false;if(!/^[A-G]/.test(t))return false;return true;}
 function isCifraLine(line){let l=line.trim();if(!l)return false;if(l.startsWith('[')&&l.endsWith(']'))return false;let words=l.split(/\s+/).filter(Boolean);let c=0;for(let w of words){if(/^[A-G][#b]?m?(7|m7|sus|dim|add)?$/.test(w)||/^[A-G][#b]?m?$/.test(w)||/^[A-G]\//.test(w))c++;}return c>0&&c/words.length>=0.4;}
 function show(){let txt=curTxt||origTxt;let h='';txt.split('\n').forEach(l=>{if(!l.trim()){h+='<div style="height:10px"></div>';return;}if(/^\[.*\]$/.test(l.trim())){h+=`<div style="font-weight:800;opacity:.7;margin:12px 0 6px;font-size:${fSize-4}px">${l}</div>`;return;}if(isCifraLine(l)){h+=`<div class="cLine" style="font-size:${fSize-2}px">${l}</div>`;}else{h+=`<div class="lLine" style="font-size:${fSize}px">${l}</div>`;}});$('leitor').innerHTML=h;$('labF').innerText=fSize+'px';}
 function fechar(){if(auto){clearInterval(auto);auto=null;$('bAuto').innerText='▶️ Auto';$('ctrlAuto').classList.remove('on');}$('mLeitor').classList.remove('on');if(document.fullscreenElement)document.exitFullscreen();$('boxLeitor').classList.remove('fullscreen-ativo');$('btnSairFull').style.display='none';document.body.style.overflow='';}
@@ -51,7 +51,7 @@ function tSimp(){simp=!simp;$('bSimp').className=simp?'btn btn-black':'btn';tran
 function iniciaAuto(){if(auto)clearInterval(auto);if(vel===0){$('labVel').innerText='⏸️ 0';return;}let tabela={1:380,2:220,3:130,4:75,5:38};let intervalo=tabela[Math.abs(vel)]||380;auto=setInterval(()=>{let el=$('leitor');if(vel>0)el.scrollTop+=1;else el.scrollTop-=1;},intervalo);}
 function toggleAuto(){if(auto&&vel!==0){clearInterval(auto);auto=null;$('bAuto').innerText='▶️ Auto';$('ctrlAuto').classList.remove('on');}else{$('bAuto').innerText='⏸️ Parar';$('ctrlAuto').classList.add('on');$('labVel').innerText=vel>0?vel+'x ▼':Math.abs(vel)+'x ▲';iniciaAuto();}}
 function ajustaVel(d){vel=Math.max(-5,Math.min(5,vel+d));$('labVel').innerText=vel===0?'⏸️ 0':vel>0?vel+'x ▼':Math.abs(vel)+'x ▲';if(auto)iniciaAuto();}
-function exportar(){let dados={cifras,reps,versao:'v99',data:new Date().toISOString()};let blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='backup-'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);}
+function exportar(){let dados={cifras,reps,versao:'v100',data:new Date().toISOString()};let blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='backup-'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);}
 function copiarCifra(){navigator.clipboard.writeText(curTxt||origTxt).then(()=>alert('Copiado!'));}
 function toggleFull(){let b=$('boxLeitor');if(!b.classList.contains('fullscreen-ativo')){b.classList.add('fullscreen-ativo');$('btnSairFull').style.display='block';document.body.style.overflow='hidden';}else{b.classList.remove('fullscreen-ativo');$('btnSairFull').style.display='none';document.body.style.overflow='';}}
 function editarAtual(){let c=cifras.find(x=>x.id==idAtual);modoEdicao=true;$('titNova').innerText='Editar';$('nT').value=c.titulo;$('nA').value=c.artista;$('nEst').value=c.estilo||'';$('nC').value=c.conteudo;selReps=c.reps||[];buildNovaReps();setTimeout(()=>selReps.forEach(i=>{let el=$('ro'+i);if(el)el.classList.add('on');}),50);$('mLeitor').classList.remove('on');$('mNova').classList.add('on');}
@@ -59,11 +59,11 @@ function excluirAtual(){if(!confirm('Apagar?'))return;cifras=cifras.filter(x=>x.
 $('imp').addEventListener('change',e=>{let r=new FileReader();r.onload=()=>{cifras.push({id:Date.now(),titulo:e.target.files[0].name.replace('.txt',''),artista:'IMPORTADA',estilo:'MPB',reps:[],conteudo:r.result});save();buildTabs();render();};r.readAsText(e.target.files[0]);});
 $('impBKP').addEventListener('change',e=>{let r=new FileReader();r.onload=()=>{try{let j=JSON.parse(r.result);cifras=j.cifras||j;reps=j.reps||reps;save();buildTabs();render();alert('Importado!');}catch(err){alert('Erro: '+err.message);}};r.readAsText(e.target.files[0]);});
 
-// === IMPORTADOR CIFRA CLUB V99 ===
-async function importarCifraClub(url){
-  if(!url||!url.includes('cifraclub.com.br')){alert('Cole um link válido do Cifra Club');return;}
-  let st=$('statusImport');st.style.display='block';st.innerText='🔍 Buscando cifra... aguarde 3s';
-  $('nC').value='Buscando em '+url+'...';
+// === IMPORTADOR UNIVERSAL V100 - QUALQUER SITE ===
+async function importarUniversal(url){
+  if(!url||!url.startsWith('http')){alert('Cole um link válido. Ex: https://www.bananacifras.com/... ou cifraclub...');return;}
+  let st=$('statusImport');st.style.display='block';st.style.background='#d97706';st.innerText='🔍 Buscando de '+new URL(url).hostname+'... aguarde';
+  $('nC').value='Buscando cifra em '+url+'... aguarde alguns segundos';
   try{
     let html=null;
     let proxies=[
@@ -73,43 +73,72 @@ async function importarCifraClub(url){
     ];
     for(let px of proxies){
       try{
-        let res=await fetch(px+encodeURIComponent(url));
+        let res=await fetch(px+encodeURIComponent(url),{cache:'no-store'});
         if(!res.ok) continue;
         let t=await res.text();
-        if(t&&t.length>2000){html=t;break;}
+        if(t&&t.length>1500){html=t;break;}
       }catch(e){continue;}
     }
     if(!html) throw new Error('bloqueado');
     let doc=new DOMParser().parseFromString(html,'text/html');
     let cifra='';
-    let pre=doc.querySelector('pre');
-    if(pre) cifra=pre.innerText;
-    if(!cifra||cifra.length<30){
-      let div=doc.querySelector('.cifra_cnt');
-      if(div) cifra=div.innerText;
+
+    // Tenta vários seletores de sites diferentes
+    let seletores=[
+      'pre', '.cifra_cnt', '#cifra_cnt', '.cifra', '.cifra-letra',
+      '[class*="cifra"]', '.letra', '.song-cifra', '.music-lyrics',
+      '.cifra_content', '.cnt-cifra', '.content-cifra'
+    ];
+    for(let sel of seletores){
+      let el=doc.querySelector(sel);
+      if(el && el.innerText && el.innerText.length>50){
+        // verifica se tem cara de cifra (tem acordes)
+        if(/[A-G][#b]?m?\s/.test(el.innerText)||el.innerText.includes('Tom:')||el.innerText.length>200){
+          cifra=el.innerText;break;
+        }
+      }
     }
-    cifra=cifra.replace(/-- Cifra Club/gi,'').trim();
+    // Fallback: pega maior bloco de texto que parece cifra
+    if(!cifra||cifra.length<50){
+      let allPres=doc.querySelectorAll('pre, div');
+      let maior='';
+      allPres.forEach(d=>{
+        let txt=d.innerText||'';
+        if(txt.length>maior.length && txt.length>100 && /[A-G]/.test(txt)) maior=txt;
+      });
+      if(maior) cifra=maior;
+    }
+    cifra=cifra.replace(/Cifra Club|Banana Cifras|Só Cifras.*?\n/gi,'').trim();
+    cifra=cifra.replace(/Fonte:.*?\n/gi,'').trim();
+
     if(cifra.length>30){
       $('nC').value=cifra;
-      st.innerText='✅ Cifra importada com sucesso! Confira e salve';
+      st.innerText='✅ Cifra de '+new URL(url).hostname+' importada! Confira e salve';
       st.style.background='#22c55e';
-      // tenta artista e música pelo link
+      // Tenta pegar título e artista da URL
       try{
-        let p=url.split('cifraclub.com.br/')[1].split('/');
-        if(p[0]) $('nA').value=p[0].replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
-        if(p[1]) $('nT').value=p[1].replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+        let u=url;
+        let parts=u.replace('https://','').replace('http://','').split('/').filter(Boolean);
+        if(parts.length>=2){
+          let art=parts[1]||parts[0];
+          let mus=parts[2]||parts[1];
+          if(art) $('nA').value=decodeURIComponent(art).replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+          if(mus) $('nT').value=decodeURIComponent(mus).replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+        }
       }catch(e){}
-    }else{throw new Error('vazio');}
+    }else{
+      throw new Error('vazio');
+    }
   }catch(err){
-    st.innerText='⚠️ Não consegui automático. Abra o link, copie tudo e cole aqui. (Cifra Club às vezes bloqueia)';
     st.style.background='#ef4444';
-    $('nC').value='Abra: '+url+'\nCopie a cifra lá e cole aqui manualmente.\n\nLink: '+url;
+    st.innerText='⚠️ Site bloqueou busca automática. Copie manual do site e cole aqui';
+    $('nC').value='Não consegui buscar automático de: '+url+'\n\nAlguns sites bloqueiam.\n\nDica: Abra o link, selecione a cifra toda, copie (CTRL+C) e cole aqui (CTRL+V)\n\nLink: '+url;
   }
 }
 function botaoBuscarLink(){
-  let link=$('nLink').value||'';
-  if(!link){alert('Cole o link do Cifra Club primeiro');return;}
-  importarCifraClub(link);
+  let link=$('nLink').value.trim();
+  if(!link){alert('Cole o link primeiro. Pode ser de qualquer site: Banana Cifras, Cifra Club, etc');return;}
+  importarUniversal(link);
 }
 function handleShare(){
  let p=new URLSearchParams(window.location.search);
@@ -117,15 +146,15 @@ function handleShare(){
  let conteudo=text||title||url||'';
  if(conteudo&&conteudo.length>3){
   setTimeout(()=>{
-    let nome=(title||'').replace(' - Cifra Club','').replace('Cifra Club','').trim()||'Nova música';
-    $('nT').value=nome.substring(0,60);
+    let nome=(title||'').replace(' - Cifra Club','').replace('Cifra Club','').replace(' - Banana Cifras','').replace('Banana Cifras','').trim()||'Nova música';
+    $('nT').value=nome.substring(0,70);
     let linkFinal=url||text||'';
-    if(linkFinal.includes('cifraclub.com.br')){
+    if(linkFinal.startsWith('http')){
       $('nLink').value=linkFinal;
       selReps=[];buildNovaReps();$('mNova').classList.add('on');
-      importarCifraClub(linkFinal);
-    }else{
-      $('nC').value=conteudo;
+      importarUniversal(linkFinal);
+    }else if(linkFinal){
+      $('nC').value=linkFinal;
       selReps=[];buildNovaReps();$('mNova').classList.add('on');
     }
     history.replaceState({},'',location.pathname);
@@ -133,5 +162,5 @@ function handleShare(){
  }
 }
 buildTabs();buildNovaReps();render();handleShare();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js?v99='+Date.now());
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js?v100='+Date.now());
 </script></body></html>
