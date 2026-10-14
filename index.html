@@ -82,7 +82,7 @@ function iniciaAuto(){if(auto) clearInterval(auto); if(vel===0){$('labVel').inne
 function toggleAuto(){if(auto && vel!==0){clearInterval(auto);auto=null;$('bAuto').innerText='▶️ Auto';$('ctrlAuto').classList.remove('on');}else{$('bAuto').innerText='⏸️ Parar';$('ctrlAuto').classList.add('on');if(vel===0) $('labVel').innerText='⏸️ 0'; else if(vel>0) $('labVel').innerText=vel+'x ▼'; else $('labVel').innerText=Math.abs(vel)+'x ▲'; iniciaAuto();}}
 function ajustaVel(d){vel=Math.max(-5,Math.min(5,vel+d)); if(vel===0){$('labVel').innerText='⏸️ 0';} else if(vel>0){$('labVel').innerText=vel+'x ▼';} else {$('labVel').innerText=Math.abs(vel)+'x ▲';} if(auto) iniciaAuto();}
 function exportar(){
- let dados={cifras,reps,versao:'v96',data:new Date().toISOString()};
+ let dados={cifras,reps,versao:'v97',data:new Date().toISOString()};
  let json=JSON.stringify(dados,null,2);
  let blob=new Blob([json],{type:'application/json;charset=utf-8'});
  let url=URL.createObjectURL(blob);
@@ -91,7 +91,7 @@ function exportar(){
  a.download='minhas-cifras-backup-'+new Date().toISOString().slice(0,10)+'.json';
  document.body.appendChild(a);
  a.click();
- setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+ setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},800);
  alert('Backup baixado! '+cifras.length+' músicas salvas.');
 }
 function copiarCifra(){navigator.clipboard.writeText(curTxt||origTxt).then(()=>alert('Copiado!'));}
@@ -102,22 +102,25 @@ $('imp').addEventListener('change',e=>{if(!e.target.files[0])return;let r=new Fi
 $('impBKP').addEventListener('change',e=>{if(!e.target.files[0])return;let r=new FileReader();r.onload=()=>{try{let j=JSON.parse(r.result);if(j.cifras){cifras=j.cifras;reps=j.reps||reps;}else if(Array.isArray(j)) cifras=j; else cifras=j.data||j; save();buildTabs();render();alert('Importado! '+cifras.length+' músicas');}catch(err){alert('Inválido: '+err.message);}};r.readAsText(e.target.files[0]);});
 function handleShare(){
  let p=new URLSearchParams(window.location.search);
- let t=p.get('title')||p.get('text')||p.get('url')||'';
- if(t){
-  if(t.length>10){
-   setTimeout(()=>{
-    if(confirm('Recebeu compartilhamento do Cifra Club!\n\nDeseja salvar como nova cifra?\n\n'+t.substring(0,120))){
-     $('nT').value=p.get('title')||'Importada do Cifra Club';
+ let title=p.get('title')||'';
+ let text=p.get('text')||'';
+ let url=p.get('url')||'';
+ let conteudo = text || title || url || '';
+ if(conteudo && conteudo.length>3){
+  setTimeout(()=>{
+    let nome = title? title.replace('Cifra Club','').trim() : 'Importada do Cifra Club';
+    if(!text && url) conteudo = url;
+    if(confirm('📲 Recebeu do Cifra Club!\n\n'+nome+'\n\nSalvar como nova cifra?')){
+     $('nT').value=nome.substring(0,60);
      $('nA').value='';
-     $('nC').value=t;
+     $('nC').value=conteudo;
      $('nEst').value='';
      selReps=[];buildNovaReps();$('mNova').classList.add('on');
     }
     history.replaceState({},'',location.pathname);
-   },800);
-  }
+  },900);
  }
 }
 buildTabs();buildNovaReps();render();$('labF').innerText=fSize+'px';handleShare();
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js?v96='+Date.now());
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js?v97='+Date.now());
 </script></body></html>
